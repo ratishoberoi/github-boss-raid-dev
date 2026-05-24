@@ -1,6 +1,7 @@
 # Deployment Checklist
 
 Generated: 2026-05-24T18:20:00Z
+Updated after initial push: 2026-05-24T18:24:00Z
 
 ## Repository Evidence
 
@@ -28,6 +29,7 @@ Generated: 2026-05-24T18:20:00Z
 | Push target | PASS | Workflow pushes `HEAD:${{ github.event.repository.default_branch }}`. |
 | Workflow syntax | PASS | `actionlint v1.7.12` returned no errors locally. |
 | Workflow present on GitHub | FAIL BEFORE PUSH | GitHub API `/actions/workflows` returned `total_count: 0` before deployment. |
+| Workflow present on GitHub after push | PASS | GitHub API `/actions/workflows` returned `total_count: 1`; `Raid Attack`, `active`, path `.github/workflows/raid-attack.yml`. |
 
 ## Issue Form Checks
 
@@ -38,14 +40,18 @@ Generated: 2026-05-24T18:20:00Z
 | Attack dropdown required | PASS | `attack_type` dropdown has required validation. |
 | Allowed attacks | PASS | Dropdown exposes Slash, Critical Strike, Lucky Attack. |
 | Issue Forms enabled on GitHub | NOT TESTABLE BEFORE PUSH | Template files are not yet present on GitHub before deployment. |
+| Issue template present on GitHub after push | PASS | GitHub API contents endpoint returned `.github/ISSUE_TEMPLATE/attack.yml` with a raw download URL. |
 
 ## README And Asset Path Checks
 
 | Item | Result | Evidence |
 | --- | --- | --- |
 | README generated locally | PASS | `node scripts/validate_state.js` returned `validation ok`. |
+| README present on GitHub after push | PASS | Raw GitHub README begins with `# ⚠ GLOBAL RAID ACTIVE`. |
 | Main boss card path | PASS | `assets/boss-card.svg` exists and parses as XML. |
+| Main boss card present on GitHub after push | PASS | Raw GitHub URL for `assets/boss-card.svg` returned SVG content. |
 | Boss phase art paths | PASS | 24 files exist under `assets/bosses/` and parse as XML. |
+| Active boss phase art present on GitHub after push | PASS | Raw GitHub URL for `assets/bosses/gpu_devourer_p3.svg` returned SVG content. |
 | README attack CTA path | PASS | README links to `https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml`. |
 
 ## Required Repository Settings
@@ -61,4 +67,4 @@ These settings must be verified in GitHub repository settings after push:
 
 ## Deployment Readiness Summary
 
-The local repository is structurally ready to deploy. Live issue-form and workflow execution cannot be verified until the current files are pushed to GitHub. Local credentials allow SSH push, but no local GitHub API token is available for automated live issue creation from this environment.
+The repository has been pushed and GitHub now exposes the workflow, issue template, README, and SVG assets. Live issue-form submission and workflow execution still require either a manual GitHub issue creation step or an API token. No local GitHub API token is available in this environment.

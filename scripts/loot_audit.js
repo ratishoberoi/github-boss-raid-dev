@@ -53,6 +53,7 @@ fs.writeFileSync("data/boss.json", JSON.stringify({ boss_name: "Neon Warden", ma
 fs.writeFileSync("data/leaderboard.json", "[]\\n");
 fs.writeFileSync("data/attacks.json", "[]\\n");
 fs.writeFileSync("data/hall_of_fame.json", "[]\\n");
+fs.writeFileSync("data/executioners.json", "[]\\n");
 fs.writeFileSync("data/player_inventory.json", "[]\\n");
 fs.writeFileSync("data/legendary_drops.json", "[]\\n");
 raid.renderAll(raid.loadState());
@@ -138,10 +139,22 @@ if (fullFileBacked) {
       state.legendaryDrops.unshift({ username: attacker, item: loot.item, rarity: loot.rarity, timestamp, boss: state.boss.boss_name });
     }
     if (state.boss.current_hp === 0) {
-      state.hallOfFame.unshift({ boss_name: state.boss.boss_name, killer: attacker, final_damage: damage, applied_damage: appliedDamage, timestamp });
+      state.hallOfFame.unshift({ boss_id: state.boss.boss_id, boss_name: state.boss.boss_name, killer: attacker, final_damage: damage, applied_damage: appliedDamage, timestamp });
+      state.executioners.unshift({
+        username: attacker,
+        boss_id: state.boss.boss_id,
+        boss_name: state.boss.boss_name,
+        boss_title: (state.bossRegistry.find((boss) => boss.id === state.boss.boss_id) || state.bossRegistry[0]).title,
+        final_damage: damage,
+        timestamp,
+        boss_phase: state.boss.phase,
+        boss_image: "assets/bosses/" + state.boss.boss_id + "_p4.svg",
+        executioner_badge: state.boss.boss_id === "gpu_devourer" ? "GPU Slayer" : "Boss Executioner"
+      });
       const defeated = state.hallOfFame.length;
       const registry = state.bossRegistry;
-      const bossDefinition = registry[defeated % registry.length];
+      const defeatedIndex = registry.findIndex((boss) => boss.id === state.boss.boss_id);
+      const bossDefinition = registry[(defeatedIndex + 1) % registry.length];
       const maxHp = 1000 + defeated * 250;
       state.boss = { boss_id: bossDefinition.id, boss_name: bossDefinition.name, max_hp: maxHp, current_hp: maxHp, phase: "Phase 1" };
     }

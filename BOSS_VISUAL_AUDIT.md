@@ -1,6 +1,6 @@
 # Boss Visual Audit
 
-Generated: 2026-05-24T17:59:32.083Z
+Generated: 2026-05-24T18:33:49.737Z
 
 ## Summary
 
@@ -17,7 +17,7 @@ Generated: 2026-05-24T17:59:32.083Z
 
 ## Current README Boss Image
 
-`assets/bosses/hallucination_titan_p1.svg`
+`assets/bosses/gpu_devourer_p3.svg`
 
 ## Rotation Check
 

@@ -11,6 +11,7 @@ const LEADERBOARD_PATH = path.join(DATA_DIR, "leaderboard.json");
 const ATTACKS_PATH = path.join(DATA_DIR, "attacks.json");
 const HALL_OF_FAME_PATH = path.join(DATA_DIR, "hall_of_fame.json");
 const BOSS_REGISTRY_PATH = path.join(DATA_DIR, "boss_registry.json");
+const EXECUTIONERS_PATH = path.join(DATA_DIR, "executioners.json");
 const LOOT_REGISTRY_PATH = path.join(DATA_DIR, "loot_registry.json");
 const PLAYER_INVENTORY_PATH = path.join(DATA_DIR, "player_inventory.json");
 const LEGENDARY_DROPS_PATH = path.join(DATA_DIR, "legendary_drops.json");
@@ -18,6 +19,7 @@ const LOCK_PATH = path.join(DATA_DIR, ".raid.lock");
 const README_PATH = path.join(ROOT, "README.md");
 const SVG_PATH = path.join(ASSETS_DIR, "boss-card.svg");
 const BOSS_ASSET_DIR = path.join(ASSETS_DIR, "bosses");
+const DEFEAT_ASSET_DIR = path.join(ASSETS_DIR, "defeats");
 
 const DEFAULT_BOSS = {
   boss_id: "hallucination_titan",
@@ -81,6 +83,7 @@ function ensureDirs() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.mkdirSync(ASSETS_DIR, { recursive: true });
   fs.mkdirSync(BOSS_ASSET_DIR, { recursive: true });
+  fs.mkdirSync(DEFEAT_ASSET_DIR, { recursive: true });
 }
 
 function deepClone(value) {
@@ -348,6 +351,26 @@ function bossImagePathFor(boss, forcePhaseNumber = null) {
   return `assets/bosses/${id}_p${phaseNumber}.svg`;
 }
 
+function executionerBadgeForBoss(bossId, bossName) {
+  const badges = {
+    gpu_devourer: "GPU Slayer",
+    hallucination_titan: "Titan Breaker",
+    data_leak_hydra: "Hydra Hunter",
+    gradient_vanisher: "Reality Anchor",
+    overfitted_beast: "Beast Tamer",
+    prompt_goblin: "Prompt Exorcist"
+  };
+  const id = slugify(bossId || bossName, DEFAULT_BOSS.boss_id);
+  return badges[id] || `${singleLine(bossName, "Boss", 40).replace(/^The\s+/i, "")} Executioner`;
+}
+
+function defeatCardPathForExecution(execution) {
+  const id = slugify(execution.boss_id || execution.boss_name, DEFAULT_BOSS.boss_id);
+  const timestampSlug = singleLine(execution.timestamp, new Date(0).toISOString(), 40).replace(/[^0-9TZ]/g, "");
+  const username = sanitizeUsername(execution.username);
+  return `assets/defeats/${id}_${timestampSlug}_${username}.svg`;
+}
+
 function bossThreatLevel(boss) {
   const phaseNumber = phaseNumberForBoss(boss);
   const percent = hpPercent(boss);
@@ -551,6 +574,28 @@ function normalizeLegendaryDrops(rawDrops) {
   }).filter(Boolean);
 }
 
+function normalizeExecutioners(rawExecutioners) {
+  const rows = Array.isArray(rawExecutioners) ? rawExecutioners : [];
+  return rows.filter(isObject).map((entry) => {
+    const bossId = slugify(entry.boss_id || entry.boss_name, DEFAULT_BOSS.boss_id);
+    const bossName = singleLine(entry.boss_name, DEFAULT_BOSS.boss_name, 64);
+    const timestamp = validTimestamp(entry.timestamp);
+    const normalized = {
+      username: sanitizeUsername(entry.username),
+      boss_id: bossId,
+      boss_name: bossName,
+      boss_title: singleLine(entry.boss_title, "Raid Entity", 80),
+      final_damage: toInteger(entry.final_damage, 0, 0, 1000000000),
+      timestamp,
+      boss_phase: singleLine(entry.boss_phase, "Final Phase", 20),
+      boss_image: singleLine(entry.boss_image, `assets/bosses/${bossId}_p4.svg`, 160),
+      executioner_badge: singleLine(entry.executioner_badge, executionerBadgeForBoss(bossId, bossName), 80)
+    };
+    normalized.defeat_card = singleLine(entry.defeat_card, defeatCardPathForExecution(normalized), 180);
+    return normalized;
+  });
+}
+
 function normalizeState(state) {
   const bossRegistry = normalizeBossRegistry(state.bossRegistry);
   return {
@@ -559,6 +604,7 @@ function normalizeState(state) {
     leaderboard: normalizeLeaderboard(state.leaderboard),
     attacks: normalizeAttacks(state.attacks),
     hallOfFame: normalizeHallOfFame(state.hallOfFame),
+    executioners: normalizeExecutioners(state.executioners),
     lootRegistry: normalizeLootRegistry(state.lootRegistry),
     playerInventory: normalizePlayerInventory(state.playerInventory),
     legendaryDrops: normalizeLegendaryDrops(state.legendaryDrops)
@@ -573,6 +619,7 @@ function loadState() {
     leaderboard: readJson(LEADERBOARD_PATH, []),
     attacks: readJson(ATTACKS_PATH, []),
     hallOfFame: readJson(HALL_OF_FAME_PATH, []),
+    executioners: readJson(EXECUTIONERS_PATH, []),
     lootRegistry: readJson(LOOT_REGISTRY_PATH, DEFAULT_LOOT_REGISTRY),
     playerInventory: readJson(PLAYER_INVENTORY_PATH, []),
     legendaryDrops: readJson(LEGENDARY_DROPS_PATH, [])
@@ -586,6 +633,7 @@ function saveState(state) {
   writeJson(LEADERBOARD_PATH, normalized.leaderboard);
   writeJson(ATTACKS_PATH, normalized.attacks);
   writeJson(HALL_OF_FAME_PATH, normalized.hallOfFame);
+  writeJson(EXECUTIONERS_PATH, normalized.executioners);
   writeJson(LOOT_REGISTRY_PATH, normalized.lootRegistry);
   writeJson(PLAYER_INVENTORY_PATH, normalized.playerInventory);
   writeJson(LEGENDARY_DROPS_PATH, normalized.legendaryDrops);
@@ -705,9 +753,34 @@ function topCollectors(playerInventory, limit = 10) {
   }).slice(0, limit);
 }
 
-function spawnNextBoss(hallOfFameCount, bossRegistry = DEFAULT_BOSS_REGISTRY) {
+function topExecutioners(executioners, limit = 10) {
+  const byUser = new Map();
+  for (const execution of executioners) {
+    const username = sanitizeUsername(execution.username);
+    const current = byUser.get(username) || {
+      username,
+      execution_count: 0,
+      first_execution: execution.timestamp,
+      latest_execution: execution.timestamp
+    };
+    current.execution_count += 1;
+    if (Date.parse(execution.timestamp) < Date.parse(current.first_execution)) current.first_execution = execution.timestamp;
+    if (Date.parse(execution.timestamp) > Date.parse(current.latest_execution)) current.latest_execution = execution.timestamp;
+    byUser.set(username, current);
+  }
+  return [...byUser.values()].sort((a, b) => (
+    b.execution_count - a.execution_count
+    || Date.parse(b.latest_execution) - Date.parse(a.latest_execution)
+    || a.username.localeCompare(b.username)
+  )).slice(0, limit);
+}
+
+function spawnNextBoss(hallOfFameCount, bossRegistry = DEFAULT_BOSS_REGISTRY, defeatedBossId = null) {
   const registry = normalizeBossRegistry(bossRegistry);
-  const index = Math.max(0, hallOfFameCount) % registry.length;
+  const defeatedIndex = registry.findIndex((boss) => boss.id === defeatedBossId);
+  const index = defeatedIndex >= 0
+    ? (defeatedIndex + 1) % registry.length
+    : Math.max(0, hallOfFameCount) % registry.length;
   const bossDefinition = registry[index];
   const maxHp = 1000 + hallOfFameCount * 250;
   return {
@@ -805,18 +878,37 @@ function applyAttack({ attacker, attackType, issueNumber }) {
     }
 
     let defeatedBoss = null;
+    let execution = null;
     if (defeated) {
+      const bossDefinition = bossById(state.bossRegistry, bossBefore.boss_id);
+      const executionerBadge = executionerBadgeForBoss(bossBefore.boss_id, bossBefore.boss_name);
+      execution = {
+        username,
+        boss_id: bossBefore.boss_id,
+        boss_name: bossBefore.boss_name,
+        boss_title: bossDefinition.title,
+        final_damage: rolledDamage,
+        timestamp,
+        boss_phase: bossBefore.phase,
+        boss_image: bossImagePathFor(bossBefore, 4),
+        executioner_badge: executionerBadge
+      };
+      execution.defeat_card = defeatCardPathForExecution(execution);
+      state.executioners.unshift(execution);
+
       defeatedBoss = {
         boss_id: bossBefore.boss_id,
         boss_name: bossBefore.boss_name,
         boss_image: bossImagePathFor(bossBefore, 4),
         killer: username,
+        executioner_badge: executionerBadge,
+        defeat_card: execution.defeat_card,
         final_damage: rolledDamage,
         applied_damage: appliedDamage,
         timestamp
       };
       state.hallOfFame.unshift(defeatedBoss);
-      state.boss = spawnNextBoss(state.hallOfFame.length, state.bossRegistry);
+      state.boss = spawnNextBoss(state.hallOfFame.length, state.bossRegistry, bossBefore.boss_id);
     }
 
     saveState(state);
@@ -829,6 +921,7 @@ function applyAttack({ attacker, attackType, issueNumber }) {
       appliedDamage,
       defeated,
       defeatedBoss,
+      execution,
       bossBefore,
       bossAfter: state.boss,
       loot,
@@ -877,6 +970,14 @@ function renderReadme(state = loadState()) {
   const bossKillerSignal = latestKiller
     ? `${markdownUser(latestKiller.killer)} defeated ${markdownCell(latestKiller.boss_name)}`
     : "No boss has fallen yet.";
+  const mostDamage = safeState.leaderboard[0];
+  const mostLoot = topCollectors(safeState.playerInventory, 1)[0];
+  const mostExecutions = topExecutioners(safeState.executioners, 1)[0];
+  const recordHolderRows = [
+    `| Most Damage | ${mostDamage ? `${markdownUser(mostDamage.username)} (${mostDamage.total_damage})` : "No raiders yet"} |`,
+    `| Most Loot | ${mostLoot ? `${markdownUser(mostLoot.username)} (${inventoryStatsForPlayer(mostLoot).totalItems})` : "No collectors yet"} |`,
+    `| Most Executions | ${mostExecutions ? `${markdownUser(mostExecutions.username)} (${mostExecutions.execution_count})` : "No executions yet"} |`
+  ].join("\n");
 
   return `# ⚠ GLOBAL RAID ACTIVE
 
@@ -899,6 +1000,12 @@ Your result is posted and the issue auto-closes.
 | Top Raider | ${topRaiderSignal} |
 | Boss Killer | ${bossKillerSignal} |
 
+## Current Record Holders
+
+| Record | Holder |
+| --- | --- |
+${recordHolderRows}
+
 <p align="center">
   <img src="./${bossImage}" alt="${markdownCell(boss.boss_name)} encounter phase art" width="720">
 </p>
@@ -912,6 +1019,10 @@ Your result is posted and the issue auto-closes.
 | Boss | HP | HP Bar | Phase | Last Attacker |
 | --- | ---: | --- | --- | --- |
 | ${markdownCell(boss.boss_name)} | ${boss.current_hp} / ${boss.max_hp} (${percent}%) | \`${progressBar(percent)}\` | ${markdownCell(boss.phase)} | ${lastAttacker} |
+
+## 👑 Latest Executioner
+
+${renderLatestExecutioner(safeState.executioners)}
 
 ## Current Boss Lore
 
@@ -996,6 +1107,14 @@ ${renderTopCollectors(safeState.playerInventory)}
 
 ${renderRecentLoot(safeState.attacks)}
 
+## 👑 Executioner Hall
+
+${renderExecutionerHall(safeState.executioners)}
+
+## Top Executioners
+
+${renderTopExecutioners(safeState.executioners)}
+
 ## Hall of Fame
 
 ${renderHallOfFame(safeState.hallOfFame)}
@@ -1074,6 +1193,42 @@ function renderRecentLoot(attacks) {
   return `| Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
 ${rows}`;
+}
+
+function renderLatestExecutioner(executioners) {
+  if (!executioners.length) {
+    return "No executioner yet. Land the final blow to claim the first crown.";
+  }
+  const execution = executioners[0];
+  return `<p align="center">
+  <img src="./${markdownCell(execution.defeat_card)}" alt="${markdownCell(execution.boss_name)} execution card" width="720">
+</p>
+
+| Boss Name | Executioner | Badge | Final Blow | Date |
+| --- | --- | --- | ---: | --- |
+| ${markdownCell(execution.boss_name)} | ${markdownUser(execution.username)} | ${markdownCell(execution.executioner_badge)} | ${execution.final_damage} | ${markdownCell(execution.timestamp)} |`;
+}
+
+function renderExecutionerHall(executioners) {
+  if (!executioners.length) {
+    return "| Boss | Executioner | Badge | Final Blow | Date |\n| --- | --- | --- | ---: | --- |\n| No executions yet | - | - | - | - |";
+  }
+  const rows = executioners.map((execution) => (
+    `| ${markdownCell(execution.boss_name)} | ${markdownUser(execution.username)}<br>(${markdownCell(execution.executioner_badge)}) | ${markdownCell(execution.executioner_badge)} | ${execution.final_damage} | ${markdownCell(execution.timestamp)} |`
+  )).join("\n");
+  return `| Boss | Executioner | Badge | Final Blow | Date |
+| --- | --- | --- | ---: | --- |
+${rows}`;
+}
+
+function renderTopExecutioners(executioners) {
+  const rows = topExecutioners(executioners, 10);
+  if (!rows.length) {
+    return "| Executioner | Execution Count | First Execution | Latest Execution |\n| --- | ---: | --- | --- |\n| No executions yet | 0 | - | - |";
+  }
+  return `| Executioner | Execution Count | First Execution | Latest Execution |
+| --- | ---: | --- | --- |
+${rows.map((row) => `| ${markdownUser(row.username)} | ${row.execution_count} | ${markdownCell(row.first_execution)} | ${markdownCell(row.latest_execution)} |`).join("\n")}`;
 }
 
 function renderHallOfFame(hallOfFame) {
@@ -1406,6 +1561,70 @@ function renderBossPhaseSvg(definition, phaseNumber) {
 `;
 }
 
+function renderDefeatCard(execution) {
+  return `<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Boss terminated: ${escapeHtml(execution.boss_name)}</title>
+  <desc id="desc">${escapeHtml(execution.username)} earned ${escapeHtml(execution.executioner_badge)} with ${execution.final_damage} final damage.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#090704"/>
+      <stop offset=".45" stop-color="#221404"/>
+      <stop offset="1" stop-color="#050b14"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="160" y1="0" x2="800" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff4a3"/>
+      <stop offset=".35" stop-color="#ffbf2e"/>
+      <stop offset=".72" stop-color="#ff2bd6"/>
+      <stop offset="1" stop-color="#23f7dd"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-40%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 0H8" stroke="#ffbf2e" stroke-opacity=".1"/>
+    </pattern>
+    <style>
+      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      @keyframes dash { to { stroke-dashoffset: -180; } }
+      .pulse { animation: pulse 1.8s ease-in-out infinite; }
+      .sweep { animation: sweep 4.6s linear infinite; }
+      .dash { animation: dash 3.6s linear infinite; }
+    </style>
+  </defs>
+  <rect width="960" height="540" rx="24" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#scan)"/>
+  <rect class="sweep" x="0" y="0" width="180" height="540" fill="#ffbf2e" fill-opacity=".065"/>
+  <rect x="28" y="28" width="904" height="484" rx="18" stroke="url(#gold)" stroke-width="3"/>
+  <rect x="52" y="52" width="856" height="436" rx="10" stroke="#ffbf2e" stroke-opacity=".45"/>
+  <text x="80" y="106" fill="#ffbf2e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24" font-weight="900" letter-spacing="3">BOSS TERMINATED</text>
+  <text x="80" y="170" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="48" font-weight="900">${escapeHtml(truncate(execution.boss_name, 24))}</text>
+  <text x="80" y="220" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24">${escapeHtml(execution.boss_title)}</text>
+  <g filter="url(#glow)">
+    <path class="pulse" d="M480 258L526 332L612 354L556 420L562 506L480 474L398 506L404 420L348 354L434 332Z" fill="url(#gold)" fill-opacity=".88"/>
+    <circle cx="480" cy="388" r="74" fill="#020713" stroke="#ffbf2e" stroke-width="7"/>
+    <text x="480" y="414" text-anchor="middle" fill="#ffbf2e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="72" font-weight="900">👑</text>
+  </g>
+  <path class="dash" d="M78 260H882M78 456H882" stroke="#ffbf2e" stroke-width="5" stroke-dasharray="22 14"/>
+  <text x="80" y="306" fill="#ffbf2e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20">EXECUTIONER</text>
+  <text x="80" y="350" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="34" font-weight="900">@${escapeHtml(truncate(execution.username, 22))}</text>
+  <text x="80" y="392" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="26">${escapeHtml(execution.executioner_badge)}</text>
+  <text x="628" y="306" fill="#ffbf2e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20">FINAL DAMAGE</text>
+  <text x="628" y="354" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="44" font-weight="900">${execution.final_damage}</text>
+  <text x="628" y="404" fill="#c8d8ef" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">${escapeHtml(execution.timestamp)}</text>
+</svg>
+`;
+}
+
+function generateDefeatCards(executioners) {
+  ensureDirs();
+  for (const execution of normalizeExecutioners(executioners)) {
+    const filePath = path.join(ROOT, execution.defeat_card);
+    atomicWriteFile(filePath, renderDefeatCard(execution));
+  }
+}
+
 function generateBossAssets(bossRegistry) {
   ensureDirs();
   for (const definition of normalizeBossRegistry(bossRegistry)) {
@@ -1421,6 +1640,7 @@ function renderAll(state = loadState()) {
   const safeState = normalizeState(state);
   saveState(safeState);
   generateBossAssets(safeState.bossRegistry);
+  generateDefeatCards(safeState.executioners);
   atomicWriteFile(README_PATH, renderReadme(safeState));
   atomicWriteFile(SVG_PATH, renderSvg(safeState));
 }
@@ -1428,7 +1648,7 @@ function renderAll(state = loadState()) {
 function formatAttackComment(result) {
   const attacker = markdownUser(result.attacker);
   const bossLine = result.defeated
-    ? `${attacker} defeated **${markdownCell(result.defeatedBoss.boss_name)}**. A new boss has spawned: **${markdownCell(result.bossAfter.boss_name)}**.`
+    ? `${attacker} defeated **${markdownCell(result.defeatedBoss.boss_name)}** and became **${markdownCell(result.execution.executioner_badge)}**. A new boss has spawned: **${markdownCell(result.bossAfter.boss_name)}**.`
     : `**${markdownCell(result.bossAfter.boss_name)}** now has **${result.bossAfter.current_hp} / ${result.bossAfter.max_hp} HP** and is in **${markdownCell(result.bossAfter.phase)}**.`;
 
   const appliedLine = result.appliedDamage === result.rolledDamage
@@ -1498,6 +1718,17 @@ function validateStateInvariants(state) {
     if (!["Legendary", "Mythic"].includes(drop.rarity)) errors.push(`invalid legendary history rarity: ${drop.rarity}`);
   }
 
+  const executionKeys = new Set();
+  for (const execution of safeState.executioners) {
+    const key = `${execution.boss_id}:${execution.timestamp}:${execution.username}`;
+    if (executionKeys.has(key)) errors.push(`duplicate execution entry: ${key}`);
+    executionKeys.add(key);
+    if (!execution.executioner_badge) errors.push(`execution missing badge: ${key}`);
+    if (!execution.boss_image) errors.push(`execution missing boss image: ${key}`);
+    if (!execution.defeat_card) errors.push(`execution missing defeat card: ${key}`);
+    if (!Number.isInteger(execution.final_damage) || execution.final_damage < 0) errors.push(`invalid execution final damage: ${key}`);
+  }
+
   return errors;
 }
 
@@ -1511,6 +1742,7 @@ module.exports = {
   parseAttackType,
   renderAll,
   renderBossPhaseSvg,
+  renderDefeatCard,
   renderReadme,
   renderSvg,
   rollLoot,

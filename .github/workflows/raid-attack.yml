@@ -36,13 +36,13 @@ jobs:
 
       - name: Commit raid state
         run: |
-          if [ -z "$(git status --porcelain README.md assets/boss-card.svg assets/bosses data/boss.json data/boss_registry.json data/leaderboard.json data/attacks.json data/hall_of_fame.json data/loot_registry.json data/player_inventory.json data/legendary_drops.json)" ]; then
+          if [ -z "$(git status --porcelain README.md assets/boss-card.svg assets/bosses assets/defeats data/boss.json data/boss_registry.json data/executioners.json data/leaderboard.json data/attacks.json data/hall_of_fame.json data/loot_registry.json data/player_inventory.json data/legendary_drops.json)" ]; then
             echo "No raid state changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md assets/boss-card.svg assets/bosses data/boss.json data/boss_registry.json data/leaderboard.json data/attacks.json data/hall_of_fame.json data/loot_registry.json data/player_inventory.json data/legendary_drops.json
+          git add README.md assets/boss-card.svg assets/bosses assets/defeats data/boss.json data/boss_registry.json data/executioners.json data/leaderboard.json data/attacks.json data/hall_of_fame.json data/loot_registry.json data/player_inventory.json data/legendary_drops.json
           git commit -m "Process raid attack"
           git pull --rebase origin "${{ github.event.repository.default_branch }}"
           git push origin HEAD:${{ github.event.repository.default_branch }}

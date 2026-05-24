@@ -29,6 +29,7 @@ fs.writeFileSync("data/boss.json", JSON.stringify({ boss_name: "Neon Warden", ma
 fs.writeFileSync("data/leaderboard.json", "[]\\n");
 fs.writeFileSync("data/attacks.json", "[]\\n");
 fs.writeFileSync("data/hall_of_fame.json", "[]\\n");
+fs.writeFileSync("data/executioners.json", "[]\\n");
 fs.writeFileSync("data/player_inventory.json", "[]\\n");
 fs.writeFileSync("data/legendary_drops.json", "[]\\n");
 raid.renderAll(raid.loadState());
@@ -76,6 +77,7 @@ for (const row of state.leaderboard) {
 }
 if (state.attacks.length !== expectedAttackCount) throw new Error("attack history count mismatch");
 if (state.hallOfFame.length !== expectedHallCount) throw new Error("hall of fame count mismatch");
+if (state.executioners.length !== expectedHallCount) throw new Error("executioner count mismatch");
 if (state.legendaryDrops.length !== expectedLegendaryHistory) throw new Error("legendary history count mismatch");
 let inventoryItemCount = 0;
 for (const player of state.playerInventory) {

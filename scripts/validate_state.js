@@ -11,6 +11,7 @@ const ROOT = path.join(__dirname, "..");
 const jsonFiles = [
   "data/boss.json",
   "data/boss_registry.json",
+  "data/executioners.json",
   "data/leaderboard.json",
   "data/attacks.json",
   "data/hall_of_fame.json",
@@ -52,6 +53,16 @@ if (actualSvg !== expectedSvg) {
 
 if (!actualSvg.trim().startsWith("<svg") || !actualSvg.trim().endsWith("</svg>")) {
   fail("assets/boss-card.svg does not look like a complete SVG document.");
+}
+
+for (const execution of state.executioners) {
+  if (!execution.defeat_card) {
+    fail(`Execution for ${execution.username} is missing defeat_card.`);
+  }
+  const defeatCardPath = path.join(ROOT, execution.defeat_card);
+  if (!fs.existsSync(defeatCardPath)) {
+    fail(`Missing defeat card: ${execution.defeat_card}. Run node scripts/render_readme.js.`);
+  }
 }
 
 console.log("validation ok");

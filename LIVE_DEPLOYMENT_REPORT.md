@@ -1,6 +1,7 @@
 # Live Deployment Report
 
 Generated: 2026-05-24T18:20:00Z
+Updated after initial push: 2026-05-24T18:24:00Z
 
 ## Evidence Categories
 
@@ -18,20 +19,23 @@ Generated: 2026-05-24T18:20:00Z
 | Branch accepts direct pushes | LIKELY PASS | GitHub API reports `main` is not protected. Actual push still must be observed. |
 | Workflow file valid locally | PASS | `actionlint v1.7.12` returned no errors. |
 | Workflow deployed to GitHub | FAIL BEFORE PUSH | GitHub API returned `total_count: 0` workflows before pushing current files. |
-| Issue form deployed to GitHub | FAIL BEFORE PUSH | Issue template files are local and not present on GitHub before push. |
-| Attack issue creation | NOT TESTABLE BEFORE PUSH | No deployed issue form exists yet; no local GitHub API token is available. |
-| Workflow trigger | NOT TESTABLE BEFORE PUSH | Workflow is not deployed yet. |
-| Damage calculation live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
-| JSON state updates live | NOT TESTABLE BEFORE PUSH | Requires live workflow run and commit observation. |
-| README regeneration live | NOT TESTABLE BEFORE PUSH | Requires live workflow run and commit observation. |
-| SVG regeneration live | NOT TESTABLE BEFORE PUSH | Requires live workflow run and commit observation. |
-| Commit back to repository live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
-| Issue comment creation live | NOT TESTABLE BEFORE PUSH | Requires live issue and workflow token execution. |
-| Issue auto-close live | NOT TESTABLE BEFORE PUSH | Requires live issue and workflow token execution. |
-| Loot generation live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
-| Inventory update live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
-| Leaderboard update live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
-| Boss phase update live | NOT TESTABLE BEFORE PUSH | Requires live workflow run. |
+| Workflow deployed to GitHub after push | PASS | GitHub API returned `Raid Attack`, `active`, path `.github/workflows/raid-attack.yml`. |
+| Issue form deployed to GitHub after push | PASS | GitHub API contents endpoint returned `.github/ISSUE_TEMPLATE/attack.yml`. |
+| README deployed to GitHub after push | PASS | Raw GitHub README begins with `# ⚠ GLOBAL RAID ACTIVE`. |
+| SVG assets deployed to GitHub after push | PASS | Raw GitHub URLs for `assets/boss-card.svg` and `assets/bosses/gpu_devourer_p3.svg` returned SVG content. |
+| Attack issue creation | NOT TESTABLE | No `GITHUB_TOKEN` or `GH_TOKEN` is available locally; unauthenticated GitHub API issue creation returned HTTP 401. |
+| Workflow trigger | NOT TESTABLE | No live issue was created; GitHub API reports `actions/runs` total_count `0`. |
+| Damage calculation live | NOT TESTABLE | Requires live workflow run. |
+| JSON state updates live | NOT TESTABLE | Requires live workflow run and commit observation. |
+| README regeneration live | NOT TESTABLE | Requires live workflow run and commit observation. |
+| SVG regeneration live | NOT TESTABLE | Requires live workflow run and commit observation. |
+| Commit back to repository live | NOT TESTABLE | Requires live workflow run. |
+| Issue comment creation live | NOT TESTABLE | Requires live issue and workflow token execution. |
+| Issue auto-close live | NOT TESTABLE | Requires live issue and workflow token execution. |
+| Loot generation live | NOT TESTABLE | Requires live workflow run. |
+| Inventory update live | NOT TESTABLE | Requires live workflow run. |
+| Leaderboard update live | NOT TESTABLE | Requires live workflow run. |
+| Boss phase update live | NOT TESTABLE | Requires live workflow run. |
 
 ## Local Verification Already Passed
 
@@ -40,6 +44,7 @@ Generated: 2026-05-24T18:20:00Z
 - SVG XML parse for generated SVG files
 - `actionlint v1.7.12`
 - Previous stress and loot audit reports in this repository
+- Initial deployment commit `9e065ce` pushed to `origin/main`.
 
 ## Warnings
 

@@ -19,6 +19,14 @@ Your result is posted and the issue auto-closes.
 | Top Raider | ⚠ No one has attacked yet. Become the First Raider. |
 | Boss Killer | No boss has fallen yet. |
 
+## Current Record Holders
+
+| Record | Holder |
+| --- | --- |
+| Most Damage | No raiders yet |
+| Most Loot | No collectors yet |
+| Most Executions | No executions yet |
+
 <p align="center">
   <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer encounter phase art" width="720">
 </p>
@@ -32,6 +40,10 @@ Your result is posted and the issue auto-closes.
 | Boss | HP | HP Bar | Phase | Last Attacker |
 | --- | ---: | --- | --- | --- |
 | The GPU Devourer | 120 / 1000 (12%) | `███░░░░░░░░░░░░░░░░░░░░░` | Phase 3 | None yet |
+
+## 👑 Latest Executioner
+
+No executioner yet. Land the final blow to claim the first crown.
 
 ## Current Boss Lore
 
@@ -132,6 +144,18 @@ No mythic relics discovered yet.
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
 | - | No loot yet | - | - | - |
+
+## 👑 Executioner Hall
+
+| Boss | Executioner | Badge | Final Blow | Date |
+| --- | --- | --- | ---: | --- |
+| No executions yet | - | - | - | - |
+
+## Top Executioners
+
+| Executioner | Execution Count | First Execution | Latest Execution |
+| --- | ---: | --- | --- |
+| No executions yet | 0 | - | - |
 
 ## Hall of Fame
 
