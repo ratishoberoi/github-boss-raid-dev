@@ -1,0 +1,71 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">The Data Leak Hydra Mutated Form</title>
+  <desc id="desc">Mutated form: leaked keys grow into new heads and exposed ports split open.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050b14"/>
+      <stop offset=".48" stop-color="#12051c"/>
+      <stop offset="1" stop-color="#061b22"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="46%" r="50%">
+      <stop offset="0" stop-color="#39ff88" stop-opacity=".32"/>
+      <stop offset=".45" stop-color="#ff2b4f" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#020713" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
+      <path d="M0 0H9" stroke="#39ff88" stroke-opacity=".08"/>
+    </pattern>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes dash { to { stroke-dashoffset: -160; } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      .pulse { animation: pulse 1.9s ease-in-out infinite; }
+      .dash { animation: dash 4s linear infinite; }
+      .spin { transform-origin: 480px 270px; animation: spin 10s linear infinite; }
+      .jitter { animation: jitter 1.9000000000000001s steps(2,end) infinite; }
+      .sweep { animation: sweep 5.2s linear infinite; }
+    </style>
+  </defs>
+  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#core)"/>
+  <rect width="960" height="540" fill="url(#scan)"/>
+  <rect class="sweep" x="0" y="0" width="192" height="540" fill="#39ff88" fill-opacity=".045"/>
+  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="#39ff88" stroke-opacity=".09"/>
+  <rect x="28" y="28" width="904" height="484" rx="16" stroke="#39ff88" stroke-opacity=".78" stroke-width="2"/>
+  <rect x="44" y="44" width="872" height="452" rx="8" stroke="#ff2b4f" stroke-opacity=".42"/>
+  <text x="70" y="86" fill="#39ff88" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE 2</text>
+  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">The Data Leak Hydra</text>
+  <text x="70" y="158" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">Breach-Headed Security Monster</text>
+  <text x="70" y="498" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION 50% // Mutated Form</text>
+  <g filter="url(#glow)">
+    <g>
+    <ellipse cx="480" cy="336" rx="168" ry="94" fill="#07101b" stroke="#39ff88" stroke-width="5"/>
+    <path d="M480 310C232 266 244 206 260 126" stroke="#39ff88" stroke-width="18" fill="none"/>
+    <polygon class="pulse" points="224,144 260,96 302,140 274,174 232,168" fill="#061522" stroke="#39ff88" stroke-width="4"/>
+    <circle cx="250" cy="140" r="5" fill="#23f7dd"/>
+    <circle cx="276" cy="140" r="5" fill="#23f7dd"/>
+    <path d="M480 310C378.66666666666663 266 390.66666666666663 206 406.66666666666663 160" stroke="#ff2b4f" stroke-width="18" fill="none"/>
+    <polygon class="pulse" points="370.66666666666663,178 406.66666666666663,130 448.66666666666663,174 420.66666666666663,208 378.66666666666663,202" fill="#061522" stroke="#ff2b4f" stroke-width="4"/>
+    <circle cx="396.66666666666663" cy="174" r="5" fill="#23f7dd"/>
+    <circle cx="422.66666666666663" cy="174" r="5" fill="#23f7dd"/>
+    <path d="M480 310C525.3333333333333 266 537.3333333333333 206 553.3333333333333 126" stroke="#39ff88" stroke-width="18" fill="none"/>
+    <polygon class="pulse" points="517.3333333333333,144 553.3333333333333,96 595.3333333333333,140 567.3333333333333,174 525.3333333333333,168" fill="#061522" stroke="#39ff88" stroke-width="4"/>
+    <circle cx="543.3333333333333" cy="140" r="5" fill="#23f7dd"/>
+    <circle cx="569.3333333333333" cy="140" r="5" fill="#23f7dd"/>
+    <path d="M480 310C672 266 684 206 700 160" stroke="#ff2b4f" stroke-width="18" fill="none"/>
+    <polygon class="pulse" points="664,178 700,130 742,174 714,208 672,202" fill="#061522" stroke="#ff2b4f" stroke-width="4"/>
+    <circle cx="690" cy="174" r="5" fill="#23f7dd"/>
+    <circle cx="716" cy="174" r="5" fill="#23f7dd"/>
+    <path class="dash" d="M248 420H716M290 452H676M330 484H628" stroke="#ff2b4f" stroke-opacity=".8" stroke-width="5" stroke-dasharray="16 12"/>
+    
+  </g>
+  </g>
+  <path d="M70 460H890" stroke="#ff2b4f" stroke-opacity=".75" stroke-width="4" stroke-dasharray="20 12"/>
+  <text x="890" y="86" text-anchor="end" fill="#ff2b4f" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT ELEVATED</text>
+</svg>

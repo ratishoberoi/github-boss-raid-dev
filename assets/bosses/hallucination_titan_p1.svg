@@ -1,0 +1,59 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">The Hallucination Titan Normal Form</title>
+  <desc id="desc">Normal form: a luminous titan wrapped in stable prediction rings.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050b14"/>
+      <stop offset=".48" stop-color="#12051c"/>
+      <stop offset="1" stop-color="#061b22"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="46%" r="50%">
+      <stop offset="0" stop-color="#23f7dd" stop-opacity=".32"/>
+      <stop offset=".45" stop-color="#ff2bd6" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#020713" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
+      <path d="M0 0H9" stroke="#23f7dd" stroke-opacity=".08"/>
+    </pattern>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes dash { to { stroke-dashoffset: -160; } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      .pulse { animation: pulse 2.15s ease-in-out infinite; }
+      .dash { animation: dash 5s linear infinite; }
+      .spin { transform-origin: 480px 270px; animation: spin 12s linear infinite; }
+      .jitter { animation: jitter 2.25s steps(2,end) infinite; }
+      .sweep { animation: sweep 5.6s linear infinite; }
+    </style>
+  </defs>
+  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#core)"/>
+  <rect width="960" height="540" fill="url(#scan)"/>
+  <rect class="sweep" x="0" y="0" width="156" height="540" fill="#23f7dd" fill-opacity=".045"/>
+  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="#23f7dd" stroke-opacity=".09"/>
+  <rect x="28" y="28" width="904" height="484" rx="16" stroke="#23f7dd" stroke-opacity=".78" stroke-width="2"/>
+  <rect x="44" y="44" width="872" height="452" rx="8" stroke="#ff2bd6" stroke-opacity=".42"/>
+  <text x="70" y="86" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE 1</text>
+  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">The Hallucination Titan</text>
+  <text x="70" y="158" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">Corrupted AI God</text>
+  <text x="70" y="498" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION 25% // Normal Form</text>
+  <g filter="url(#glow)">
+    <g>
+    <ellipse cx="480" cy="310" rx="140" ry="162" fill="#07101b" stroke="#23f7dd" stroke-width="6"/>
+    <circle class="pulse" cx="480.0" cy="218.0" r="38" fill="#07101b" stroke="#23f7dd" stroke-width="5"/>
+    <circle cx="468.0" cy="214.0" r="6" fill="#ffe95e"/>
+    <circle cx="492.0" cy="214.0" r="6" fill="#ffe95e"/>
+    <path class="spin" d="M282 310C352 162 606 162 678 310C606 458 352 458 282 310Z" stroke="#ff2bd6" stroke-width="5" fill="none" stroke-dasharray="18 18"/>
+    <path class="dash" d="M218 154L742 466M748 154L224 466" stroke="#ffe95e" stroke-opacity=".25" stroke-width="3" stroke-dasharray="14 18"/>
+    
+  </g>
+  </g>
+  <path d="M70 460H890" stroke="#ff2bd6" stroke-opacity=".75" stroke-width="4" stroke-dasharray="15 12"/>
+  <text x="890" y="86" text-anchor="end" fill="#ff2bd6" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT ACTIVE</text>
+</svg>

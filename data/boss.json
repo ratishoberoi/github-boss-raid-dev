@@ -1,0 +1,7 @@
+{
+  "boss_id": "gpu_devourer",
+  "boss_name": "The GPU Devourer",
+  "max_hp": 1000,
+  "current_hp": 120,
+  "phase": "Phase 3"
+}

@@ -1,0 +1,63 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">The GPU Devourer Mutated Form</title>
+  <desc id="desc">Mutated form: cooling towers snap open into claws and intake fans become teeth.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050b14"/>
+      <stop offset=".48" stop-color="#12051c"/>
+      <stop offset="1" stop-color="#061b22"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="46%" r="50%">
+      <stop offset="0" stop-color="#ff6b1a" stop-opacity=".32"/>
+      <stop offset=".45" stop-color="#ffe95e" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#020713" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
+      <path d="M0 0H9" stroke="#ff6b1a" stroke-opacity=".08"/>
+    </pattern>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes dash { to { stroke-dashoffset: -160; } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      .pulse { animation: pulse 1.9s ease-in-out infinite; }
+      .dash { animation: dash 4s linear infinite; }
+      .spin { transform-origin: 480px 270px; animation: spin 10s linear infinite; }
+      .jitter { animation: jitter 1.9000000000000001s steps(2,end) infinite; }
+      .sweep { animation: sweep 5.2s linear infinite; }
+    </style>
+  </defs>
+  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#core)"/>
+  <rect width="960" height="540" fill="url(#scan)"/>
+  <rect class="sweep" x="0" y="0" width="192" height="540" fill="#ff6b1a" fill-opacity=".045"/>
+  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="#ff6b1a" stroke-opacity=".09"/>
+  <rect x="28" y="28" width="904" height="484" rx="16" stroke="#ff6b1a" stroke-opacity=".78" stroke-width="2"/>
+  <rect x="44" y="44" width="872" height="452" rx="8" stroke="#ffe95e" stroke-opacity=".42"/>
+  <text x="70" y="86" fill="#ff6b1a" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE 2</text>
+  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">The GPU Devourer</text>
+  <text x="70" y="158" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">Infinite Compute Maw</text>
+  <text x="70" y="498" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION 50% // Mutated Form</text>
+  <g filter="url(#glow)">
+    <g>
+    <rect x="300" y="152" width="360" height="210" rx="18" fill="#07101b" stroke="#ff6b1a" stroke-width="5"/>
+    <circle class="pulse" cx="480" cy="258" r="80" fill="#020713" stroke="#ffe95e" stroke-width="8"/>
+    <circle class="spin" cx="480" cy="258" r="38" fill="#23f7dd" fill-opacity=".75"/>
+    <path d="M342 130L278 58M618 130L682 58" stroke="#ffe95e" stroke-width="16" stroke-linecap="round"/>
+    <path d="M318 206L210 212M642 206L750 212" stroke="#ff6b1a" stroke-width="16" stroke-linecap="round"/>
+    <rect class="pulse" x="268" y="354" width="30" height="74" fill="#ff6b1a" fill-opacity=".55"/>
+    <rect class="pulse" x="320" y="354" width="30" height="74" fill="#ffe95e" fill-opacity=".55"/>
+    <rect class="pulse" x="372" y="354" width="30" height="74" fill="#ff6b1a" fill-opacity=".55"/>
+    <rect class="pulse" x="424" y="354" width="30" height="74" fill="#ffe95e" fill-opacity=".55"/>
+    <rect class="pulse" x="476" y="354" width="30" height="74" fill="#ff6b1a" fill-opacity=".55"/>
+    
+  </g>
+  </g>
+  <path d="M70 460H890" stroke="#ffe95e" stroke-opacity=".75" stroke-width="4" stroke-dasharray="20 12"/>
+  <text x="890" y="86" text-anchor="end" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT ELEVATED</text>
+</svg>
