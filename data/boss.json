@@ -1,7 +1,7 @@
 {
-  "boss_id": "data_leak_hydra",
-  "boss_name": "The Data Leak Hydra",
-  "max_hp": 1250,
-  "current_hp": 133,
-  "phase": "Phase 3"
+  "boss_id": "gradient_vanisher",
+  "boss_name": "The Gradient Vanisher",
+  "max_hp": 1500,
+  "current_hp": 1500,
+  "phase": "Phase 1"
 }
