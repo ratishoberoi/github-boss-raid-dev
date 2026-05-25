@@ -10,18 +10,18 @@
         "last_obtained": "2026-05-25T14:01:55.675Z"
       },
       {
+        "item": "Prompt Shard",
+        "rarity": "Rare",
+        "quantity": 2,
+        "first_obtained": "2026-05-25T06:14:19.846Z",
+        "last_obtained": "2026-05-25T14:02:47.985Z"
+      },
+      {
         "item": "Neural Fragment",
         "rarity": "Rare",
         "quantity": 1,
         "first_obtained": "2026-05-25T05:30:31.086Z",
         "last_obtained": "2026-05-25T05:30:31.086Z"
-      },
-      {
-        "item": "Prompt Shard",
-        "rarity": "Rare",
-        "quantity": 1,
-        "first_obtained": "2026-05-25T06:14:19.846Z",
-        "last_obtained": "2026-05-25T06:14:19.846Z"
       },
       {
         "item": "Corrupted CSV",

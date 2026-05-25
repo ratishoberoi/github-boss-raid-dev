@@ -8,8 +8,8 @@
 
 ### Breach-Headed Security Monster
 
-**HP 437 / 1250 (35%)**  
-`████████░░░░░░░░░░░░░░░░`
+**HP 295 / 1250 (24%)**  
+`██████░░░░░░░░░░░░░░░░░░`
 
 **Phase 3 of 4**  
 Corrupted form: redacted files peel away as toxic data streams pour out.
@@ -20,15 +20,15 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
 ## Live Pulse
 
-**Last Attack:** @ratishoberoi hit for 397  
-**Latest Loot:** @ratishoberoi found Memory Fragment (Common)  
-**Top Raider:** @ratishoberoi with 933 damage  
+**Last Attack:** @ratishoberoi hit for 142  
+**Latest Loot:** @ratishoberoi found Prompt Shard (Rare)  
+**Top Raider:** @ratishoberoi with 1075 damage  
 **Boss Killer:** @ratishoberoi (GPU Slayer)
 
 ## Current Record Holders
 
-**Most Damage:** @ratishoberoi (933)  
-**Most Loot:** @ratishoberoi (8)  
+**Most Damage:** @ratishoberoi (1075)  
+**Most Loot:** @ratishoberoi (9)  
 **Most Executions:** @ratishoberoi (1)
 
 ## 👑 Latest Executioner
@@ -84,7 +84,7 @@ Phases remaining: **1**
     <td align="center" width="33%">
       <img src="./assets/boss_phases/data_leak_hydra_p3.png" alt="The Data Leak Hydra campaign thumbnail" width="180" style="border:2px solid #ffbf2e;">
       <br><strong>⚔ CURRENT</strong><br>
-      <strong>Boss 2: The Data Leak Hydra</strong><br><sub>HP 437 / 1250<br>Phase 3</sub>
+      <strong>Boss 2: The Data Leak Hydra</strong><br><sub>HP 295 / 1250<br>Phase 3</sub>
     </td>
     <td align="center" width="33%">
       <img src="./assets/boss_phases/gradient_vanisher_p1.png" alt="The Gradient Vanisher campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
@@ -113,10 +113,10 @@ Phases remaining: **1**
 
 ## Loot
 
-**Latest Drop:** @ratishoberoi found Memory Fragment (Common)  
-**Vault:** 8 relics held by 1 collectors  
+**Latest Drop:** @ratishoberoi found Prompt Shard (Rare)  
+**Vault:** 9 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
-**Top Collector:** @ratishoberoi (8 relics)
+**Top Collector:** @ratishoberoi (9 relics)
 
 <details>
 <summary>Loot Vault</summary>
@@ -125,7 +125,7 @@ Phases remaining: **1**
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 8 |
+| Total Relics Held | 9 |
 | Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
@@ -133,7 +133,7 @@ Phases remaining: **1**
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 3 | 4 |
-| Rare | 15% | 5 | 4 |
+| Rare | 15% | 6 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
@@ -142,6 +142,7 @@ Phases remaining: **1**
 
 | Time | Collector | Relic | Rarity |
 | --- | --- | --- | --- |
+| 2026-05-25T14:02:47.985Z | @ratishoberoi | Prompt Shard | Rare |
 | 2026-05-25T14:02:23.654Z | @ratishoberoi | Memory Fragment | Common |
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Gradient Crystal | Rare |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Gradient Crystal | Rare |
@@ -163,12 +164,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | @ratishoberoi | 8 | 6 | 0 | 0 |
+| 1 | @ratishoberoi | 9 | 6 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
+| 2026-05-25T14:02:47.985Z | @ratishoberoi | Prompt Shard | Rare | 142 |
 | 2026-05-25T14:02:23.654Z | @ratishoberoi | Memory Fragment | Common | 397 |
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Gradient Crystal | Rare | 94 |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Gradient Crystal | Rare | 322 |
@@ -219,6 +221,7 @@ No mythic relics discovered yet.
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
+| 2026-05-25T14:02:47.985Z | @ratishoberoi | Lucky Attack | 142 | Phase 3 |
 | 2026-05-25T14:02:23.654Z | @ratishoberoi | Lucky Attack | 397 | Phase 3 |
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Lucky Attack | 94 | Phase 2 |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Lucky Attack | 322 | Phase 1 |
@@ -232,7 +235,7 @@ No mythic relics discovered yet.
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 933 | 8 |
+| 1 | @ratishoberoi | 1075 | 9 |
 
 </details>
 
@@ -252,7 +255,7 @@ No mythic relics discovered yet.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 3 | 4 |
-| Rare | 15% | 5 | 4 |
+| Rare | 15% | 6 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |

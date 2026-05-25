@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T14:02:47.985Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Lucky Attack",
+    "damage": 142,
+    "applied_damage": 142,
+    "boss_name": "The Data Leak Hydra",
+    "phase_after_attack": "Phase 3",
+    "defeated": false,
+    "issue_number": 9,
+    "loot": {
+      "item": "Prompt Shard",
+      "rarity": "Rare"
+    }
+  },
+  {
     "timestamp": "2026-05-25T14:02:23.654Z",
     "attacker": "ratishoberoi",
     "attack_type": "Lucky Attack",
