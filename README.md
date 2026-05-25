@@ -1,18 +1,18 @@
 <p align="center">
-  <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer raid encounter" width="960">
+  <img src="./assets/bosses/data_leak_hydra_p1.svg" alt="The Data Leak Hydra raid encounter" width="960">
 </p>
 
 # ⚠ GLOBAL RAID ACTIVE
 
-## THE GPU DEVOURER
+## THE DATA LEAK HYDRA
 
-### Infinite Compute Maw
+### Breach-Headed Security Monster
 
-**HP 8 / 1000 (1%)**  
-`░░░░░░░░░░░░░░░░░░░░░░░░`
+**HP 1250 / 1250 (100%)**  
+`████████████████████████`
 
-**Final Phase of 4**  
-Final Nightmare form: a starved compute singularity with an endless reactor mouth.
+**Phase 1 of 4**  
+Normal form: three encrypted heads watch the raid perimeter.
 
 ## [⚔ ATTACK THIS BOSS](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
 
@@ -20,48 +20,48 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
 ## Live Raid Pulse
 
-**Last Attack:** @ratishoberoi hit for 32  
-**Latest Loot:** @ratishoberoi found Lost Token (Common)  
-**Top Raider:** @ratishoberoi with 112 damage  
-**Boss Killer:** No boss has fallen yet.
+**Last Attack:** @ratishoberoi hit for 441  
+**Latest Loot:** @ratishoberoi found Gradient Crystal (Rare)  
+**Top Raider:** @ratishoberoi with 120 damage  
+**Boss Killer:** @ratishoberoi (GPU Slayer)
 
 ## Phase Evolution
 
 <table>
   <tr>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p1.svg" alt="The GPU Devourer phase 1" width="170">
-      <br><strong>✅ CLEARED</strong><br>
+      <img src="./assets/bosses/data_leak_hydra_p1.svg" alt="The Data Leak Hydra phase 1" width="210">
+      <br><strong>🔥 CURRENT</strong><br>
       <sub>Phase 1</sub>
     </td>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p2.svg" alt="The GPU Devourer phase 2" width="170">
-      <br><strong>✅ CLEARED</strong><br>
+      <img src="./assets/bosses/data_leak_hydra_p2.svg" alt="The Data Leak Hydra phase 2" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
       <sub>Phase 2</sub>
     </td>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer phase 3" width="170">
-      <br><strong>✅ CLEARED</strong><br>
+      <img src="./assets/bosses/data_leak_hydra_p3.svg" alt="The Data Leak Hydra phase 3" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
       <sub>Phase 3</sub>
     </td>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer phase 4" width="210">
-      <br><strong>🔥 CURRENT</strong><br>
+      <img src="./assets/bosses/data_leak_hydra_p4.svg" alt="The Data Leak Hydra phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
       <sub>Phase 4</sub>
     </td>
   </tr>
 </table>
 
-**✅ Phase 1 → ✅ Phase 2 → ✅ Phase 3 → 🔥 Phase 4**  
-Current transformation: Final Nightmare form: a starved compute singularity with an endless reactor mouth.  
-Phases remaining: **0**
+**🔥 Phase 1 → ⬜ Phase 2 → ⬜ Phase 3 → ⬜ Phase 4**  
+Current transformation: Normal form: three encrypted heads watch the raid perimeter.  
+Phases remaining: **3**
 
 ## WORLD BOSS CAMPAIGN
 
-**🔥 CURRENT**  
+**✅ EXECUTED**  
 Boss 1: The GPU Devourer
 
-**🔒 LOCKED**  
+**🔥 CURRENT**  
 Boss 2: The Data Leak Hydra
 
 **🔒 LOCKED**  
@@ -78,26 +78,32 @@ Boss 6: The Prompt Goblin
 
 ## Current Record Holders
 
-**Most Damage:** @ratishoberoi (112)  
-**Most Loot:** @ratishoberoi (4)  
-**Most Executions:** No executions yet
+**Most Damage:** @ratishoberoi (120)  
+**Most Loot:** @ratishoberoi (5)  
+**Most Executions:** @ratishoberoi (1)
 
 ## 👑 Latest Executioner
 
-No executioner yet. Land the final blow to claim the first crown.
+<p align="center">
+  <img src="./assets/defeats/gpu_devourer_20260525T072541744Z_ratishoberoi.svg" alt="The GPU Devourer execution card" width="720">
+</p>
+
+| Boss Name | Executioner | Badge | Final Blow | Date |
+| --- | --- | --- | ---: | --- |
+| The GPU Devourer | @ratishoberoi | GPU Slayer | 441 | 2026-05-25T07:25:41.744Z |
 
 ## Why Attack Now
 
-A furnace-beast that eats compute clusters and exhales molten tensors.
+Every severed secret becomes another head, hissing credentials into the dark.
 
 **Damage the boss. Roll loot. Push the next phase. Take the final blow.**
 
 ## Loot Signal
 
-**Latest Drop:** @ratishoberoi found Lost Token (Common)  
-**Vault:** 4 relics held by 1 collectors  
+**Latest Drop:** @ratishoberoi found Gradient Crystal (Rare)  
+**Vault:** 5 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
-**Top Collector:** @ratishoberoi (4 relics)
+**Top Collector:** @ratishoberoi (5 relics)
 
 <details>
 <summary>Recent Combat</summary>
@@ -106,6 +112,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
+| 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
 | 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
 | 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Slash | 18 | Final Phase |
@@ -115,7 +122,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 112 | 4 |
+| 1 | @ratishoberoi | 120 | 5 |
 
 </details>
 
@@ -126,7 +133,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 4 |
+| Total Relics Held | 5 |
 | Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
@@ -134,7 +141,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 2 | 4 |
-| Rare | 15% | 2 | 4 |
+| Rare | 15% | 3 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
@@ -143,6 +150,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Collector | Relic | Rarity |
 | --- | --- | --- | --- |
+| 2026-05-25T07:25:41.744Z | @ratishoberoi | Gradient Crystal | Rare |
 | 2026-05-25T07:25:20.156Z | @ratishoberoi | Lost Token | Common |
 | 2026-05-25T06:14:19.846Z | @ratishoberoi | Prompt Shard | Rare |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common |
@@ -160,12 +168,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | @ratishoberoi | 4 | 4 | 0 | 0 |
+| 1 | @ratishoberoi | 5 | 5 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
+| 2026-05-25T07:25:41.744Z | @ratishoberoi | Gradient Crystal | Rare | 441 |
 | 2026-05-25T07:25:20.156Z | @ratishoberoi | Lost Token | Common | 32 |
 | 2026-05-25T06:14:19.846Z | @ratishoberoi | Prompt Shard | Rare | 54 |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common | 18 |
@@ -180,17 +189,21 @@ No mythic relics discovered yet.
 
 | Boss | Executioner | Badge | Final Blow | Date |
 | --- | --- | --- | ---: | --- |
-| No executions yet | - | - | - | - |
+| The GPU Devourer | @ratishoberoi<br>(GPU Slayer) | GPU Slayer | 441 | 2026-05-25T07:25:41.744Z |
 
 ## Top Executioners
 
 | Executioner | Execution Count | First Execution | Latest Execution |
 | --- | ---: | --- | --- |
-| No executions yet | 0 | - | - |
+| @ratishoberoi | 1 | 2026-05-25T07:25:41.744Z | 2026-05-25T07:25:41.744Z |
 
 ## Hall of Fame
 
-No bosses defeated yet.
+### Cinematic Defeat Archive
+
+| Defeat Panel | Boss | Killer | Date | Final Damage |
+| --- | --- | --- | --- | ---: |
+| <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer defeated" width="120"> | The GPU Devourer | @ratishoberoi | 2026-05-25T07:25:41.744Z | 441 |
 
 </details>
 
@@ -210,7 +223,7 @@ No bosses defeated yet.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 2 | 4 |
-| Rare | 15% | 2 | 4 |
+| Rare | 15% | 3 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |

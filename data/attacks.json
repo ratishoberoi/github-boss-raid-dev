@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T07:25:41.744Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Lucky Attack",
+    "damage": 441,
+    "applied_damage": 8,
+    "boss_name": "The GPU Devourer",
+    "phase_after_attack": "Final Phase",
+    "defeated": true,
+    "issue_number": 5,
+    "loot": {
+      "item": "Gradient Crystal",
+      "rarity": "Rare"
+    }
+  },
+  {
     "timestamp": "2026-05-25T07:25:20.156Z",
     "attacker": "ratishoberoi",
     "attack_type": "Lucky Attack",

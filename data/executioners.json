@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "username": "ratishoberoi",
+    "boss_id": "gpu_devourer",
+    "boss_name": "The GPU Devourer",
+    "boss_title": "Infinite Compute Maw",
+    "final_damage": 441,
+    "timestamp": "2026-05-25T07:25:41.744Z",
+    "boss_phase": "Final Phase",
+    "boss_image": "assets/bosses/gpu_devourer_p4.svg",
+    "executioner_badge": "GPU Slayer",
+    "defeat_card": "assets/defeats/gpu_devourer_20260525T072541744Z_ratishoberoi.svg"
+  }
+]

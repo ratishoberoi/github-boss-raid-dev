@@ -1,7 +1,7 @@
 {
-  "boss_id": "gpu_devourer",
-  "boss_name": "The GPU Devourer",
-  "max_hp": 1000,
-  "current_hp": 8,
-  "phase": "Final Phase"
+  "boss_id": "data_leak_hydra",
+  "boss_name": "The Data Leak Hydra",
+  "max_hp": 1250,
+  "current_hp": 1250,
+  "phase": "Phase 1"
 }
