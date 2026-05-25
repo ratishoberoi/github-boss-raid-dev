@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T14:01:55.675Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Lucky Attack",
+    "damage": 94,
+    "applied_damage": 94,
+    "boss_name": "The Data Leak Hydra",
+    "phase_after_attack": "Phase 2",
+    "defeated": false,
+    "issue_number": 7,
+    "loot": {
+      "item": "Gradient Crystal",
+      "rarity": "Rare"
+    }
+  },
+  {
     "timestamp": "2026-05-25T14:00:19.663Z",
     "attacker": "ratishoberoi",
     "attack_type": "Lucky Attack",
