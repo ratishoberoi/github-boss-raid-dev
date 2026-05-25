@@ -8,8 +8,8 @@
 
 ### Infinite Compute Maw
 
-**HP 94 / 1000 (9%)**  
-`██░░░░░░░░░░░░░░░░░░░░░░`
+**HP 40 / 1000 (4%)**  
+`█░░░░░░░░░░░░░░░░░░░░░░░`
 
 **Final Phase of 4**  
 Final Nightmare form: a starved compute singularity with an endless reactor mouth.
@@ -20,9 +20,9 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
 ## Live Raid Pulse
 
-**Last Attack:** @ratishoberoi hit for 18  
-**Latest Loot:** @ratishoberoi found Corrupted CSV (Common)  
-**Top Raider:** @ratishoberoi with 26 damage  
+**Last Attack:** @ratishoberoi hit for 54  
+**Latest Loot:** @ratishoberoi found Prompt Shard (Rare)  
+**Top Raider:** @ratishoberoi with 80 damage  
 **Boss Killer:** No boss has fallen yet.
 
 ## Phase Evolution
@@ -58,8 +58,8 @@ Phases remaining: **0**
 
 ## Current Record Holders
 
-**Most Damage:** @ratishoberoi (26)  
-**Most Loot:** @ratishoberoi (2)  
+**Most Damage:** @ratishoberoi (80)  
+**Most Loot:** @ratishoberoi (3)  
 **Most Executions:** No executions yet
 
 ## 👑 Latest Executioner
@@ -74,10 +74,10 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 ## Loot Signal
 
-**Latest Drop:** @ratishoberoi found Corrupted CSV (Common)  
-**Vault:** 2 relics held by 1 collectors  
+**Latest Drop:** @ratishoberoi found Prompt Shard (Rare)  
+**Vault:** 3 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
-**Top Collector:** @ratishoberoi (2 relics)
+**Top Collector:** @ratishoberoi (3 relics)
 
 <details>
 <summary>Recent Combat</summary>
@@ -86,6 +86,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
+| 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Slash | 18 | Final Phase |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
 
@@ -93,7 +94,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 26 | 2 |
+| 1 | @ratishoberoi | 80 | 3 |
 
 </details>
 
@@ -104,7 +105,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 2 |
+| Total Relics Held | 3 |
 | Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
@@ -112,7 +113,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 1 | 4 |
-| Rare | 15% | 1 | 4 |
+| Rare | 15% | 2 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
@@ -121,6 +122,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Collector | Relic | Rarity |
 | --- | --- | --- | --- |
+| 2026-05-25T06:14:19.846Z | @ratishoberoi | Prompt Shard | Rare |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare |
 
@@ -136,12 +138,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | @ratishoberoi | 2 | 2 | 0 | 0 |
+| 1 | @ratishoberoi | 3 | 3 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
+| 2026-05-25T06:14:19.846Z | @ratishoberoi | Prompt Shard | Rare | 54 |
 | 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common | 18 |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare | 8 |
 
@@ -184,7 +187,7 @@ No bosses defeated yet.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 1 | 4 |
-| Rare | 15% | 1 | 4 |
+| Rare | 15% | 2 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |

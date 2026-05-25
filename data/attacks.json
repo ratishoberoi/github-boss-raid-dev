@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T06:14:19.846Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Critical Strike",
+    "damage": 54,
+    "applied_damage": 54,
+    "boss_name": "The GPU Devourer",
+    "phase_after_attack": "Final Phase",
+    "defeated": false,
+    "issue_number": 3,
+    "loot": {
+      "item": "Prompt Shard",
+      "rarity": "Rare"
+    }
+  },
+  {
     "timestamp": "2026-05-25T06:10:41.242Z",
     "attacker": "ratishoberoi",
     "attack_type": "Slash",
