@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T07:25:20.156Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Lucky Attack",
+    "damage": 32,
+    "applied_damage": 32,
+    "boss_name": "The GPU Devourer",
+    "phase_after_attack": "Final Phase",
+    "defeated": false,
+    "issue_number": 4,
+    "loot": {
+      "item": "Lost Token",
+      "rarity": "Common"
+    }
+  },
+  {
     "timestamp": "2026-05-25T06:14:19.846Z",
     "attacker": "ratishoberoi",
     "attack_type": "Critical Strike",

@@ -2,6 +2,6 @@
   "boss_id": "gpu_devourer",
   "boss_name": "The GPU Devourer",
   "max_hp": 1000,
-  "current_hp": 40,
+  "current_hp": 8,
   "phase": "Final Phase"
 }
