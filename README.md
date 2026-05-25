@@ -1,7 +1,9 @@
 <p align="center">
   <img src="./assets/bosses/data_leak_hydra_p1.svg" alt="The Data Leak Hydra raid encounter" width="960">
 </p>
+<h2>GIF TEST</h2>
 
+<img src="./assets/boss_phases/data_leak_hydra_p1.gif" width="900">
 # ⚠ GLOBAL RAID ACTIVE
 
 ## THE DATA LEAK HYDRA
