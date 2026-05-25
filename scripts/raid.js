@@ -5,6 +5,7 @@ const { execSync } = require("child_process");
 const ROOT = path.join(__dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
 const ASSETS_DIR = path.join(ROOT, "assets");
+const MASTER_BOSS_ART_DIR = path.join(ASSETS_DIR, "master_boss_art");
 
 const BOSS_PATH = path.join(DATA_DIR, "boss.json");
 const LEADERBOARD_PATH = path.join(DATA_DIR, "leaderboard.json");
@@ -79,9 +80,19 @@ const NEXT_BOSSES = [
   "Cipher Colossus"
 ];
 
+const BOSS_CAMPAIGN_ORDER = [
+  "gpu_devourer",
+  "data_leak_hydra",
+  "gradient_vanisher",
+  "hallucination_titan",
+  "overfitted_beast",
+  "prompt_goblin"
+];
+
 function ensureDirs() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.mkdirSync(ASSETS_DIR, { recursive: true });
+  fs.mkdirSync(MASTER_BOSS_ART_DIR, { recursive: true });
   fs.mkdirSync(BOSS_ASSET_DIR, { recursive: true });
   fs.mkdirSync(DEFEAT_ASSET_DIR, { recursive: true });
 }
@@ -349,6 +360,11 @@ function bossImagePathFor(boss, forcePhaseNumber = null) {
   const id = slugify(boss.boss_id || boss.id || boss.boss_name, DEFAULT_BOSS.boss_id);
   const phaseNumber = forcePhaseNumber || phaseNumberForBoss(boss);
   return `assets/bosses/${id}_p${phaseNumber}.svg`;
+}
+
+function masterBossArtPathFor(definition) {
+  const id = slugify(definition.id || definition.name, DEFAULT_BOSS.boss_id);
+  return `../master_boss_art/${id}_master.png`;
 }
 
 function executionerBadgeForBoss(bossId, bossName) {
@@ -996,6 +1012,10 @@ ${renderLivePulse(safeState)}
 
 ${renderPhaseEvolutionStrip(boss, bossDefinition)}
 
+## WORLD BOSS CAMPAIGN
+
+${renderWorldBossCampaign(safeState)}
+
 ## Current Record Holders
 
 ${renderRecordHolders(safeState)}
@@ -1142,6 +1162,26 @@ function renderPhaseEvolutionStrip(boss, bossDefinition) {
 **${phaseProgressLine(boss)}**  
 Current transformation: ${markdownCell(bossDefinition[phaseKeyForBoss(boss)])}  
 Phases remaining: **${phasesRemaining(boss)}**`;
+}
+
+function renderWorldBossCampaign(state) {
+  const currentId = slugify(state.boss.boss_id || state.boss.boss_name, DEFAULT_BOSS.boss_id);
+  const executed = new Set([
+    ...state.hallOfFame.map((entry) => slugify(entry.boss_id || entry.boss_name, "")),
+    ...state.executioners.map((entry) => slugify(entry.boss_id || entry.boss_name, ""))
+  ].filter(Boolean));
+  const registryById = new Map(state.bossRegistry.map((boss) => [boss.id, boss]));
+  const rows = BOSS_CAMPAIGN_ORDER.map((bossId, index) => {
+    const definition = registryById.get(bossId) || { name: bossId.replace(/_/g, " ") };
+    const status = bossId === currentId
+      ? "🔥 CURRENT"
+      : executed.has(bossId)
+        ? "✅ EXECUTED"
+        : "🔒 LOCKED";
+    return `**${status}**  
+Boss ${index + 1}: ${markdownCell(definition.name)}`;
+  });
+  return rows.join("\n\n");
 }
 
 function renderRecordHolders(state) {
@@ -1457,167 +1497,163 @@ function bossPhaseDescription(definition, phaseNumber) {
   return definition[`phase_${phaseNumber}`] || definition.phase_1;
 }
 
-function renderBossFigure(definition, phaseNumber, colors) {
+function bossPhaseDisplayName(definition, phaseNumber) {
+  const names = {
+    gpu_devourer: ["Contained Predator", "Reactor Exposure", "City Destroyer", "World Eater"],
+    data_leak_hydra: ["3 Heads", "5 Heads", "7 Heads", "9 Heads"],
+    gradient_vanisher: ["Single Singularity", "Dual Singularity", "Reality Fracture", "Cosmic Collapse"],
+    hallucination_titan: ["3 Faces", "10 Faces", "25 Faces", "100+ Faces"],
+    overfitted_beast: ["Contained Beast", "Chains Breaking", "Mutation Surge", "Catastrophic Beast"],
+    prompt_goblin: ["Prompt Thief", "Prompt Lord", "Prompt Warlock", "Reality Manipulator"]
+  };
+  return (names[definition.id] && names[definition.id][phaseNumber - 1]) || bossPhaseName(phaseNumber);
+}
+
+function repeatedNodes(count, renderer) {
+  return Array.from({ length: count }, (_, index) => renderer(index)).join("\n    ");
+}
+
+function renderCracks(count, color, opacity = ".65") {
+  return repeatedNodes(count, (index) => {
+    const x = 80 + ((index * 137) % 790);
+    const y = 70 + ((index * 83) % 380);
+    return `<path class="corruption-pulse" d="M${x} ${y}L${x + 24} ${y + 34}L${x + 8} ${y + 72}L${x + 46} ${y + 118}" stroke="${color}" stroke-opacity="${opacity}" stroke-width="${2 + (index % 3)}" fill="none"/>`;
+  });
+}
+
+function renderEnergyRibbons(count, color, opacity = ".72") {
+  return repeatedNodes(count, (index) => {
+    const y = 80 + index * (380 / Math.max(1, count - 1));
+    return `<path class="energy-movement" d="M-40 ${y}C160 ${y - 70} 330 ${y + 84} 520 ${y}C710 ${y - 84} 850 ${y + 68} 1000 ${y - 28}" stroke="${color}" stroke-opacity="${opacity}" stroke-width="${3 + index % 4}" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>`;
+  });
+}
+
+function renderEyeGlowCluster(points, color) {
+  return points.map(([x, y, r]) => (
+    `<circle class="eye-glow-pulse" cx="${x}" cy="${y}" r="${r}" fill="${color}" fill-opacity=".86" filter="url(#glow)"/>`
+  )).join("\n    ");
+}
+
+function renderPhaseEffects(definition, phaseNumber, colors) {
   const [primary, secondary, accent] = colors;
-  const corruption = phaseNumber >= 3;
-  const final = phaseNumber === 4;
-  const mutate = phaseNumber >= 2;
-
-  function slashStorm(opacity = ".45") {
-    return `<path class="flow" d="M72 122C210 58 360 164 490 112C650 48 776 80 906 166M54 414C208 334 360 450 518 382C662 320 772 344 916 270" stroke="${secondary}" stroke-opacity="${opacity}" stroke-width="${phaseNumber + 3}" stroke-linecap="round" stroke-dasharray="26 18" fill="none"/>
-    <path class="shake" d="M190 72L246 154L198 230L276 304L218 426L288 510M742 58L694 146L760 238L690 314L744 430L686 512" stroke="${accent}" stroke-opacity="${corruption ? ".64" : ".28"}" stroke-width="${phaseNumber + 2}" fill="none"/>`;
-  }
-
-  function dragonSpines(startX, count, baseY, height) {
-    return Array.from({ length: count }, (_, index) => {
-      const x = startX + index * 58;
-      const y = baseY - Math.sin(index * 0.9) * 28;
-      const c = index % 2 ? secondary : primary;
-      return `<path class="pulse" d="M${x} ${y}L${x + 28} ${y - height - phaseNumber * 10}L${x + 58} ${y}Z" fill="#070b12" stroke="${c}" stroke-width="${3 + phaseNumber * 0.6}"/>`;
-    }).join("\n    ");
-  }
+  const corruptionOpacity = (0.16 + phaseNumber * 0.11).toFixed(2);
+  const common = `${renderEnergyRibbons(phaseNumber + 2, accent, ".42")}
+    ${renderCracks(phaseNumber * 4, secondary, ".42")}
+    <circle class="pulsing-glow" cx="482" cy="292" r="${122 + phaseNumber * 18}" fill="${accent}" fill-opacity=".12" filter="url(#glow)"/>
+    ${renderEyeGlowCluster([[438, 226, 7 + phaseNumber], [522, 226, 7 + phaseNumber]], accent)}
+    <circle class="reactor-flicker" cx="482" cy="292" r="${34 + phaseNumber * 14}" fill="${primary}" fill-opacity="${0.12 + phaseNumber * 0.05}" filter="url(#glow)"/>
+    <circle class="corruption-pulse" cx="482" cy="292" r="${76 + phaseNumber * 22}" stroke="${secondary}" stroke-opacity="${corruptionOpacity}" stroke-width="${6 + phaseNumber}" fill="none"/>
+    <path class="threat-indicator-pulse" d="M36 42H214L250 78H36Z" fill="#020713" fill-opacity=".78" stroke="${primary}" stroke-width="2"/>`;
 
   if (definition.id === "gpu_devourer") {
-    const bodyStroke = final ? 13 : 8 + phaseNumber;
-    const headScale = final ? 1 : 0;
-    const spines = dragonSpines(220, final ? 11 : 7 + phaseNumber, 252 - phaseNumber * 7, 66);
-    const wings = mutate
-      ? `<path class="shake" d="M346 244C218 108 108 104 54 232C170 206 242 274 352 312Z" fill="#080b13" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-linejoin="round"/>
-    <path class="shake" d="M604 230C730 86 864 82 922 210C796 196 728 272 608 304Z" fill="#080b13" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-linejoin="round"/>`
-      : "";
-    const reactorBreak = corruption
-      ? `<path class="pulse" d="M390 282C438 222 526 220 574 286C540 352 426 354 390 282Z" fill="${primary}" fill-opacity=".62" stroke="${accent}" stroke-width="8"/>
-    <path class="flow" d="M426 290C374 360 382 424 330 500M526 292C584 366 574 430 630 512" stroke="${primary}" stroke-width="${8 + phaseNumber}" stroke-linecap="round" stroke-dasharray="20 14" fill="none"/>`
-      : `<path class="pulse" d="M410 286C452 246 516 246 558 288C516 318 454 318 410 286Z" fill="${accent}" fill-opacity=".42" stroke="${accent}" stroke-width="6"/>`;
-    const furnaceMaw = final
-      ? `<path class="pulse" d="M674 190C758 130 882 148 932 242C880 342 748 338 674 270Z" fill="#020408" stroke="${secondary}" stroke-width="12"/>
-    <path d="M716 216C770 190 852 202 890 246C844 284 768 284 716 252Z" fill="${primary}" fill-opacity=".72" stroke="${accent}" stroke-width="7"/>
-    <path d="M724 178L746 236L770 174L794 242L824 176L840 238L870 188M722 310L750 252L774 318L798 250L824 318L844 256L878 304" stroke="#f8fbff" stroke-width="5" stroke-linecap="round"/>`
-      : `<path class="pulse" d="M690 186L766 160L850 206L774 226L842 260L736 256L690 224Z" fill="#070b12" stroke="${secondary}" stroke-width="${7 + phaseNumber}"/>
-    <path d="M724 200L754 216L722 228M782 196L814 210L780 226" stroke="${accent}" stroke-width="6" stroke-linecap="round"/>`;
-    return `<g>
-    ${wings}
-    <path d="M86 332C172 226 300 176 458 192C584 206 660 242 736 214C660 336 548 420 358 412C248 406 154 376 86 332Z" fill="#060a12" stroke="${primary}" stroke-width="${bodyStroke}" stroke-linejoin="round"/>
-    <path d="M118 338C70 292 58 204 108 132C158 226 252 236 336 286C246 284 178 306 118 338Z" fill="#090f18" stroke="${secondary}" stroke-width="8"/>
-    ${spines}
-    ${furnaceMaw}
-    ${reactorBreak}
-    <path d="M246 382L156 506M354 404L314 526M590 398L662 528M688 350L836 486" stroke="${primary}" stroke-width="${final ? 24 : 14 + phaseNumber * 2}" stroke-linecap="round"/>
-    <path d="M166 506L112 510M314 526L272 524M662 528L708 522M836 486L890 498" stroke="${secondary}" stroke-width="9" stroke-linecap="round"/>
-    ${final ? `<path class="pulse" d="M110 92C282 34 662 28 910 118C790 126 704 174 670 246C522 154 302 160 110 92Z" fill="${primary}" fill-opacity=".13" stroke="${secondary}" stroke-width="7"/>` : ""}
-    ${slashStorm(final ? ".82" : ".34")}
-  </g>`;
+    const reactor = [38, 64, 92, 132][phaseNumber - 1];
+    const jaw = [18, 38, 64, 96][phaseNumber - 1];
+    return `${common}
+    <circle class="reactor-flicker" cx="496" cy="300" r="${reactor}" fill="${primary}" fill-opacity=".44" filter="url(#glow)"/>
+    <path class="eye-glow-pulse" d="M670 ${238 - jaw / 3}C748 ${196 - jaw} 842 ${204 - jaw / 2} 924 ${250}C842 ${298 + jaw / 2} 750 ${302 + jaw} 670 ${268 + jaw / 3}Z" fill="#050407" fill-opacity=".34" stroke="${secondary}" stroke-width="${3 + phaseNumber}"/>
+    <path class="energy-movement" d="M498 300C430 396 386 438 338 524M512 302C604 392 668 444 762 536" stroke="${primary}" stroke-width="${5 + phaseNumber * 2}" stroke-dasharray="22 16" fill="none"/>
+    ${phaseNumber >= 3 ? `<path d="M34 502H928" stroke="${primary}" stroke-width="18" stroke-opacity=".34"/><path d="M70 500V448M132 500V414M206 500V456M772 500V422M846 500V392M908 500V450" stroke="${secondary}" stroke-width="12" stroke-opacity=".54"/>` : ""}
+    ${phaseNumber === 4 ? `<circle class="reactor-flicker" cx="842" cy="252" r="126" fill="${primary}" fill-opacity=".20" filter="url(#glow)"/><circle class="threat-indicator-pulse" cx="842" cy="252" r="172" stroke="${secondary}" stroke-width="9" stroke-opacity=".34" fill="none"/>` : ""}`;
   }
 
   if (definition.id === "data_leak_hydra") {
     const heads = [3, 5, 7, 9][phaseNumber - 1];
-    const headNodes = Array.from({ length: heads }, (_, index) => {
-      const x = 120 + index * (720 / Math.max(1, heads - 1));
-      const y = 164 + (index % 3) * 38 - phaseNumber * 12;
-      const c = index % 2 ? secondary : primary;
-      const jaw = y + 42 + phaseNumber * 3;
-      return `<path d="M480 370C${x + 42} 348 ${x - 58} 238 ${x} ${y}" stroke="${c}" stroke-width="${22 + phaseNumber * 2}" stroke-linecap="round" fill="none"/>
-    <path class="pulse" d="M${x - 66} ${y + 20}C${x - 38} ${y - 44} ${x + 42} ${y - 52} ${x + 82} ${y + 8}C${x + 44} ${y + 72} ${x - 34} ${y + 76} ${x - 66} ${y + 20}Z" fill="#061012" stroke="${c}" stroke-width="6"/>
-    <path d="M${x - 34} ${y + 14}L${x - 8} ${y}L${x - 16} ${y + 30}M${x + 30} ${y + 12}L${x + 56} ${y - 2}L${x + 48} ${y + 30}" stroke="${accent}" stroke-width="6" fill="none"/>
-    <path d="M${x - 24} ${jaw}C${x + 8} ${jaw + 16} ${x + 46} ${jaw + 8} ${x + 72} ${jaw - 18}" stroke="${secondary}" stroke-width="5" fill="none"/>
-    <path class="flow" d="M${x + 16} ${y + 78}C${x + 10} ${y + 130} ${x + 44} ${y + 156} ${x + 22} ${y + 216}" stroke="${accent}" stroke-opacity=".52" stroke-width="5" stroke-dasharray="14 12" fill="none"/>`;
-    }).join("\n    ");
-    return `<g>
-    <path d="M176 386C258 282 390 250 480 314C586 244 736 286 822 398C676 496 330 500 176 386Z" fill="#050b10" stroke="${primary}" stroke-width="${9 + phaseNumber}"/>
-    <path d="M264 426C386 342 574 342 704 430C590 506 388 506 264 426Z" fill="#020607" stroke="${secondary}" stroke-width="7"/>
-    ${headNodes}
-    <path class="flow" d="M112 462C292 382 446 510 606 426C704 374 806 404 914 458" stroke="${secondary}" stroke-opacity=".92" stroke-width="${7 + phaseNumber}" stroke-dasharray="${phaseNumber * 8 + 12} 12" fill="none"/>
-    ${final ? `<path class="shake" d="M48 94C248 34 680 30 920 104C824 164 826 238 906 318C680 274 318 274 64 326C156 232 150 158 48 94Z" stroke="${secondary}" stroke-width="8" fill="${secondary}" fill-opacity=".12"/>` : ""}
-    ${slashStorm(final ? ".74" : ".42")}
-  </g>`;
+    const eyes = repeatedNodes(heads, (index) => {
+      const x = 144 + index * (672 / Math.max(1, heads - 1));
+      const y = 132 + (index % 3) * 42;
+      return `<circle class="eye-glow-pulse" cx="${x}" cy="${y}" r="${10 + phaseNumber}" fill="${accent}" filter="url(#glow)"/>
+      <circle class="eye-glow-pulse" cx="${x + 34}" cy="${y + 4}" r="${10 + phaseNumber}" fill="${accent}" filter="url(#glow)"/>`;
+    });
+    const chains = repeatedNodes(5, (index) => {
+      const x = 104 + index * 188;
+      return `<path class="corruption-pulse" d="M${x} 38L${x + 40} 116L${x + 8} 190${phaseNumber >= 2 ? `M${x + 18} 234L${x + 54} 318` : `L${x + 48} 284`}" stroke="${secondary}" stroke-opacity=".7" stroke-width="7" stroke-dasharray="${phaseNumber >= 2 ? "24 24" : "8 8"}" fill="none"/>`;
+    });
+    return `${common}
+    ${eyes}
+    ${chains}
+    ${renderEnergyRibbons(phaseNumber + 4, primary, ".64")}
+    <path class="threat-indicator-pulse" d="M92 468C248 404 414 512 576 430C708 362 816 410 934 352" stroke="${accent}" stroke-width="${8 + phaseNumber}" stroke-opacity=".68" stroke-dasharray="18 14" fill="none"/>`;
   }
 
   if (definition.id === "gradient_vanisher") {
-    const echoes = Array.from({ length: 4 + phaseNumber }, (_, index) => {
-      const offset = (index - 2) * (24 + phaseNumber * 4);
-      const opacity = Math.max(0.08, 0.44 - index * 0.045);
-      return `<path class="drift" d="M${420 + offset} 56C292 150 280 374 ${438 + offset} 516C516 448 598 318 568 184C546 102 488 72 ${420 + offset} 56Z" fill="${index % 2 ? secondary : primary}" fill-opacity="${opacity}" stroke="${accent}" stroke-opacity="${opacity}" stroke-width="3"/>`;
-    }).join("\n    ");
-    const voidCuts = corruption
-      ? `<path d="M392 164L504 206L434 278L556 330L452 394L540 476" stroke="#020409" stroke-width="${34 + phaseNumber * 6}" stroke-linecap="round" fill="none"/>
-    <path class="flow" d="M170 120L812 462M848 94L128 474M314 36L642 520" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-dasharray="12 20"/>`
-      : "";
-    return `<g>
-    ${echoes}
-    <path class="pulse" d="M454 48C306 154 294 384 454 526C548 450 638 320 606 180C580 94 526 62 454 48Z" fill="#060914" fill-opacity="${final ? ".28" : ".82"}" stroke="${primary}" stroke-width="${8 + phaseNumber}"/>
-    <path d="M350 218C428 138 552 144 628 236C546 202 430 204 350 218Z" fill="${secondary}" fill-opacity=".22" stroke="${secondary}" stroke-width="7"/>
-    <path class="pulse" d="M424 250L466 224L452 282ZM538 254L586 228L558 288Z" fill="${accent}"/>
-    <path d="M380 386C460 440 552 424 622 360" stroke="${primary}" stroke-width="9" fill="none"/>
-    ${voidCuts}
-    ${final ? `<path class="shake" d="M182 72C344 148 626 130 806 54C694 224 720 384 846 512C614 440 350 462 132 522C260 356 270 220 182 72Z" fill="${primary}" fill-opacity=".10" stroke="${accent}" stroke-width="7"/>` : ""}
-  </g>`;
+    const holes = [1, 2, 4, 7][phaseNumber - 1];
+    const singularities = repeatedNodes(holes, (index) => {
+      const x = 220 + ((index * 163) % 560);
+      const y = 126 + ((index * 97) % 286);
+      const r = 34 + phaseNumber * 9 + (index % 3) * 8;
+      return `<circle class="reactor-flicker" cx="${x}" cy="${y}" r="${r}" fill="#010207" stroke="${accent}" stroke-width="5" filter="url(#glow)"/>
+      <circle class="spin" cx="${x}" cy="${y}" r="${r + 20}" stroke="${secondary}" stroke-opacity=".58" stroke-width="4" stroke-dasharray="18 14" fill="none"/>`;
+    });
+    return `${common}
+    ${singularities}
+    <path class="corruption-pulse" d="M128 76L824 488M846 58L96 502M304 28L612 530M54 248L924 316" stroke="${secondary}" stroke-width="${4 + phaseNumber * 2}" stroke-opacity=".62" stroke-dasharray="16 18" fill="none"/>
+    ${phaseNumber >= 3 ? `<path d="M0 0H960V540H0Z" fill="#000" fill-opacity=".16"/><path class="energy-movement" d="M96 166C280 92 396 238 518 178C684 96 804 124 960 66" stroke="${accent}" stroke-width="9" stroke-dasharray="20 18" fill="none"/>` : ""}`;
+  }
+
+  if (definition.id === "hallucination_titan") {
+    const faces = [3, 10, 25, 110][phaseNumber - 1];
+    const faceNodes = repeatedNodes(faces, (index) => {
+      const cols = phaseNumber === 4 ? 15 : Math.ceil(Math.sqrt(faces));
+      const x = 110 + (index % cols) * (740 / Math.max(1, cols - 1));
+      const y = 82 + Math.floor(index / cols) * (370 / Math.max(1, Math.ceil(faces / cols) - 1));
+      const size = phaseNumber === 4 ? 6 + (index % 3) : 11 + phaseNumber;
+      return `<g class="eye-glow-pulse" opacity="${phaseNumber === 4 ? ".54" : ".72"}">
+      <circle cx="${x}" cy="${y}" r="${size}" fill="${primary}" fill-opacity=".20" stroke="${accent}" stroke-width="2"/>
+      <circle cx="${x - size / 2}" cy="${y - 1}" r="${Math.max(2, size / 4)}" fill="${secondary}"/>
+      <circle cx="${x + size / 2}" cy="${y - 1}" r="${Math.max(2, size / 4)}" fill="${secondary}"/>
+    </g>`;
+    });
+    return `${common}
+    ${faceNodes}
+    <path class="spin" d="M150 282C278 34 684 28 818 282C680 530 278 530 150 282Z" stroke="${secondary}" stroke-width="${4 + phaseNumber}" stroke-opacity=".48" stroke-dasharray="24 18" fill="none"/>
+    ${phaseNumber >= 3 ? renderEnergyRibbons(8, primary, ".54") : ""}`;
   }
 
   if (definition.id === "overfitted_beast") {
-    const shards = Array.from({ length: 8 + phaseNumber * 4 }, (_, index) => {
-      const x = 172 + (index % 8) * 86;
-      const y = 132 + Math.floor(index / 8) * 90 + (index % 2) * 20;
-      return `<path class="shake" d="M${x} ${y}L${x + 64} ${y - 22}L${x + 86} ${y + 42}L${x + 18} ${y + 64}Z" fill="#0a1018" stroke="${index % 2 ? secondary : primary}" stroke-width="4"/>
-    <path d="M${x + 14} ${y + 20}C${x + 34} ${y + 6} ${x + 58} ${y + 8} ${x + 72} ${y + 28}" stroke="${accent}" stroke-width="3" fill="none"/>`;
-    }).join("\n    ");
-    return `<g>
-    <path d="M126 388C182 230 306 112 484 118C674 126 824 246 884 412C692 526 318 530 126 388Z" fill="#070812" stroke="${secondary}" stroke-width="${11 + phaseNumber}"/>
-    <path d="M318 186L244 42L438 128M642 190L720 42L522 128" fill="#070812" stroke="${primary}" stroke-width="9"/>
-    <path d="M236 328L70 ${mutate ? 214 : 292}M730 330L914 ${mutate ? 210 : 296}M304 426L218 ${final ? 540 : 496}M676 426L778 ${final ? 540 : 496}" stroke="${primary}" stroke-width="${18 + phaseNumber * 4}" stroke-linecap="round"/>
-    <path d="M70 214L34 242M914 210L946 236M218 540L172 534M778 540L824 532" stroke="${secondary}" stroke-width="10" stroke-linecap="round"/>
-    <path class="pulse" d="M398 258L456 224L438 292ZM566 260L506 224L526 294Z" fill="${accent}"/>
-    <path d="M386 356C448 424 552 422 628 354" stroke="${secondary}" stroke-width="11" fill="none"/>
-    ${shards}
-    ${final ? `<path class="flow" d="M86 448C282 548 692 550 888 442" stroke="${primary}" stroke-width="13" stroke-dasharray="28 12" fill="none"/>` : ""}
-  </g>`;
+    const chains = repeatedNodes(7, (index) => {
+      const x = 70 + index * 138;
+      return `<path class="corruption-pulse" d="M${x} 42L${x + 68} 162${phaseNumber >= 2 ? `M${x + 90} 214L${x + 148} 360` : `L${x + 118} 320`}" stroke="${secondary}" stroke-opacity=".76" stroke-width="${8 + phaseNumber}" stroke-dasharray="${phaseNumber >= 2 ? "34 28" : "10 10"}" fill="none"/>`;
+    });
+    const mutation = repeatedNodes(phaseNumber * 6, (index) => {
+      const x = 112 + ((index * 109) % 760);
+      const y = 118 + ((index * 71) % 330);
+      return `<path class="corruption-pulse" d="M${x} ${y}L${x + 46} ${y - 24}L${x + 82} ${y + 34}L${x + 16} ${y + 58}Z" fill="${primary}" fill-opacity=".18" stroke="${accent}" stroke-width="3"/>`;
+    });
+    return `${common}
+    ${chains}
+    ${mutation}
+    <path class="threat-indicator-pulse" d="M80 478C264 406 700 402 886 474" stroke="${primary}" stroke-width="${12 + phaseNumber * 3}" stroke-opacity=".45" fill="none"/>
+    ${phaseNumber === 4 ? `<rect class="corruption-pulse" x="0" y="0" width="960" height="540" fill="${secondary}" fill-opacity=".10"/>` : ""}`;
   }
 
-  if (definition.id === "prompt_goblin") {
-    const sigils = Array.from({ length: phaseNumber + 4 }, (_, index) => {
-      const x = 166 + index * 92;
-      const y = 82 + (index % 2) * 56;
-      return `<path class="shake" d="M${x} ${y}C${x + 46} ${y - 40} ${x + 74} ${y + 28} ${x + 22} ${y + 62}M${x + 2} ${y + 28}L${x + 72} ${y + 20}" stroke="${index % 2 ? secondary : primary}" stroke-width="5" fill="none"/>`;
-    }).join("\n    ");
-    const shadow = final ? `<path class="pulse" d="M228 62C404 10 698 44 820 196C696 170 628 270 638 428C514 326 392 330 276 428C314 284 308 164 228 62Z" fill="${secondary}" fill-opacity=".16" stroke="${secondary}" stroke-width="7"/>` : "";
-    return `<g>
-    ${shadow}
-    ${sigils}
-    <path d="M478 84C628 160 706 310 630 466C548 530 406 530 328 462C254 304 318 154 478 84Z" fill="#07101b" stroke="${primary}" stroke-width="${9 + phaseNumber}"/>
-    <path d="M372 214L218 ${mutate ? 92 : 188}C286 286 290 366 194 474M584 214L746 ${mutate ? 92 : 188}C674 286 670 366 766 474" stroke="${secondary}" stroke-width="${14 + phaseNumber * 4}" stroke-linecap="round" fill="none"/>
-    <path d="M400 200L294 48L468 146M556 200L666 48L490 146" fill="#07101b" stroke="${accent}" stroke-width="8"/>
-    <path class="pulse" d="M410 280L466 246L446 316ZM548 280L492 246L512 316Z" fill="${accent}"/>
-    <path d="M390 356Q480 ${final ? 446 : 394} 570 354" stroke="${secondary}" stroke-width="11" fill="none"/>
-    <path d="M344 462L270 532M616 462L696 532" stroke="${primary}" stroke-width="${14 + phaseNumber * 2}" stroke-linecap="round"/>
-    ${corruption ? `<path class="flow" d="M146 448C284 406 404 488 480 430C574 358 708 424 832 382" stroke="${accent}" stroke-width="7" stroke-dasharray="16 12" fill="none"/>` : ""}
-  </g>`;
-  }
-
-  const faces = 1 + (mutate ? phaseNumber : 0);
-  const faceNodes = Array.from({ length: faces }, (_, index) => {
-    const angle = (Math.PI * 2 * index) / faces;
-    const x = 480 + Math.cos(angle) * (mutate ? 156 : 0);
-    const y = 214 + Math.sin(angle) * (mutate ? 82 : 0);
-    return `<path class="pulse" d="M${x - 72} ${y + 8}C${x - 44} ${y - 74} ${x + 46} ${y - 76} ${x + 76} ${y + 4}C${x + 42} ${y + 88} ${x - 38} ${y + 88} ${x - 72} ${y + 8}Z" fill="#07101b" stroke="${index % 2 ? secondary : primary}" stroke-width="6"/>
-    <path d="M${x - 34} ${y - 8}L${x - 6} ${y - 28}L${x - 16} ${y + 10}M${x + 30} ${y - 8}L${x + 58} ${y - 28}L${x + 48} ${y + 10}" stroke="${accent}" stroke-width="6" fill="none"/>`;
-  }).join("\n    ");
-  return `<g>
-    <path d="M480 38C310 112 224 306 284 476C408 544 572 544 688 472C750 298 674 110 480 38Z" fill="#07101b" stroke="${primary}" stroke-width="${10 + phaseNumber}"/>
-    <path d="M310 288L92 ${mutate ? 150 : 238}M650 288L872 ${mutate ? 150 : 238}M376 438L278 ${final ? 548 : 502}M590 438L698 ${final ? 548 : 502}" stroke="${secondary}" stroke-width="${16 + phaseNumber * 4}" stroke-linecap="round"/>
-    ${faceNodes}
-    <path class="spin" d="M188 314C300 78 660 76 774 314C660 542 300 546 188 314Z" stroke="${secondary}" stroke-width="${6 + phaseNumber}" fill="none" stroke-dasharray="22 18"/>
-    <path class="flow" d="M116 118L850 498M884 116L90 500" stroke="${accent}" stroke-opacity="${corruption ? ".78" : ".32"}" stroke-width="${corruption ? 8 : 5}" stroke-dasharray="14 20"/>
-    ${final ? `<path class="shake" d="M84 52C292 12 676 12 878 56C794 178 792 348 910 520C662 450 312 456 56 522C176 346 176 176 84 52Z" stroke="${secondary}" stroke-width="8" fill="${secondary}" fill-opacity=".10"/>` : ""}
-  </g>`;
+  const runeCount = [8, 16, 28, 44][phaseNumber - 1];
+  const runes = repeatedNodes(runeCount, (index) => {
+    const x = 86 + ((index * 91) % 800);
+    const y = 64 + ((index * 53) % 420);
+    const text = ["{}", "&&", "!!", "RUN", "SYS", ">>"][index % 6];
+    return `<text class="energy-movement" x="${x}" y="${y}" fill="${index % 2 ? secondary : accent}" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="${16 + phaseNumber * 2}" font-weight="900">${escapeHtml(text)}</text>`;
+  });
+  return `${common}
+    ${runes}
+    <path class="reactor-flicker" d="M188 476C312 348 646 348 780 476" stroke="${secondary}" stroke-width="${8 + phaseNumber * 2}" stroke-opacity=".56" fill="none"/>
+    ${phaseNumber === 4 ? `<path class="corruption-pulse" d="M92 70C278 24 704 24 874 76C778 174 782 374 884 520C654 430 310 430 76 520C178 370 178 176 92 70Z" fill="${secondary}" fill-opacity=".14" stroke="${accent}" stroke-width="7"/>` : ""}`;
 }
 
 function renderBossPhaseSvg(definition, phaseNumber) {
   const colors = bossPalette(definition.id);
   const [primary, secondary, accent] = colors;
-  const figure = renderBossFigure(definition, phaseNumber, colors);
+  const effects = renderPhaseEffects(definition, phaseNumber, colors);
   const phaseDescription = bossPhaseDescription(definition, phaseNumber);
+  const masterArt = masterBossArtPathFor(definition);
+  const scale = 1 + (phaseNumber - 1) * 0.035;
+  const imageWidth = Math.round(960 * scale);
+  const imageHeight = Math.round(540 * scale);
+  const imageX = Math.round((960 - imageWidth) / 2);
+  const imageY = Math.round((540 - imageHeight) / 2);
+  const phaseLabel = bossPhaseDisplayName(definition, phaseNumber);
 
   return `<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">${escapeHtml(definition.name)} ${bossPhaseName(phaseNumber)}</title>
+  <title id="title">${escapeHtml(definition.name)} ${escapeHtml(phaseLabel)}</title>
   <desc id="desc">${escapeHtml(phaseDescription)}</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
@@ -1633,6 +1669,14 @@ function renderBossPhaseSvg(definition, phaseNumber) {
     <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
       <path d="M0 0H9" stroke="${primary}" stroke-opacity=".08"/>
     </pattern>
+    <filter id="phaseImage">
+      <feColorMatrix type="saturate" values="${1 + phaseNumber * 0.22}"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="${1 + phaseNumber * 0.06}"/>
+        <feFuncG type="linear" slope="${1 + phaseNumber * 0.02}"/>
+        <feFuncB type="linear" slope="${1 + phaseNumber * 0.04}"/>
+      </feComponentTransfer>
+    </filter>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -1642,33 +1686,41 @@ function renderBossPhaseSvg(definition, phaseNumber) {
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes pulseGlow { 0%,100% { opacity: .46; } 50% { opacity: 1; } }
+      @keyframes energyMove { to { stroke-dashoffset: -260; transform: translateX(34px); } }
+      @keyframes scanMove { 0% { transform: translateY(-540px); } 100% { transform: translateY(540px); } }
+      @keyframes reactorFlicker { 0%,100% { opacity: .34; transform: scale(.94); } 40% { opacity: .92; transform: scale(1.08); } 70% { opacity: .58; transform: scale(1.02); } }
+      @keyframes corruptionPulse { 0%,100% { opacity: .22; } 50% { opacity: .78; } }
+      @keyframes eyeGlowPulse { 0%,100% { opacity: .56; } 50% { opacity: 1; } }
+      @keyframes threatPulse { 0%,100% { opacity: .52; } 50% { opacity: 1; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
-      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
-      @keyframes flow { to { stroke-dashoffset: -220; } }
-      .pulse { animation: pulse ${Math.max(0.9, 2.4 - phaseNumber * 0.25)}s ease-in-out infinite; }
+      .pulsing-glow { animation: pulseGlow ${Math.max(0.9, 2.4 - phaseNumber * 0.22)}s ease-in-out infinite; }
+      .energy-movement { animation: energyMove ${Math.max(1.8, 5.4 - phaseNumber * .48)}s linear infinite; }
+      .scanline-movement { animation: scanMove ${Math.max(2.2, 5.8 - phaseNumber * .35)}s linear infinite; }
+      .reactor-flicker { transform-box: fill-box; transform-origin: center; animation: reactorFlicker ${Math.max(.72, 1.8 - phaseNumber * .18)}s steps(3,end) infinite; }
+      .corruption-pulse { animation: corruptionPulse ${Math.max(1.1, 2.8 - phaseNumber * .22)}s ease-in-out infinite; }
+      .eye-glow-pulse { animation: eyeGlowPulse ${Math.max(.82, 2.1 - phaseNumber * .22)}s ease-in-out infinite; }
+      .threat-indicator-pulse { animation: threatPulse ${Math.max(.72, 1.9 - phaseNumber * .18)}s ease-in-out infinite; }
       .spin { transform-origin: 480px 270px; animation: spin ${Math.max(6, 14 - phaseNumber * 2)}s linear infinite; }
-      .shake { animation: shake ${Math.max(0.7, 2.2 - phaseNumber * .28)}s steps(2,end) infinite; }
-      .drift { animation: drift ${Math.max(2.2, 5.4 - phaseNumber * .45)}s ease-in-out infinite; }
       .sweep { animation: sweep ${Math.max(2.6, 6 - phaseNumber * .4)}s linear infinite; }
-      .flow { animation: flow ${Math.max(2.2, 5.2 - phaseNumber * .5)}s linear infinite; }
     </style>
   </defs>
   <rect width="960" height="540" fill="url(#bg)"/>
-  <rect width="960" height="540" fill="url(#core)"/>
+  <image href="${masterArt}" x="${imageX}" y="${imageY}" width="${imageWidth}" height="${imageHeight}" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
+  <rect width="960" height="540" fill="url(#core)" opacity="${0.26 + phaseNumber * 0.08}"/>
+  <rect class="corruption-pulse" width="960" height="540" fill="${secondary}" fill-opacity="${phaseNumber >= 3 ? ".12" : ".04"}"/>
   <rect width="960" height="540" fill="url(#scan)"/>
-  <rect class="sweep" x="0" y="0" width="${120 + phaseNumber * 36}" height="540" fill="${primary}" fill-opacity=".045"/>
-  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="${primary}" stroke-opacity=".08"/>
-  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="${secondary}" stroke-opacity=".72" stroke-width="4"/>
-  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="${secondary}" stroke-opacity=".18" stroke-width="${phaseNumber + 3}" stroke-dasharray="26 18" fill="none"/>
+  <rect class="scanline-movement" x="0" y="-540" width="960" height="86" fill="${primary}" fill-opacity=".10"/>
+  <rect class="sweep" x="0" y="0" width="${120 + phaseNumber * 46}" height="540" fill="${primary}" fill-opacity=".045"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="${secondary}" stroke-opacity=".16" stroke-width="${phaseNumber + 3}" stroke-dasharray="26 18" fill="none"/>
   <g filter="url(#heavyGlow)">
-    ${figure}
+    ${effects}
   </g>
   <g filter="url(#glow)">
-    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="${primary}" stroke-width="2"/>
-    <text x="58" y="67" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE ${phaseNumber}</text>
+    <text x="58" y="66" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20" font-weight="900">PHASE ${phaseNumber}</text>
+    <text x="58" y="92" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16" font-weight="900">${escapeHtml(phaseLabel)}</text>
+    <circle class="threat-indicator-pulse" cx="902" cy="58" r="${16 + phaseNumber * 3}" fill="${primary}" filter="url(#glow)"/>
   </g>
 </svg>
 `;

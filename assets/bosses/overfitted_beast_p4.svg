@@ -1,5 +1,5 @@
 <svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">The Overfitted Beast Final Nightmare Form</title>
+  <title id="title">The Overfitted Beast Catastrophic Beast</title>
   <desc id="desc">Final Nightmare form: a bloated archive-monster screaming duplicated training rows.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
@@ -15,6 +15,14 @@
     <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
       <path d="M0 0H9" stroke="#ff3b6b" stroke-opacity=".08"/>
     </pattern>
+    <filter id="phaseImage">
+      <feColorMatrix type="saturate" values="1.88"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.24"/>
+        <feFuncG type="linear" slope="1.08"/>
+        <feFuncB type="linear" slope="1.16"/>
+      </feComponentTransfer>
+    </filter>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -24,88 +32,100 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes pulseGlow { 0%,100% { opacity: .46; } 50% { opacity: 1; } }
+      @keyframes energyMove { to { stroke-dashoffset: -260; transform: translateX(34px); } }
+      @keyframes scanMove { 0% { transform: translateY(-540px); } 100% { transform: translateY(540px); } }
+      @keyframes reactorFlicker { 0%,100% { opacity: .34; transform: scale(.94); } 40% { opacity: .92; transform: scale(1.08); } 70% { opacity: .58; transform: scale(1.02); } }
+      @keyframes corruptionPulse { 0%,100% { opacity: .22; } 50% { opacity: .78; } }
+      @keyframes eyeGlowPulse { 0%,100% { opacity: .56; } 50% { opacity: 1; } }
+      @keyframes threatPulse { 0%,100% { opacity: .52; } 50% { opacity: 1; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
-      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
-      @keyframes flow { to { stroke-dashoffset: -220; } }
-      .pulse { animation: pulse 1.4s ease-in-out infinite; }
+      .pulsing-glow { animation: pulseGlow 1.52s ease-in-out infinite; }
+      .energy-movement { animation: energyMove 3.4800000000000004s linear infinite; }
+      .scanline-movement { animation: scanMove 4.4s linear infinite; }
+      .reactor-flicker { transform-box: fill-box; transform-origin: center; animation: reactorFlicker 1.08s steps(3,end) infinite; }
+      .corruption-pulse { animation: corruptionPulse 1.92s ease-in-out infinite; }
+      .eye-glow-pulse { animation: eyeGlowPulse 1.2200000000000002s ease-in-out infinite; }
+      .threat-indicator-pulse { animation: threatPulse 1.18s ease-in-out infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 6s linear infinite; }
-      .shake { animation: shake 1.08s steps(2,end) infinite; }
-      .drift { animation: drift 3.6000000000000005s ease-in-out infinite; }
       .sweep { animation: sweep 4.4s linear infinite; }
-      .flow { animation: flow 3.2s linear infinite; }
     </style>
   </defs>
   <rect width="960" height="540" fill="url(#bg)"/>
-  <rect width="960" height="540" fill="url(#core)"/>
+  <image href="../master_boss_art/overfitted_beast_master.png" x="-50" y="-28" width="1061" height="597" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
+  <rect width="960" height="540" fill="url(#core)" opacity="0.5800000000000001"/>
+  <rect class="corruption-pulse" width="960" height="540" fill="#ffe95e" fill-opacity=".12"/>
   <rect width="960" height="540" fill="url(#scan)"/>
-  <rect class="sweep" x="0" y="0" width="264" height="540" fill="#ff3b6b" fill-opacity=".045"/>
-  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="#ff3b6b" stroke-opacity=".08"/>
-  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="#ffe95e" stroke-opacity=".72" stroke-width="4"/>
-  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ffe95e" stroke-opacity=".18" stroke-width="7" stroke-dasharray="26 18" fill="none"/>
+  <rect class="scanline-movement" x="0" y="-540" width="960" height="86" fill="#ff3b6b" fill-opacity=".10"/>
+  <rect class="sweep" x="0" y="0" width="304" height="540" fill="#ff3b6b" fill-opacity=".045"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ffe95e" stroke-opacity=".16" stroke-width="7" stroke-dasharray="26 18" fill="none"/>
   <g filter="url(#heavyGlow)">
-    <g>
-    <path d="M126 388C182 230 306 112 484 118C674 126 824 246 884 412C692 526 318 530 126 388Z" fill="#070812" stroke="#ffe95e" stroke-width="15"/>
-    <path d="M318 186L244 42L438 128M642 190L720 42L522 128" fill="#070812" stroke="#ff3b6b" stroke-width="9"/>
-    <path d="M236 328L70 214M730 330L914 210M304 426L218 540M676 426L778 540" stroke="#ff3b6b" stroke-width="34" stroke-linecap="round"/>
-    <path d="M70 214L34 242M914 210L946 236M218 540L172 534M778 540L824 532" stroke="#ffe95e" stroke-width="10" stroke-linecap="round"/>
-    <path class="pulse" d="M398 258L456 224L438 292ZM566 260L506 224L526 294Z" fill="#23f7dd"/>
-    <path d="M386 356C448 424 552 422 628 354" stroke="#ffe95e" stroke-width="11" fill="none"/>
-    <path class="shake" d="M172 132L236 110L258 174L190 196Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M186 152C206 138 230 140 244 160" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M258 152L322 130L344 194L276 216Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M272 172C292 158 316 160 330 180" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M344 132L408 110L430 174L362 196Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M358 152C378 138 402 140 416 160" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M430 152L494 130L516 194L448 216Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M444 172C464 158 488 160 502 180" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M516 132L580 110L602 174L534 196Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M530 152C550 138 574 140 588 160" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M602 152L666 130L688 194L620 216Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M616 172C636 158 660 160 674 180" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M688 132L752 110L774 174L706 196Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M702 152C722 138 746 140 760 160" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M774 152L838 130L860 194L792 216Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M788 172C808 158 832 160 846 180" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M172 222L236 200L258 264L190 286Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M186 242C206 228 230 230 244 250" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M258 242L322 220L344 284L276 306Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M272 262C292 248 316 250 330 270" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M344 222L408 200L430 264L362 286Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M358 242C378 228 402 230 416 250" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M430 242L494 220L516 284L448 306Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M444 262C464 248 488 250 502 270" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M516 222L580 200L602 264L534 286Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M530 242C550 228 574 230 588 250" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M602 242L666 220L688 284L620 306Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M616 262C636 248 660 250 674 270" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M688 222L752 200L774 264L706 286Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M702 242C722 228 746 230 760 250" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M774 242L838 220L860 284L792 306Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M788 262C808 248 832 250 846 270" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M172 312L236 290L258 354L190 376Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M186 332C206 318 230 320 244 340" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M258 332L322 310L344 374L276 396Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M272 352C292 338 316 340 330 360" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M344 312L408 290L430 354L362 376Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M358 332C378 318 402 320 416 340" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M430 332L494 310L516 374L448 396Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M444 352C464 338 488 340 502 360" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M516 312L580 290L602 354L534 376Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M530 332C550 318 574 320 588 340" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M602 332L666 310L688 374L620 396Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M616 352C636 338 660 340 674 360" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M688 312L752 290L774 354L706 376Z" fill="#0a1018" stroke="#ff3b6b" stroke-width="4"/>
-    <path d="M702 332C722 318 746 320 760 340" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="shake" d="M774 332L838 310L860 374L792 396Z" fill="#0a1018" stroke="#ffe95e" stroke-width="4"/>
-    <path d="M788 352C808 338 832 340 846 360" stroke="#23f7dd" stroke-width="3" fill="none"/>
-    <path class="flow" d="M86 448C282 548 692 550 888 442" stroke="#ff3b6b" stroke-width="13" stroke-dasharray="28 12" fill="none"/>
-  </g>
+    <path class="energy-movement" d="M-40 80C160 10 330 164 520 80C710 -4 850 148 1000 52" stroke="#23f7dd" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 156C160 86 330 240 520 156C710 72 850 224 1000 128" stroke="#23f7dd" stroke-opacity=".42" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 232C160 162 330 316 520 232C710 148 850 300 1000 204" stroke="#23f7dd" stroke-opacity=".42" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 308C160 238 330 392 520 308C710 224 850 376 1000 280" stroke="#23f7dd" stroke-opacity=".42" stroke-width="6" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 384C160 314 330 468 520 384C710 300 850 452 1000 356" stroke="#23f7dd" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 460C160 390 330 544 520 460C710 376 850 528 1000 432" stroke="#23f7dd" stroke-opacity=".42" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="corruption-pulse" d="M80 70L104 104L88 142L126 188" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M217 153L241 187L225 225L263 271" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M354 236L378 270L362 308L400 354" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M491 319L515 353L499 391L537 437" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M628 402L652 436L636 474L674 520" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M765 105L789 139L773 177L811 223" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M112 188L136 222L120 260L158 306" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M249 271L273 305L257 343L295 389" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M386 354L410 388L394 426L432 472" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M523 437L547 471L531 509L569 555" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M660 140L684 174L668 212L706 258" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M797 223L821 257L805 295L843 341" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M144 306L168 340L152 378L190 424" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M281 389L305 423L289 461L327 507" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M418 92L442 126L426 164L464 210" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M555 175L579 209L563 247L601 293" stroke="#ffe95e" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <circle class="pulsing-glow" cx="482" cy="292" r="194" fill="#23f7dd" fill-opacity=".12" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="438" cy="226" r="11" fill="#23f7dd" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="522" cy="226" r="11" fill="#23f7dd" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="reactor-flicker" cx="482" cy="292" r="90" fill="#ff3b6b" fill-opacity="0.32" filter="url(#glow)"/>
+    <circle class="corruption-pulse" cx="482" cy="292" r="164" stroke="#ffe95e" stroke-opacity="0.60" stroke-width="10" fill="none"/>
+    <path class="threat-indicator-pulse" d="M36 42H214L250 78H36Z" fill="#020713" fill-opacity=".78" stroke="#ff3b6b" stroke-width="2"/>
+    <path class="corruption-pulse" d="M70 42L138 162M160 214L218 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M208 42L276 162M298 214L356 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M346 42L414 162M436 214L494 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M484 42L552 162M574 214L632 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M622 42L690 162M712 214L770 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M760 42L828 162M850 214L908 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M898 42L966 162M988 214L1046 360" stroke="#ffe95e" stroke-opacity=".76" stroke-width="12" stroke-dasharray="34 28" fill="none"/>
+    <path class="corruption-pulse" d="M112 118L158 94L194 152L128 176Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M221 189L267 165L303 223L237 247Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M330 260L376 236L412 294L346 318Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M439 331L485 307L521 365L455 389Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M548 402L594 378L630 436L564 460Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M657 143L703 119L739 177L673 201Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M766 214L812 190L848 248L782 272Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M115 285L161 261L197 319L131 343Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M224 356L270 332L306 390L240 414Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M333 427L379 403L415 461L349 485Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M442 168L488 144L524 202L458 226Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M551 239L597 215L633 273L567 297Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M660 310L706 286L742 344L676 368Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M769 381L815 357L851 415L785 439Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M118 122L164 98L200 156L134 180Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M227 193L273 169L309 227L243 251Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M336 264L382 240L418 298L352 322Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M445 335L491 311L527 369L461 393Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M554 406L600 382L636 440L570 464Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M663 147L709 123L745 181L679 205Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M772 218L818 194L854 252L788 276Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M121 289L167 265L203 323L137 347Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M230 360L276 336L312 394L246 418Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="corruption-pulse" d="M339 431L385 407L421 465L355 489Z" fill="#ff3b6b" fill-opacity=".18" stroke="#23f7dd" stroke-width="3"/>
+    <path class="threat-indicator-pulse" d="M80 478C264 406 700 402 886 474" stroke="#ff3b6b" stroke-width="24" stroke-opacity=".45" fill="none"/>
+    <rect class="corruption-pulse" x="0" y="0" width="960" height="540" fill="#ffe95e" fill-opacity=".10"/>
   </g>
   <g filter="url(#glow)">
-    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="#ff3b6b" stroke-width="2"/>
-    <text x="58" y="67" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE 4</text>
+    <text x="58" y="66" fill="#23f7dd" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20" font-weight="900">PHASE 4</text>
+    <text x="58" y="92" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16" font-weight="900">Catastrophic Beast</text>
+    <circle class="threat-indicator-pulse" cx="902" cy="58" r="28" fill="#ff3b6b" filter="url(#glow)"/>
   </g>
 </svg>

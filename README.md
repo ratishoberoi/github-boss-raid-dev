@@ -56,6 +56,26 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 Current transformation: Final Nightmare form: a starved compute singularity with an endless reactor mouth.  
 Phases remaining: **0**
 
+## WORLD BOSS CAMPAIGN
+
+**🔥 CURRENT**  
+Boss 1: The GPU Devourer
+
+**🔒 LOCKED**  
+Boss 2: The Data Leak Hydra
+
+**🔒 LOCKED**  
+Boss 3: The Gradient Vanisher
+
+**🔒 LOCKED**  
+Boss 4: The Hallucination Titan
+
+**🔒 LOCKED**  
+Boss 5: The Overfitted Beast
+
+**🔒 LOCKED**  
+Boss 6: The Prompt Goblin
+
 ## Current Record Holders
 
 **Most Damage:** @ratishoberoi (80)  

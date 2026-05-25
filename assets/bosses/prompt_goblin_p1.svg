@@ -1,5 +1,5 @@
 <svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">The Prompt Goblin Normal Form</title>
+  <title id="title">The Prompt Goblin Prompt Thief</title>
   <desc id="desc">Normal form: a wiry trickster clutching a stolen command token.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
@@ -15,6 +15,14 @@
     <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
       <path d="M0 0H9" stroke="#9dff28" stroke-opacity=".08"/>
     </pattern>
+    <filter id="phaseImage">
+      <feColorMatrix type="saturate" values="1.22"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.06"/>
+        <feFuncG type="linear" slope="1.02"/>
+        <feFuncB type="linear" slope="1.04"/>
+      </feComponentTransfer>
+    </filter>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -24,46 +32,62 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes pulseGlow { 0%,100% { opacity: .46; } 50% { opacity: 1; } }
+      @keyframes energyMove { to { stroke-dashoffset: -260; transform: translateX(34px); } }
+      @keyframes scanMove { 0% { transform: translateY(-540px); } 100% { transform: translateY(540px); } }
+      @keyframes reactorFlicker { 0%,100% { opacity: .34; transform: scale(.94); } 40% { opacity: .92; transform: scale(1.08); } 70% { opacity: .58; transform: scale(1.02); } }
+      @keyframes corruptionPulse { 0%,100% { opacity: .22; } 50% { opacity: .78; } }
+      @keyframes eyeGlowPulse { 0%,100% { opacity: .56; } 50% { opacity: 1; } }
+      @keyframes threatPulse { 0%,100% { opacity: .52; } 50% { opacity: 1; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
-      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
-      @keyframes flow { to { stroke-dashoffset: -220; } }
-      .pulse { animation: pulse 2.15s ease-in-out infinite; }
+      .pulsing-glow { animation: pulseGlow 2.1799999999999997s ease-in-out infinite; }
+      .energy-movement { animation: energyMove 4.92s linear infinite; }
+      .scanline-movement { animation: scanMove 5.45s linear infinite; }
+      .reactor-flicker { transform-box: fill-box; transform-origin: center; animation: reactorFlicker 1.62s steps(3,end) infinite; }
+      .corruption-pulse { animation: corruptionPulse 2.5799999999999996s ease-in-out infinite; }
+      .eye-glow-pulse { animation: eyeGlowPulse 1.8800000000000001s ease-in-out infinite; }
+      .threat-indicator-pulse { animation: threatPulse 1.72s ease-in-out infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 12s linear infinite; }
-      .shake { animation: shake 1.9200000000000002s steps(2,end) infinite; }
-      .drift { animation: drift 4.95s ease-in-out infinite; }
       .sweep { animation: sweep 5.6s linear infinite; }
-      .flow { animation: flow 4.7s linear infinite; }
     </style>
   </defs>
   <rect width="960" height="540" fill="url(#bg)"/>
-  <rect width="960" height="540" fill="url(#core)"/>
+  <image href="../master_boss_art/prompt_goblin_master.png" x="0" y="0" width="960" height="540" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
+  <rect width="960" height="540" fill="url(#core)" opacity="0.34"/>
+  <rect class="corruption-pulse" width="960" height="540" fill="#ff2bd6" fill-opacity=".04"/>
   <rect width="960" height="540" fill="url(#scan)"/>
-  <rect class="sweep" x="0" y="0" width="156" height="540" fill="#9dff28" fill-opacity=".045"/>
-  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="#9dff28" stroke-opacity=".08"/>
-  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="#ff2bd6" stroke-opacity=".72" stroke-width="4"/>
-  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ff2bd6" stroke-opacity=".18" stroke-width="4" stroke-dasharray="26 18" fill="none"/>
+  <rect class="scanline-movement" x="0" y="-540" width="960" height="86" fill="#9dff28" fill-opacity=".10"/>
+  <rect class="sweep" x="0" y="0" width="166" height="540" fill="#9dff28" fill-opacity=".045"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ff2bd6" stroke-opacity=".16" stroke-width="4" stroke-dasharray="26 18" fill="none"/>
   <g filter="url(#heavyGlow)">
-    <g>
+    <path class="energy-movement" d="M-40 80C160 10 330 164 520 80C710 -4 850 148 1000 52" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 270C160 200 330 354 520 270C710 186 850 338 1000 242" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 460C160 390 330 544 520 460C710 376 850 528 1000 432" stroke="#ffe95e" stroke-opacity=".42" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="corruption-pulse" d="M80 70L104 104L88 142L126 188" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M217 153L241 187L225 225L263 271" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M354 236L378 270L362 308L400 354" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M491 319L515 353L499 391L537 437" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <circle class="pulsing-glow" cx="482" cy="292" r="140" fill="#ffe95e" fill-opacity=".12" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="438" cy="226" r="8" fill="#ffe95e" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="522" cy="226" r="8" fill="#ffe95e" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="reactor-flicker" cx="482" cy="292" r="48" fill="#9dff28" fill-opacity="0.16999999999999998" filter="url(#glow)"/>
+    <circle class="corruption-pulse" cx="482" cy="292" r="98" stroke="#ff2bd6" stroke-opacity="0.27" stroke-width="7" fill="none"/>
+    <path class="threat-indicator-pulse" d="M36 42H214L250 78H36Z" fill="#020713" fill-opacity=".78" stroke="#9dff28" stroke-width="2"/>
+    <text class="energy-movement" x="86" y="64" fill="#ffe95e" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">{}</text>
+    <text class="energy-movement" x="177" y="117" fill="#ff2bd6" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">&amp;&amp;</text>
+    <text class="energy-movement" x="268" y="170" fill="#ffe95e" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">!!</text>
+    <text class="energy-movement" x="359" y="223" fill="#ff2bd6" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">RUN</text>
+    <text class="energy-movement" x="450" y="276" fill="#ffe95e" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">SYS</text>
+    <text class="energy-movement" x="541" y="329" fill="#ff2bd6" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">&gt;&gt;</text>
+    <text class="energy-movement" x="632" y="382" fill="#ffe95e" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">{}</text>
+    <text class="energy-movement" x="723" y="435" fill="#ff2bd6" fill-opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="900">&amp;&amp;</text>
+    <path class="reactor-flicker" d="M188 476C312 348 646 348 780 476" stroke="#ff2bd6" stroke-width="10" stroke-opacity=".56" fill="none"/>
     
-    <path class="shake" d="M166 82C212 42 240 110 188 144M168 110L238 102" stroke="#9dff28" stroke-width="5" fill="none"/>
-    <path class="shake" d="M258 138C304 98 332 166 280 200M260 166L330 158" stroke="#ff2bd6" stroke-width="5" fill="none"/>
-    <path class="shake" d="M350 82C396 42 424 110 372 144M352 110L422 102" stroke="#9dff28" stroke-width="5" fill="none"/>
-    <path class="shake" d="M442 138C488 98 516 166 464 200M444 166L514 158" stroke="#ff2bd6" stroke-width="5" fill="none"/>
-    <path class="shake" d="M534 82C580 42 608 110 556 144M536 110L606 102" stroke="#9dff28" stroke-width="5" fill="none"/>
-    <path d="M478 84C628 160 706 310 630 466C548 530 406 530 328 462C254 304 318 154 478 84Z" fill="#07101b" stroke="#9dff28" stroke-width="10"/>
-    <path d="M372 214L218 188C286 286 290 366 194 474M584 214L746 188C674 286 670 366 766 474" stroke="#ff2bd6" stroke-width="18" stroke-linecap="round" fill="none"/>
-    <path d="M400 200L294 48L468 146M556 200L666 48L490 146" fill="#07101b" stroke="#ffe95e" stroke-width="8"/>
-    <path class="pulse" d="M410 280L466 246L446 316ZM548 280L492 246L512 316Z" fill="#ffe95e"/>
-    <path d="M390 356Q480 394 570 354" stroke="#ff2bd6" stroke-width="11" fill="none"/>
-    <path d="M344 462L270 532M616 462L696 532" stroke="#9dff28" stroke-width="16" stroke-linecap="round"/>
-    
-  </g>
   </g>
   <g filter="url(#glow)">
-    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="#9dff28" stroke-width="2"/>
-    <text x="58" y="67" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE 1</text>
+    <text x="58" y="66" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20" font-weight="900">PHASE 1</text>
+    <text x="58" y="92" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16" font-weight="900">Prompt Thief</text>
+    <circle class="threat-indicator-pulse" cx="902" cy="58" r="19" fill="#9dff28" filter="url(#glow)"/>
   </g>
 </svg>

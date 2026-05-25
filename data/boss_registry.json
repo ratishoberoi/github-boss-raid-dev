@@ -1,16 +1,5 @@
 [
   {
-    "id": "hallucination_titan",
-    "name": "The Hallucination Titan",
-    "title": "Corrupted AI God",
-    "lore": "A towering oracle that speaks in impossible outputs and bends reality around false predictions.",
-    "theme": "Corrupted AI god",
-    "phase_1": "Normal form: a luminous titan wrapped in stable prediction rings.",
-    "phase_2": "Mutated form: duplicate faces split from its skull and argue across the arena.",
-    "phase_3": "Corrupted form: error sigils tear through its body as hallucinated limbs emerge.",
-    "phase_4": "Final Nightmare form: a fractured godhead broadcasting contradictory realities."
-  },
-  {
     "id": "gpu_devourer",
     "name": "The GPU Devourer",
     "title": "Infinite Compute Maw",
@@ -42,6 +31,17 @@
     "phase_2": "Mutated form: its limbs smear into fading echoes that lag behind its body.",
     "phase_3": "Corrupted form: transparent fractures erase pieces of its torso and face.",
     "phase_4": "Final Nightmare form: a near-invisible void outlined by collapsing signal ghosts."
+  },
+  {
+    "id": "hallucination_titan",
+    "name": "The Hallucination Titan",
+    "title": "Corrupted AI God",
+    "lore": "A towering oracle that speaks in impossible outputs and bends reality around false predictions.",
+    "theme": "Corrupted AI god",
+    "phase_1": "Normal form: a luminous titan wrapped in stable prediction rings.",
+    "phase_2": "Mutated form: duplicate faces split from its skull and argue across the arena.",
+    "phase_3": "Corrupted form: error sigils tear through its body as hallucinated limbs emerge.",
+    "phase_4": "Final Nightmare form: a fractured godhead broadcasting contradictory realities."
   },
   {
     "id": "overfitted_beast",

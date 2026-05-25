@@ -1,5 +1,5 @@
 <svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">The Hallucination Titan Corrupted Form</title>
+  <title id="title">The Hallucination Titan 25 Faces</title>
   <desc id="desc">Corrupted form: error sigils tear through its body as hallucinated limbs emerge.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
@@ -15,6 +15,14 @@
     <pattern id="scan" width="9" height="9" patternUnits="userSpaceOnUse">
       <path d="M0 0H9" stroke="#23f7dd" stroke-opacity=".08"/>
     </pattern>
+    <filter id="phaseImage">
+      <feColorMatrix type="saturate" values="1.6600000000000001"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.18"/>
+        <feFuncG type="linear" slope="1.06"/>
+        <feFuncB type="linear" slope="1.12"/>
+      </feComponentTransfer>
+    </filter>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -24,46 +32,196 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes pulseGlow { 0%,100% { opacity: .46; } 50% { opacity: 1; } }
+      @keyframes energyMove { to { stroke-dashoffset: -260; transform: translateX(34px); } }
+      @keyframes scanMove { 0% { transform: translateY(-540px); } 100% { transform: translateY(540px); } }
+      @keyframes reactorFlicker { 0%,100% { opacity: .34; transform: scale(.94); } 40% { opacity: .92; transform: scale(1.08); } 70% { opacity: .58; transform: scale(1.02); } }
+      @keyframes corruptionPulse { 0%,100% { opacity: .22; } 50% { opacity: .78; } }
+      @keyframes eyeGlowPulse { 0%,100% { opacity: .56; } 50% { opacity: 1; } }
+      @keyframes threatPulse { 0%,100% { opacity: .52; } 50% { opacity: 1; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
-      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
-      @keyframes flow { to { stroke-dashoffset: -220; } }
-      .pulse { animation: pulse 1.65s ease-in-out infinite; }
+      .pulsing-glow { animation: pulseGlow 1.7399999999999998s ease-in-out infinite; }
+      .energy-movement { animation: energyMove 3.9600000000000004s linear infinite; }
+      .scanline-movement { animation: scanMove 4.75s linear infinite; }
+      .reactor-flicker { transform-box: fill-box; transform-origin: center; animation: reactorFlicker 1.26s steps(3,end) infinite; }
+      .corruption-pulse { animation: corruptionPulse 2.1399999999999997s ease-in-out infinite; }
+      .eye-glow-pulse { animation: eyeGlowPulse 1.44s ease-in-out infinite; }
+      .threat-indicator-pulse { animation: threatPulse 1.3599999999999999s ease-in-out infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 8s linear infinite; }
-      .shake { animation: shake 1.36s steps(2,end) infinite; }
-      .drift { animation: drift 4.050000000000001s ease-in-out infinite; }
       .sweep { animation: sweep 4.8s linear infinite; }
-      .flow { animation: flow 3.7s linear infinite; }
     </style>
   </defs>
   <rect width="960" height="540" fill="url(#bg)"/>
-  <rect width="960" height="540" fill="url(#core)"/>
+  <image href="../master_boss_art/hallucination_titan_master.png" x="-33" y="-19" width="1027" height="578" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
+  <rect width="960" height="540" fill="url(#core)" opacity="0.5"/>
+  <rect class="corruption-pulse" width="960" height="540" fill="#ff2bd6" fill-opacity=".12"/>
   <rect width="960" height="540" fill="url(#scan)"/>
-  <rect class="sweep" x="0" y="0" width="228" height="540" fill="#23f7dd" fill-opacity=".045"/>
-  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="#23f7dd" stroke-opacity=".08"/>
-  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="#ff2bd6" stroke-opacity=".72" stroke-width="4"/>
-  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ff2bd6" stroke-opacity=".18" stroke-width="6" stroke-dasharray="26 18" fill="none"/>
+  <rect class="scanline-movement" x="0" y="-540" width="960" height="86" fill="#23f7dd" fill-opacity=".10"/>
+  <rect class="sweep" x="0" y="0" width="258" height="540" fill="#23f7dd" fill-opacity=".045"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ff2bd6" stroke-opacity=".16" stroke-width="6" stroke-dasharray="26 18" fill="none"/>
   <g filter="url(#heavyGlow)">
-    <g>
-    <path d="M480 38C310 112 224 306 284 476C408 544 572 544 688 472C750 298 674 110 480 38Z" fill="#07101b" stroke="#23f7dd" stroke-width="13"/>
-    <path d="M310 288L92 150M650 288L872 150M376 438L278 502M590 438L698 502" stroke="#ff2bd6" stroke-width="28" stroke-linecap="round"/>
-    <path class="pulse" d="M564 222C592 140 682 138 712 218C678 302 598 302 564 222Z" fill="#07101b" stroke="#23f7dd" stroke-width="6"/>
-    <path d="M602 206L630 186L620 224M666 206L694 186L684 224" stroke="#ffe95e" stroke-width="6" fill="none"/>
-    <path class="pulse" d="M408 304C436 222 526 220 556 300C522 384 442 384 408 304Z" fill="#07101b" stroke="#ff2bd6" stroke-width="6"/>
-    <path d="M446 288L474 268L464 306M510 288L538 268L528 306" stroke="#ffe95e" stroke-width="6" fill="none"/>
-    <path class="pulse" d="M252 222C280 140 370 138 400 218C366 302 286 302 252 222Z" fill="#07101b" stroke="#23f7dd" stroke-width="6"/>
-    <path d="M290 206L318 186L308 224M354 206L382 186L372 224" stroke="#ffe95e" stroke-width="6" fill="none"/>
-    <path class="pulse" d="M407.99999999999994 140C435.99999999999994 58 526 56 556 136C522 220 441.99999999999994 220 407.99999999999994 140Z" fill="#07101b" stroke="#ff2bd6" stroke-width="6"/>
-    <path d="M445.99999999999994 124L473.99999999999994 104L463.99999999999994 142M509.99999999999994 124L538 104L528 142" stroke="#ffe95e" stroke-width="6" fill="none"/>
-    <path class="spin" d="M188 314C300 78 660 76 774 314C660 542 300 546 188 314Z" stroke="#ff2bd6" stroke-width="9" fill="none" stroke-dasharray="22 18"/>
-    <path class="flow" d="M116 118L850 498M884 116L90 500" stroke="#ffe95e" stroke-opacity=".78" stroke-width="8" stroke-dasharray="14 20"/>
-    
-  </g>
+    <path class="energy-movement" d="M-40 80C160 10 330 164 520 80C710 -4 850 148 1000 52" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 175C160 105 330 259 520 175C710 91 850 243 1000 147" stroke="#ffe95e" stroke-opacity=".42" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 270C160 200 330 354 520 270C710 186 850 338 1000 242" stroke="#ffe95e" stroke-opacity=".42" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 365C160 295 330 449 520 365C710 281 850 433 1000 337" stroke="#ffe95e" stroke-opacity=".42" stroke-width="6" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 460C160 390 330 544 520 460C710 376 850 528 1000 432" stroke="#ffe95e" stroke-opacity=".42" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="corruption-pulse" d="M80 70L104 104L88 142L126 188" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M217 153L241 187L225 225L263 271" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M354 236L378 270L362 308L400 354" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M491 319L515 353L499 391L537 437" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M628 402L652 436L636 474L674 520" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M765 105L789 139L773 177L811 223" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M112 188L136 222L120 260L158 306" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M249 271L273 305L257 343L295 389" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M386 354L410 388L394 426L432 472" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <path class="corruption-pulse" d="M523 437L547 471L531 509L569 555" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="2" fill="none"/>
+    <path class="corruption-pulse" d="M660 140L684 174L668 212L706 258" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="3" fill="none"/>
+    <path class="corruption-pulse" d="M797 223L821 257L805 295L843 341" stroke="#ff2bd6" stroke-opacity=".42" stroke-width="4" fill="none"/>
+    <circle class="pulsing-glow" cx="482" cy="292" r="176" fill="#ffe95e" fill-opacity=".12" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="438" cy="226" r="10" fill="#ffe95e" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="eye-glow-pulse" cx="522" cy="226" r="10" fill="#ffe95e" fill-opacity=".86" filter="url(#glow)"/>
+    <circle class="reactor-flicker" cx="482" cy="292" r="76" fill="#23f7dd" fill-opacity="0.27" filter="url(#glow)"/>
+    <circle class="corruption-pulse" cx="482" cy="292" r="142" stroke="#ff2bd6" stroke-opacity="0.49" stroke-width="9" fill="none"/>
+    <path class="threat-indicator-pulse" d="M36 42H214L250 78H36Z" fill="#020713" fill-opacity=".78" stroke="#23f7dd" stroke-width="2"/>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="110" cy="82" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="103" cy="81" r="3.5" fill="#ff2bd6"/>
+      <circle cx="117" cy="81" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="295" cy="82" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="288" cy="81" r="3.5" fill="#ff2bd6"/>
+      <circle cx="302" cy="81" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="480" cy="82" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="473" cy="81" r="3.5" fill="#ff2bd6"/>
+      <circle cx="487" cy="81" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="665" cy="82" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="658" cy="81" r="3.5" fill="#ff2bd6"/>
+      <circle cx="672" cy="81" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="850" cy="82" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="843" cy="81" r="3.5" fill="#ff2bd6"/>
+      <circle cx="857" cy="81" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="110" cy="174.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="103" cy="173.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="117" cy="173.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="295" cy="174.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="288" cy="173.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="302" cy="173.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="480" cy="174.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="473" cy="173.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="487" cy="173.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="665" cy="174.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="658" cy="173.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="672" cy="173.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="850" cy="174.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="843" cy="173.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="857" cy="173.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="110" cy="267" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="103" cy="266" r="3.5" fill="#ff2bd6"/>
+      <circle cx="117" cy="266" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="295" cy="267" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="288" cy="266" r="3.5" fill="#ff2bd6"/>
+      <circle cx="302" cy="266" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="480" cy="267" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="473" cy="266" r="3.5" fill="#ff2bd6"/>
+      <circle cx="487" cy="266" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="665" cy="267" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="658" cy="266" r="3.5" fill="#ff2bd6"/>
+      <circle cx="672" cy="266" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="850" cy="267" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="843" cy="266" r="3.5" fill="#ff2bd6"/>
+      <circle cx="857" cy="266" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="110" cy="359.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="103" cy="358.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="117" cy="358.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="295" cy="359.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="288" cy="358.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="302" cy="358.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="480" cy="359.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="473" cy="358.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="487" cy="358.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="665" cy="359.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="658" cy="358.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="672" cy="358.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="850" cy="359.5" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="843" cy="358.5" r="3.5" fill="#ff2bd6"/>
+      <circle cx="857" cy="358.5" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="110" cy="452" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="103" cy="451" r="3.5" fill="#ff2bd6"/>
+      <circle cx="117" cy="451" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="295" cy="452" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="288" cy="451" r="3.5" fill="#ff2bd6"/>
+      <circle cx="302" cy="451" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="480" cy="452" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="473" cy="451" r="3.5" fill="#ff2bd6"/>
+      <circle cx="487" cy="451" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="665" cy="452" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="658" cy="451" r="3.5" fill="#ff2bd6"/>
+      <circle cx="672" cy="451" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <g class="eye-glow-pulse" opacity=".72">
+      <circle cx="850" cy="452" r="14" fill="#23f7dd" fill-opacity=".20" stroke="#ffe95e" stroke-width="2"/>
+      <circle cx="843" cy="451" r="3.5" fill="#ff2bd6"/>
+      <circle cx="857" cy="451" r="3.5" fill="#ff2bd6"/>
+    </g>
+    <path class="spin" d="M150 282C278 34 684 28 818 282C680 530 278 530 150 282Z" stroke="#ff2bd6" stroke-width="7" stroke-opacity=".48" stroke-dasharray="24 18" fill="none"/>
+    <path class="energy-movement" d="M-40 80C160 10 330 164 520 80C710 -4 850 148 1000 52" stroke="#23f7dd" stroke-opacity=".54" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 134.28571428571428C160 64.28571428571428 330 218.28571428571428 520 134.28571428571428C710 50.28571428571428 850 202.28571428571428 1000 106.28571428571428" stroke="#23f7dd" stroke-opacity=".54" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 188.57142857142856C160 118.57142857142856 330 272.57142857142856 520 188.57142857142856C710 104.57142857142856 850 256.57142857142856 1000 160.57142857142856" stroke="#23f7dd" stroke-opacity=".54" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 242.85714285714286C160 172.85714285714286 330 326.8571428571429 520 242.85714285714286C710 158.85714285714286 850 310.8571428571429 1000 214.85714285714286" stroke="#23f7dd" stroke-opacity=".54" stroke-width="6" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 297.1428571428571C160 227.1428571428571 330 381.1428571428571 520 297.1428571428571C710 213.1428571428571 850 365.1428571428571 1000 269.1428571428571" stroke="#23f7dd" stroke-opacity=".54" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 351.42857142857144C160 281.42857142857144 330 435.42857142857144 520 351.42857142857144C710 267.42857142857144 850 419.42857142857144 1000 323.42857142857144" stroke="#23f7dd" stroke-opacity=".54" stroke-width="4" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 405.7142857142857C160 335.7142857142857 330 489.7142857142857 520 405.7142857142857C710 321.7142857142857 850 473.7142857142857 1000 377.7142857142857" stroke="#23f7dd" stroke-opacity=".54" stroke-width="5" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
+    <path class="energy-movement" d="M-40 460C160 390 330 544 520 460C710 376 850 528 1000 432" stroke="#23f7dd" stroke-opacity=".54" stroke-width="6" stroke-linecap="round" stroke-dasharray="30 24" fill="none"/>
   </g>
   <g filter="url(#glow)">
-    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="#23f7dd" stroke-width="2"/>
-    <text x="58" y="67" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE 3</text>
+    <text x="58" y="66" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20" font-weight="900">PHASE 3</text>
+    <text x="58" y="92" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16" font-weight="900">25 Faces</text>
+    <circle class="threat-indicator-pulse" cx="902" cy="58" r="25" fill="#23f7dd" filter="url(#glow)"/>
   </g>
 </svg>
