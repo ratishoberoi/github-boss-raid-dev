@@ -2,6 +2,6 @@
   "boss_id": "data_leak_hydra",
   "boss_name": "The Data Leak Hydra",
   "max_hp": 1250,
-  "current_hp": 834,
-  "phase": "Phase 2"
+  "current_hp": 437,
+  "phase": "Phase 3"
 }
