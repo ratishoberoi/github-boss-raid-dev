@@ -367,6 +367,22 @@ function bossPhasePngPathFor(definition, phaseNumber) {
   return `../boss_phases/${id}_p${phaseNumber}.png`;
 }
 
+function bossPhaseAssetPath(bossOrDefinition, phaseNumber, extension) {
+  const id = slugify(
+    bossOrDefinition.boss_id || bossOrDefinition.id || bossOrDefinition.boss_name || bossOrDefinition.name,
+    DEFAULT_BOSS.boss_id
+  );
+  return `assets/boss_phases/${id}_p${phaseNumber}.${extension}`;
+}
+
+function currentBossGifPathFor(boss) {
+  return bossPhaseAssetPath(boss, phaseNumberForBoss(boss), "gif");
+}
+
+function bossPhasePngReadmePathFor(bossOrDefinition, phaseNumber) {
+  return bossPhaseAssetPath(bossOrDefinition, phaseNumber, "png");
+}
+
 function executionerBadgeForBoss(bossId, bossName) {
   const badges = {
     gpu_devourer: "GPU Slayer",
@@ -981,7 +997,7 @@ function renderReadme(state = loadState()) {
     }).join("\n")
     : "| - | No attacks yet | - | - | - |";
 
-  const bossImage = bossImagePathFor(boss);
+  const bossImage = currentBossGifPathFor(boss);
   const phaseDescription = bossDefinition[phaseKeyForBoss(boss)];
 
   return `<p align="center">
@@ -1004,17 +1020,9 @@ ${markdownCell(phaseDescription)}
 
 Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
-## Live Raid Pulse
+## Live Pulse
 
 ${renderLivePulse(safeState)}
-
-## Phase Evolution
-
-${renderPhaseEvolutionStrip(boss, bossDefinition)}
-
-## WORLD BOSS CAMPAIGN
-
-${renderWorldBossCampaign(safeState)}
 
 ## Current Record Holders
 
@@ -1024,32 +1032,17 @@ ${renderRecordHolders(safeState)}
 
 ${renderLatestExecutioner(safeState.executioners)}
 
-## Why Attack Now
+## Phase Evolution
 
-${markdownCell(bossDefinition.lore)}
+${renderPhaseEvolutionStrip(boss, bossDefinition)}
 
-**Damage the boss. Roll loot. Push the next phase. Take the final blow.**
+## WORLD BOSS CAMPAIGN
 
-## Loot Signal
+${renderWorldBossCampaign(safeState)}
+
+## Loot
 
 ${renderLootTease(safeState)}
-
-<details>
-<summary>Recent Combat</summary>
-
-## Last 10 Attacks
-
-| Time | Attacker | Attack | Damage | Result |
-| --- | --- | --- | ---: | --- |
-${attackRows}
-
-## Top 10 Attackers
-
-| Rank | Attacker | Total Damage | Attacks |
-| ---: | --- | ---: | ---: |
-${leaderboardRows}
-
-</details>
 
 <details>
 <summary>Loot Vault</summary>
@@ -1080,8 +1073,10 @@ ${renderRecentLoot(safeState.attacks)}
 
 </details>
 
+## Executioners
+
 <details>
-<summary>Executioner Archives</summary>
+<summary>Executioner Records</summary>
 
 ## 👑 Executioner Hall
 
@@ -1091,9 +1086,31 @@ ${renderExecutionerHall(safeState.executioners)}
 
 ${renderTopExecutioners(safeState.executioners)}
 
+</details>
+
 ## Hall of Fame
 
+<details>
+<summary>Defeated Bosses</summary>
+
 ${renderHallOfFame(safeState.hallOfFame)}
+
+</details>
+
+<details>
+<summary>Recent Combat</summary>
+
+## Last 10 Attacks
+
+| Time | Attacker | Attack | Damage | Result |
+| --- | --- | --- | ---: | --- |
+${attackRows}
+
+## Top 10 Attackers
+
+| Rank | Attacker | Total Damage | Attacks |
+| ---: | --- | ---: | ---: |
+${leaderboardRows}
 
 </details>
 
@@ -1144,7 +1161,7 @@ function renderPhaseEvolutionStrip(boss, bossDefinition) {
   const current = phaseNumberForBoss(boss);
   const cells = [1, 2, 3, 4].map((phaseNumber) => {
     const status = phaseNumber < current ? "✅ CLEARED" : phaseNumber === current ? "🔥 CURRENT" : "⬜ LOCKED";
-    const imagePath = bossImagePathFor(boss, phaseNumber);
+    const imagePath = bossPhasePngReadmePathFor(boss, phaseNumber);
     const width = phaseNumber === current ? 210 : 170;
     const imageStyle = phaseNumber > current ? ' style="opacity:0.42; filter:grayscale(1);"' : "";
     return `<td align="center" width="25%">
@@ -1171,17 +1188,39 @@ function renderWorldBossCampaign(state) {
     ...state.executioners.map((entry) => slugify(entry.boss_id || entry.boss_name, ""))
   ].filter(Boolean));
   const registryById = new Map(state.bossRegistry.map((boss) => [boss.id, boss]));
-  const rows = BOSS_CAMPAIGN_ORDER.map((bossId, index) => {
+  const executionByBoss = new Map(state.executioners.map((execution) => [slugify(execution.boss_id || execution.boss_name, ""), execution]));
+  const cells = BOSS_CAMPAIGN_ORDER.map((bossId, index) => {
     const definition = registryById.get(bossId) || { name: bossId.replace(/_/g, " ") };
-    const status = bossId === currentId
-      ? "🔥 CURRENT"
-      : executed.has(bossId)
-        ? "✅ EXECUTED"
-        : "🔒 LOCKED";
-    return `**${status}**  
-Boss ${index + 1}: ${markdownCell(definition.name)}`;
+    const current = bossId === currentId;
+    const done = executed.has(bossId);
+    const status = current ? "⚔ CURRENT" : done ? "☠ EXECUTED" : "🔒 LOCKED";
+    const phaseNumber = current ? phaseNumberForBoss(state.boss) : done ? 4 : 1;
+    const imagePath = bossPhasePngReadmePathFor(definition, phaseNumber);
+    const style = done
+      ? ""
+      : current
+        ? "border:2px solid #ffbf2e;"
+        : "opacity:0.35; filter:grayscale(1);";
+    const execution = executionByBoss.get(bossId);
+    const extra = done && execution
+      ? `<br><sub>Executed by:<br>${markdownUser(execution.username)}<br>Badge:<br>${markdownCell(execution.executioner_badge)}<br>${markdownCell(execution.timestamp)}</sub>`
+      : current
+        ? `<br><sub>HP ${state.boss.current_hp} / ${state.boss.max_hp}<br>${markdownCell(state.boss.phase)}</sub>`
+        : "<br><sub>LOCKED</sub>";
+    return `<td align="center" width="33%">
+      <img src="./${imagePath}" alt="${markdownCell(definition.name)} campaign thumbnail" width="180" style="${style}">
+      <br><strong>${status}</strong><br>
+      <strong>Boss ${index + 1}: ${markdownCell(definition.name)}</strong>${extra}
+    </td>`;
   });
-  return rows.join("\n\n");
+  return `<table>
+  <tr>
+    ${cells.slice(0, 3).join("\n    ")}
+  </tr>
+  <tr>
+    ${cells.slice(3).join("\n    ")}
+  </tr>
+</table>`;
 }
 
 function renderRecordHolders(state) {

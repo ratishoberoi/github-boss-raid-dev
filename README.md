@@ -1,9 +1,7 @@
 <p align="center">
-  <img src="./assets/bosses/data_leak_hydra_p1.svg" alt="The Data Leak Hydra raid encounter" width="960">
+  <img src="./assets/boss_phases/data_leak_hydra_p1.gif" alt="The Data Leak Hydra raid encounter" width="960">
 </p>
-<h2>GIF TEST</h2>
 
-<img src="./assets/boss_phases/data_leak_hydra_p1.gif" width="900">
 # ⚠ GLOBAL RAID ACTIVE
 
 ## THE DATA LEAK HYDRA
@@ -20,63 +18,12 @@ Normal form: three encrypted heads watch the raid perimeter.
 
 Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
-## Live Raid Pulse
+## Live Pulse
 
 **Last Attack:** @ratishoberoi hit for 441  
 **Latest Loot:** @ratishoberoi found Gradient Crystal (Rare)  
 **Top Raider:** @ratishoberoi with 120 damage  
 **Boss Killer:** @ratishoberoi (GPU Slayer)
-
-## Phase Evolution
-
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <img src="./assets/bosses/data_leak_hydra_p1.svg" alt="The Data Leak Hydra phase 1" width="210">
-      <br><strong>🔥 CURRENT</strong><br>
-      <sub>Phase 1</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="./assets/bosses/data_leak_hydra_p2.svg" alt="The Data Leak Hydra phase 2" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
-      <sub>Phase 2</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="./assets/bosses/data_leak_hydra_p3.svg" alt="The Data Leak Hydra phase 3" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
-      <sub>Phase 3</sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="./assets/bosses/data_leak_hydra_p4.svg" alt="The Data Leak Hydra phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
-      <sub>Phase 4</sub>
-    </td>
-  </tr>
-</table>
-
-**🔥 Phase 1 → ⬜ Phase 2 → ⬜ Phase 3 → ⬜ Phase 4**  
-Current transformation: Normal form: three encrypted heads watch the raid perimeter.  
-Phases remaining: **3**
-
-## WORLD BOSS CAMPAIGN
-
-**✅ EXECUTED**  
-Boss 1: The GPU Devourer
-
-**🔥 CURRENT**  
-Boss 2: The Data Leak Hydra
-
-**🔒 LOCKED**  
-Boss 3: The Gradient Vanisher
-
-**🔒 LOCKED**  
-Boss 4: The Hallucination Titan
-
-**🔒 LOCKED**  
-Boss 5: The Overfitted Beast
-
-**🔒 LOCKED**  
-Boss 6: The Prompt Goblin
 
 ## Current Record Holders
 
@@ -94,39 +41,82 @@ Boss 6: The Prompt Goblin
 | --- | --- | --- | ---: | --- |
 | The GPU Devourer | @ratishoberoi | GPU Slayer | 441 | 2026-05-25T07:25:41.744Z |
 
-## Why Attack Now
+## Phase Evolution
 
-Every severed secret becomes another head, hissing credentials into the dark.
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <img src="./assets/boss_phases/data_leak_hydra_p1.png" alt="The Data Leak Hydra phase 1" width="210">
+      <br><strong>🔥 CURRENT</strong><br>
+      <sub>Phase 1</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/boss_phases/data_leak_hydra_p2.png" alt="The Data Leak Hydra phase 2" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
+      <sub>Phase 2</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/boss_phases/data_leak_hydra_p3.png" alt="The Data Leak Hydra phase 3" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
+      <sub>Phase 3</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/boss_phases/data_leak_hydra_p4.png" alt="The Data Leak Hydra phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
+      <sub>Phase 4</sub>
+    </td>
+  </tr>
+</table>
 
-**Damage the boss. Roll loot. Push the next phase. Take the final blow.**
+**🔥 Phase 1 → ⬜ Phase 2 → ⬜ Phase 3 → ⬜ Phase 4**  
+Current transformation: Normal form: three encrypted heads watch the raid perimeter.  
+Phases remaining: **3**
 
-## Loot Signal
+## WORLD BOSS CAMPAIGN
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/gpu_devourer_p4.png" alt="The GPU Devourer campaign thumbnail" width="180" style="">
+      <br><strong>☠ EXECUTED</strong><br>
+      <strong>Boss 1: The GPU Devourer</strong><br><sub>Executed by:<br>@ratishoberoi<br>Badge:<br>GPU Slayer<br>2026-05-25T07:25:41.744Z</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/data_leak_hydra_p1.png" alt="The Data Leak Hydra campaign thumbnail" width="180" style="border:2px solid #ffbf2e;">
+      <br><strong>⚔ CURRENT</strong><br>
+      <strong>Boss 2: The Data Leak Hydra</strong><br><sub>HP 1250 / 1250<br>Phase 1</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/gradient_vanisher_p1.png" alt="The Gradient Vanisher campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+      <br><strong>🔒 LOCKED</strong><br>
+      <strong>Boss 3: The Gradient Vanisher</strong><br><sub>LOCKED</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/hallucination_titan_p1.png" alt="The Hallucination Titan campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+      <br><strong>🔒 LOCKED</strong><br>
+      <strong>Boss 4: The Hallucination Titan</strong><br><sub>LOCKED</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/overfitted_beast_p1.png" alt="The Overfitted Beast campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+      <br><strong>🔒 LOCKED</strong><br>
+      <strong>Boss 5: The Overfitted Beast</strong><br><sub>LOCKED</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="./assets/boss_phases/prompt_goblin_p1.png" alt="The Prompt Goblin campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+      <br><strong>🔒 LOCKED</strong><br>
+      <strong>Boss 6: The Prompt Goblin</strong><br><sub>LOCKED</sub>
+    </td>
+  </tr>
+</table>
+
+## Loot
 
 **Latest Drop:** @ratishoberoi found Gradient Crystal (Rare)  
 **Vault:** 5 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
 **Top Collector:** @ratishoberoi (5 relics)
-
-<details>
-<summary>Recent Combat</summary>
-
-## Last 10 Attacks
-
-| Time | Attacker | Attack | Damage | Result |
-| --- | --- | --- | ---: | --- |
-| 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
-| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
-| 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
-| 2026-05-25T06:10:41.242Z | @ratishoberoi | Slash | 18 | Final Phase |
-| 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
-
-## Top 10 Attackers
-
-| Rank | Attacker | Total Damage | Attacks |
-| ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 120 | 5 |
-
-</details>
 
 <details>
 <summary>Loot Vault</summary>
@@ -184,8 +174,10 @@ No mythic relics discovered yet.
 
 </details>
 
+## Executioners
+
 <details>
-<summary>Executioner Archives</summary>
+<summary>Executioner Records</summary>
 
 ## 👑 Executioner Hall
 
@@ -199,13 +191,39 @@ No mythic relics discovered yet.
 | --- | ---: | --- | --- |
 | @ratishoberoi | 1 | 2026-05-25T07:25:41.744Z | 2026-05-25T07:25:41.744Z |
 
+</details>
+
 ## Hall of Fame
+
+<details>
+<summary>Defeated Bosses</summary>
 
 ### Cinematic Defeat Archive
 
 | Defeat Panel | Boss | Killer | Date | Final Damage |
 | --- | --- | --- | --- | ---: |
 | <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer defeated" width="120"> | The GPU Devourer | @ratishoberoi | 2026-05-25T07:25:41.744Z | 441 |
+
+</details>
+
+<details>
+<summary>Recent Combat</summary>
+
+## Last 10 Attacks
+
+| Time | Attacker | Attack | Damage | Result |
+| --- | --- | --- | ---: | --- |
+| 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
+| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
+| 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
+| 2026-05-25T06:10:41.242Z | @ratishoberoi | Slash | 18 | Final Phase |
+| 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
+
+## Top 10 Attackers
+
+| Rank | Attacker | Total Damage | Attacks |
+| ---: | --- | ---: | ---: |
+| 1 | @ratishoberoi | 120 | 5 |
 
 </details>
 
