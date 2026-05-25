@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/boss_phases/gradient_vanisher_p1.gif" alt="The Gradient Vanisher raid encounter" width="960">
+  <img src="./assets/boss_phases/gradient_vanisher_p1.gif" alt="The Gradient Vanisher raid encounter" width="100%">
 </p>
 
 # ⚠ GLOBAL RAID ACTIVE
@@ -14,9 +14,41 @@
 **Phase 1 of 4**  
 Normal form: a sharp silhouette traced by clean vector lines.
 
-## [⚔ ATTACK THIS BOSS](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
+<p align="center">
+  <strong>⬇⬇⬇ RAIDERS, STRIKE NOW ⬇⬇⬇</strong>
+</p>
+
+<h1 align="center">
+  <a href="https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml">⚔ ATTACK THIS BOSS ⚔</a>
+</h1>
+
+<p align="center">
+  <strong>⬆⬆⬆ CLICK TO ROLL DAMAGE + CLAIM LOOT ⬆⬆⬆</strong>
+</p>
 
 Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
+
+## Raid Rules
+
+### Attack Damage
+
+| Attack | Damage |
+| --- | ---: |
+| Slash | 5-20 |
+| Critical Strike | 0-100 |
+| Lucky Attack | 1-500 |
+
+### Drop Rates
+
+| Rarity | Drop Rate | Owned | Registry Items |
+| --- | ---: | ---: | ---: |
+| Common | 80% | 6 | 4 |
+| Rare | 15% | 6 | 4 |
+| Epic | 4% | 0 | 4 |
+| Legendary | 0.9% | 0 | 4 |
+| Mythic | 0.1% | 0 | 3 |
+
+Every attack is processed by GitHub Actions. Damage is applied to the shared boss, loot rolls automatically, the README updates, and the attack issue closes with the result.
 
 ## Live Pulse
 
@@ -37,10 +69,6 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
   <img src="./assets/defeats/data_leak_hydra_20260525T140406805Z_ratishoberoi.svg" alt="The Data Leak Hydra execution card" width="720">
 </p>
 
-| Boss Name | Executioner | Badge | Final Blow | Date |
-| --- | --- | --- | ---: | --- |
-| The Data Leak Hydra | @ratishoberoi | Hydra Hunter | 297 | 2026-05-25T14:04:06.805Z |
-
 ## Phase Evolution
 
 <table>
@@ -52,23 +80,23 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
     </td>
     <td align="center" width="25%">
       <img src="./assets/boss_phases/gradient_vanisher_p2.png" alt="The Gradient Vanisher phase 2" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
+      <br><strong>🔒 LOCKED</strong><br>
       <sub>Phase 2</sub>
     </td>
     <td align="center" width="25%">
       <img src="./assets/boss_phases/gradient_vanisher_p3.png" alt="The Gradient Vanisher phase 3" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
+      <br><strong>🔒 LOCKED</strong><br>
       <sub>Phase 3</sub>
     </td>
     <td align="center" width="25%">
       <img src="./assets/boss_phases/gradient_vanisher_p4.png" alt="The Gradient Vanisher phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
+      <br><strong>🔒 LOCKED</strong><br>
       <sub>Phase 4</sub>
     </td>
   </tr>
 </table>
 
-**🔥 Phase 1 → ⬜ Phase 2 → ⬜ Phase 3 → ⬜ Phase 4**  
+**🔥 Phase 1 → 🔒 Phase 2 → 🔒 Phase 3 → 🔒 Phase 4**  
 Current transformation: Normal form: a sharp silhouette traced by clean vector lines.  
 Phases remaining: **3**
 
@@ -76,37 +104,54 @@ Phases remaining: **3**
 
 <table>
   <tr>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/gpu_devourer_p4.png" alt="The GPU Devourer campaign thumbnail" width="180" style="">
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/gpu_devourer_p4.png" alt="The GPU Devourer campaign artwork" width="360" style="">
       <br><strong>☠ EXECUTED</strong><br>
       <strong>Boss 1: The GPU Devourer</strong><br><sub>Executed by:<br>@ratishoberoi<br>Badge:<br>GPU Slayer<br>2026-05-25T07:25:41.744Z</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/data_leak_hydra_p4.png" alt="The Data Leak Hydra campaign thumbnail" width="180" style="">
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/data_leak_hydra_p4.png" alt="The Data Leak Hydra campaign artwork" width="360" style="">
       <br><strong>☠ EXECUTED</strong><br>
       <strong>Boss 2: The Data Leak Hydra</strong><br><sub>Executed by:<br>@ratishoberoi<br>Badge:<br>Hydra Hunter<br>2026-05-25T14:04:06.805Z</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/gradient_vanisher_p1.png" alt="The Gradient Vanisher campaign thumbnail" width="180" style="border:2px solid #ffbf2e;">
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/gradient_vanisher_p1.png" alt="The Gradient Vanisher campaign artwork" width="360" style="border:2px solid #ffbf2e;">
       <br><strong>⚔ CURRENT</strong><br>
       <strong>Boss 3: The Gradient Vanisher</strong><br><sub>HP 1500 / 1500<br>Phase 1</sub>
     </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/hallucination_titan_p1.png" alt="The Hallucination Titan campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/hallucination_titan_p1.png" alt="The Hallucination Titan campaign artwork" width="360" style="opacity:0.35; filter:grayscale(1);">
       <br><strong>🔒 LOCKED</strong><br>
       <strong>Boss 4: The Hallucination Titan</strong><br><sub>LOCKED</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/overfitted_beast_p1.png" alt="The Overfitted Beast campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/overfitted_beast_p1.png" alt="The Overfitted Beast campaign artwork" width="360" style="opacity:0.35; filter:grayscale(1);">
       <br><strong>🔒 LOCKED</strong><br>
       <strong>Boss 5: The Overfitted Beast</strong><br><sub>LOCKED</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="./assets/boss_phases/prompt_goblin_p1.png" alt="The Prompt Goblin campaign thumbnail" width="180" style="opacity:0.35; filter:grayscale(1);">
+    <td align="center" width="50%">
+      <img src="./assets/boss_phases/prompt_goblin_p1.png" alt="The Prompt Goblin campaign artwork" width="360" style="opacity:0.35; filter:grayscale(1);">
       <br><strong>🔒 LOCKED</strong><br>
       <strong>Boss 6: The Prompt Goblin</strong><br><sub>LOCKED</sub>
+    </td>
+  </tr>
+</table>
+
+## NEXT THREAT
+
+<table>
+  <tr>
+    <td align="center" width="45%">
+      <img src="./assets/boss_phases/hallucination_titan_p1.png" alt="The Hallucination Titan locked next threat" width="360" style="opacity:0.45; filter:grayscale(1);">
+    </td>
+    <td width="55%">
+      <strong>The Hallucination Titan</strong><br>
+      A towering oracle that speaks in impossible outputs and bends reality around false predictions.<br><br>
+      <strong>Unlock Requirement:</strong> Execute The Gradient Vanisher.
     </td>
   </tr>
 </table>
@@ -211,10 +256,35 @@ No mythic relics discovered yet.
 
 ### Cinematic Defeat Archive
 
-| Defeat Panel | Boss | Killer | Date | Final Damage |
-| --- | --- | --- | --- | ---: |
-| <img src="./assets/bosses/data_leak_hydra_p4.svg" alt="The Data Leak Hydra defeated" width="120"> | The Data Leak Hydra | @ratishoberoi | 2026-05-25T14:04:06.805Z | 297 |
-| <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer defeated" width="120"> | The GPU Devourer | @ratishoberoi | 2026-05-25T07:25:41.744Z | 441 |
+<table>
+  <tr>
+    <td align="center" width="55%">
+      <img src="./assets/boss_phases/data_leak_hydra_p4.png" alt="The Data Leak Hydra final form defeated" width="420">
+    </td>
+    <td width="45%">
+      <h3>The Data Leak Hydra</h3>
+      <strong>Executioner:</strong> @ratishoberoi<br>
+      <strong>Badge Earned:</strong> Hydra Hunter<br>
+      <strong>Final Blow:</strong> 297<br>
+      <strong>Execution Date:</strong> 2026-05-25T14:04:06.805Z
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td align="center" width="55%">
+      <img src="./assets/boss_phases/gpu_devourer_p4.png" alt="The GPU Devourer final form defeated" width="420">
+    </td>
+    <td width="45%">
+      <h3>The GPU Devourer</h3>
+      <strong>Executioner:</strong> @ratishoberoi<br>
+      <strong>Badge Earned:</strong> GPU Slayer<br>
+      <strong>Final Blow:</strong> 441<br>
+      <strong>Execution Date:</strong> 2026-05-25T07:25:41.744Z
+    </td>
+  </tr>
+</table>
 
 </details>
 
@@ -241,33 +311,6 @@ No mythic relics discovered yet.
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
 | 1 | @ratishoberoi | 1370 | 12 |
-
-</details>
-
-<details>
-<summary>Raid Rules</summary>
-
-## Attack Damage
-
-| Attack | Damage |
-| --- | ---: |
-| Slash | 5-20 |
-| Critical Strike | 0-100 |
-| Lucky Attack | 1-500 |
-
-## Drop Rates
-
-| Rarity | Drop Rate | Owned | Registry Items |
-| --- | ---: | ---: | ---: |
-| Common | 80% | 6 | 4 |
-| Rare | 15% | 6 | 4 |
-| Epic | 4% | 0 | 4 |
-| Legendary | 0.9% | 0 | 4 |
-| Mythic | 0.1% | 0 | 3 |
-
-## Implementation
-
-This raid runs entirely inside GitHub using the profile README, Issues, Actions, JSON state, and generated SVGs.
 
 </details>
 
