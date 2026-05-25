@@ -88,4 +88,11 @@ Boss-specific animation classes:
 
 ## GitHub Rendering Check
 
-Pending push at local audit time. After push, verify GitHub serves every SVG and every referenced PNG with HTTP 200.
+PASS: after push, GitHub API/raw asset checks returned HTTP `200` for all 24 generated SVGs and all 24 referenced phase PNGs.
+
+Verified set:
+
+- 24 / 24 `assets/bosses/*.svg`
+- 24 / 24 `assets/boss_phases/*.png`
+
+This verifies the assets are present and served by GitHub from `main`. Local browser/raster screenshot tooling is not installed in this environment, so visual raster screenshots were not produced.
