@@ -8,7 +8,7 @@
 
 ### Fading Backprop Phantom
 
-**HP 1492 / 1500 (99%)**  
+**HP 1476 / 1500 (98%)**  
 `████████████████████████`
 
 **Phase 1 of 4**  
@@ -43,7 +43,7 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 7 | 4 |
-| Rare | 15% | 6 | 4 |
+| Rare | 15% | 7 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
@@ -55,8 +55,8 @@ Every attack is processed by GitHub Actions. Damage is applied to the shared bos
 > ### 🥇 #1 Raider
 > **@ratishoberoi**
 >
-> **Total Damage:** 1378  
-> **Attacks:** 13
+> **Total Damage:** 1394  
+> **Attacks:** 14
 
 > ### 🥈 #2 Raider
 > **Open Slot**
@@ -74,12 +74,12 @@ Every attack is processed by GitHub Actions. Damage is applied to the shared bos
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 1378 | 13 |
+| 1 | @ratishoberoi | 1394 | 14 |
 
 ### Current Record Holders
 
-**Most Damage:** @ratishoberoi (1378)  
-**Most Loot:** @ratishoberoi (13)  
+**Most Damage:** @ratishoberoi (1394)  
+**Most Loot:** @ratishoberoi (14)  
 **Most Executions:** @ratishoberoi (2)
 
 ## ⚔ RECENT COMBAT
@@ -88,6 +88,7 @@ Every attack is processed by GitHub Actions. Damage is applied to the shared bos
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
+| 2026-05-25T14:34:03.498Z | @ratishoberoi | Slash | 16 | Phase 1 |
 | 2026-05-25T14:33:33.169Z | @ratishoberoi | Slash | 8 | Phase 1 |
 | 2026-05-25T14:04:06.805Z | @ratishoberoi | Lucky Attack | 297 | Defeated boss |
 | 2026-05-25T14:03:37.524Z | @ratishoberoi | Lucky Attack | 118 | Phase 3 |
@@ -97,13 +98,12 @@ Every attack is processed by GitHub Actions. Damage is applied to the shared bos
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Lucky Attack | 94 | Phase 2 |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Lucky Attack | 322 | Phase 1 |
 | 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
-| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
 
 ## Live Pulse
 
-**Last Attack:** @ratishoberoi hit for 8  
-**Latest Loot:** @ratishoberoi found Broken Dataset (Common)  
-**Top Raider:** @ratishoberoi with 1378 damage  
+**Last Attack:** @ratishoberoi hit for 16  
+**Latest Loot:** @ratishoberoi found Neural Fragment (Rare)  
+**Top Raider:** @ratishoberoi with 1394 damage  
 **Boss Killer:** @ratishoberoi (Hydra Hunter)
 
 ## 👑 Latest Executioner
@@ -162,7 +162,7 @@ Phases remaining: **3**
     <td align="center" width="50%">
       <img src="./assets/boss_phases/gradient_vanisher_p1.png" alt="The Gradient Vanisher campaign artwork" width="360" style="border:2px solid #ffbf2e;">
       <br><strong>⚔ CURRENT</strong><br>
-      <strong>Boss 3: The Gradient Vanisher</strong><br><sub>HP 1492 / 1500<br>Phase 1</sub>
+      <strong>Boss 3: The Gradient Vanisher</strong><br><sub>HP 1476 / 1500<br>Phase 1</sub>
     </td>
     <td align="center" width="50%">
       <img src="./assets/boss_phases/hallucination_titan_p1.png" alt="The Hallucination Titan campaign artwork" width="360" style="opacity:0.35; filter:grayscale(1);">
@@ -201,10 +201,10 @@ Phases remaining: **3**
 
 ## Loot
 
-**Latest Drop:** @ratishoberoi found Broken Dataset (Common)  
-**Vault:** 13 relics held by 1 collectors  
+**Latest Drop:** @ratishoberoi found Neural Fragment (Rare)  
+**Vault:** 14 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
-**Top Collector:** @ratishoberoi (13 relics)
+**Top Collector:** @ratishoberoi (14 relics)
 
 <details>
 <summary>Loot Vault</summary>
@@ -213,7 +213,7 @@ Phases remaining: **3**
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 13 |
+| Total Relics Held | 14 |
 | Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
@@ -221,7 +221,7 @@ Phases remaining: **3**
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 7 | 4 |
-| Rare | 15% | 6 | 4 |
+| Rare | 15% | 7 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
@@ -230,6 +230,7 @@ Phases remaining: **3**
 
 | Time | Collector | Relic | Rarity |
 | --- | --- | --- | --- |
+| 2026-05-25T14:34:03.498Z | @ratishoberoi | Neural Fragment | Rare |
 | 2026-05-25T14:33:33.169Z | @ratishoberoi | Broken Dataset | Common |
 | 2026-05-25T14:04:06.805Z | @ratishoberoi | Corrupted CSV | Common |
 | 2026-05-25T14:03:37.524Z | @ratishoberoi | Corrupted CSV | Common |
@@ -239,7 +240,6 @@ Phases remaining: **3**
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Gradient Crystal | Rare |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Gradient Crystal | Rare |
 | 2026-05-25T07:25:41.744Z | @ratishoberoi | Gradient Crystal | Rare |
-| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lost Token | Common |
 
 ## Legendary Discoveries
 
@@ -253,12 +253,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | @ratishoberoi | 13 | 7 | 0 | 0 |
+| 1 | @ratishoberoi | 14 | 7 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
+| 2026-05-25T14:34:03.498Z | @ratishoberoi | Neural Fragment | Rare | 16 |
 | 2026-05-25T14:33:33.169Z | @ratishoberoi | Broken Dataset | Common | 8 |
 | 2026-05-25T14:04:06.805Z | @ratishoberoi | Corrupted CSV | Common | 297 |
 | 2026-05-25T14:03:37.524Z | @ratishoberoi | Corrupted CSV | Common | 118 |
@@ -268,7 +269,6 @@ No mythic relics discovered yet.
 | 2026-05-25T14:01:55.675Z | @ratishoberoi | Gradient Crystal | Rare | 94 |
 | 2026-05-25T14:00:19.663Z | @ratishoberoi | Gradient Crystal | Rare | 322 |
 | 2026-05-25T07:25:41.744Z | @ratishoberoi | Gradient Crystal | Rare | 441 |
-| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lost Token | Common | 32 |
 
 </details>
 
