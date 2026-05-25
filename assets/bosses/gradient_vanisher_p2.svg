@@ -41,6 +41,24 @@
       @keyframes threatPulse { 0%,100% { opacity: .52; } 50% { opacity: 1; } }
       @keyframes spin { to { transform: rotate(360deg); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      @keyframes emberRise { 0% { transform: translateY(60px); opacity: 0; } 35% { opacity: .9; } 100% { transform: translateY(-220px); opacity: 0; } }
+      @keyframes mouthFire { 0%,100% { opacity: .28; transform: scaleX(.92); } 50% { opacity: .88; transform: scaleX(1.08); } }
+      @keyframes heatDistort { 0%,100% { transform: translateX(-12px); opacity: .22; } 50% { transform: translateX(14px); opacity: .62; } }
+      @keyframes smokeDrift { 0% { transform: translateX(-30px); opacity: .04; } 50% { opacity: .18; } 100% { transform: translateX(42px); opacity: .04; } }
+      @keyframes dataFall { 0% { transform: translateY(-120px); opacity: 0; } 20% { opacity: .9; } 100% { transform: translateY(560px); opacity: 0; } }
+      @keyframes lockDrift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(12px,-18px); } }
+      @keyframes particleDrift { 0%,100% { transform: translate(0,0); opacity: .25; } 50% { transform: translate(20px,-26px); opacity: .8; } }
+      @keyframes orbitPlanet { to { transform: rotate(360deg); } }
+      @keyframes rotateEquation { 0%,100% { transform: rotate(-2deg); opacity: .34; } 50% { transform: rotate(3deg); opacity: .84; } }
+      @keyframes voidDrift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-18px,16px); } }
+      @keyframes apparitionFade { 0%,100% { opacity: .08; transform: scale(.92); } 50% { opacity: .46; transform: scale(1.08); } }
+      @keyframes fragmentDrift { 0%,100% { transform: translateY(0) rotate(0deg); opacity: .18; } 50% { transform: translateY(-24px) rotate(8deg); opacity: .58; } }
+      @keyframes chainMove { to { stroke-dashoffset: -180; } }
+      @keyframes lightningFlash { 0%,100% { opacity: .15; } 45% { opacity: 1; } 52% { opacity: .25; } 60% { opacity: .9; } }
+      @keyframes veinSurge { to { stroke-dashoffset: -140; } }
+      @keyframes magicRotate { to { transform: rotate(360deg); } }
+      @keyframes pageDrift { 0%,100% { transform: translate(0,0) rotate(0deg); opacity: .25; } 50% { transform: translate(18px,-24px) rotate(6deg); opacity: .74; } }
+      @keyframes promptFloat { 0%,100% { transform: translateY(0); opacity: .25; } 50% { transform: translateY(-30px); opacity: .82; } }
       .pulsing-glow { animation: pulseGlow 1.96s ease-in-out infinite; }
       .energy-movement { animation: energyMove 4.44s linear infinite; }
       .scanline-movement { animation: scanMove 5.1s linear infinite; }
@@ -50,10 +68,30 @@
       .threat-indicator-pulse { animation: threatPulse 1.54s ease-in-out infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 10s linear infinite; }
       .sweep { animation: sweep 5.2s linear infinite; }
+      .ember-rise { animation: emberRise 2.7s ease-out infinite; }
+      .mouth-fire { transform-box: fill-box; transform-origin: center; animation: mouthFire 1.1400000000000001s ease-in-out infinite; }
+      .heat-distortion { animation: heatDistort 2.32s ease-in-out infinite; }
+      .smoke-drift { animation: smokeDrift 5.2s ease-in-out infinite; }
+      .data-waterfall { animation: dataFall 3.84s linear infinite; }
+      .lock-drift { animation: lockDrift 3.64s ease-in-out infinite; }
+      .corruption-particle { animation: particleDrift 2.7600000000000002s ease-in-out infinite; }
+      .data-leak { animation: energyMove 3.32s linear infinite; }
+      .orbiting-planet { transform-origin: 480px 270px; animation: orbitPlanet 9.6s linear infinite; }
+      .rotating-equation { transform-box: fill-box; transform-origin: center; animation: rotateEquation 4.32s ease-in-out infinite; }
+      .void-particle-drift { animation: voidDrift 3.4s ease-in-out infinite; }
+      .orbiting-face { transform-origin: 480px 270px; animation: orbitPlanet 10.2s linear infinite; }
+      .apparition-fade { animation: apparitionFade 3.16s ease-in-out infinite; }
+      .memory-fragment { animation: fragmentDrift 4.08s ease-in-out infinite; }
+      .moving-chain { animation: chainMove 3.2399999999999998s linear infinite; }
+      .lightning-arc { animation: lightningFlash 1.48s steps(2,end) infinite; }
+      .glowing-vein { animation: veinSurge 2.7s linear infinite; }
+      .magic-circle-rotate { transform-origin: 480px 286px; animation: magicRotate 11.2s linear infinite; }
+      .spell-page-drift { animation: pageDrift 4.2s ease-in-out infinite; }
+      .prompt-fragment { animation: promptFloat 3.28s ease-in-out infinite; }
     </style>
   </defs>
   <rect width="960" height="540" fill="url(#bg)"/>
-  <image href="../master_boss_art/gradient_vanisher_master.png" x="-17" y="-9" width="994" height="559" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
+  <image href="../boss_phases/gradient_vanisher_p2.png" x="0" y="0" width="960" height="540" preserveAspectRatio="xMidYMid slice" filter="url(#phaseImage)"/>
   <rect width="960" height="540" fill="url(#core)" opacity="0.42000000000000004"/>
   <rect class="corruption-pulse" width="960" height="540" fill="#7a5cff" fill-opacity=".04"/>
   <rect width="960" height="540" fill="url(#scan)"/>
@@ -83,6 +121,43 @@
       <circle class="spin" cx="220" cy="126" r="72" stroke="#7a5cff" stroke-opacity=".58" stroke-width="4" stroke-dasharray="18 14" fill="none"/>
     <circle class="reactor-flicker" cx="383" cy="223" r="60" fill="#010207" stroke="#ff2bd6" stroke-width="5" filter="url(#glow)"/>
       <circle class="spin" cx="383" cy="223" r="80" stroke="#7a5cff" stroke-opacity=".58" stroke-width="4" stroke-dasharray="18 14" fill="none"/>
+    <g class="orbiting-planet"><circle cx="642" cy="152" r="10" fill="#ff2bd6"/><circle cx="702" cy="220" r="7" fill="#7a5cff"/></g>
+    <text class="rotating-equation" x="172" y="128" fill="#ff2bd6" fill-opacity=".66" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="26">∂L/∂x → 0</text>
+    <text class="rotating-equation" x="610" y="430" fill="#7a5cff" fill-opacity=".62" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22">Σ∇ collapse</text>
+    <circle class="void-particle-drift" cx="40" cy="70" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="129" cy="201" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="218" cy="332" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="307" cy="463" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="396" cy="174" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="485" cy="305" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="574" cy="436" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="663" cy="147" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="752" cy="278" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="841" cy="409" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="50" cy="120" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="139" cy="251" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="228" cy="382" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="317" cy="93" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="406" cy="224" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="495" cy="355" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="584" cy="486" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="673" cy="197" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="762" cy="328" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="851" cy="459" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="60" cy="170" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="149" cy="301" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="238" cy="432" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="327" cy="143" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="416" cy="274" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="505" cy="405" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="594" cy="116" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="683" cy="247" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="772" cy="378" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="861" cy="89" r="3" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="70" cy="220" r="4" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="159" cy="351" r="5" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="248" cy="482" r="2" fill="#ff2bd6" fill-opacity=".46"/>
+    <circle class="void-particle-drift" cx="337" cy="193" r="3" fill="#ff2bd6" fill-opacity=".46"/>
     <path class="corruption-pulse" d="M128 76L824 488M846 58L96 502M304 28L612 530M54 248L924 316" stroke="#7a5cff" stroke-width="8" stroke-opacity=".62" stroke-dasharray="16 18" fill="none"/>
     
   </g>
