@@ -2,7 +2,7 @@
 
 ## THE GPU DEVOURER
 
-**HP: 12%**
+**HP: 11%**
 
 [**⚔ ATTACK THIS BOSS**](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
 
@@ -14,17 +14,17 @@ Your result is posted and the issue auto-closes.
 
 | Live Signal | Status |
 | --- | --- |
-| Last Attack | ⚠ No one has attacked yet. Become the First Raider. |
-| Latest Loot | No relics discovered. The vault awaits. |
-| Top Raider | ⚠ No one has attacked yet. Become the First Raider. |
+| Last Attack | @ratishoberoi rolled 8 damage |
+| Latest Loot | @ratishoberoi found Neural Fragment (Rare) |
+| Top Raider | @ratishoberoi with 8 total damage |
 | Boss Killer | No boss has fallen yet. |
 
 ## Current Record Holders
 
 | Record | Holder |
 | --- | --- |
-| Most Damage | No raiders yet |
-| Most Loot | No collectors yet |
+| Most Damage | @ratishoberoi (8) |
+| Most Loot | @ratishoberoi (1) |
 | Most Executions | No executions yet |
 
 <p align="center">
@@ -39,7 +39,7 @@ Your result is posted and the issue auto-closes.
 
 | Boss | HP | HP Bar | Phase | Last Attacker |
 | --- | ---: | --- | --- | --- |
-| The GPU Devourer | 120 / 1000 (12%) | `███░░░░░░░░░░░░░░░░░░░░░` | Phase 3 | None yet |
+| The GPU Devourer | 112 / 1000 (11%) | `███░░░░░░░░░░░░░░░░░░░░░` | Phase 3 | @ratishoberoi |
 
 ## 👑 Latest Executioner
 
@@ -54,7 +54,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 | --- | --- |
 | Theme | Machine consuming infinite compute |
 | Threat Level | SEVERE |
-| Corruption Level | 88% |
+| Corruption Level | 89% |
 | Danger Meter | `█████████████████████░░░` |
 
 ## Boss Evolution Status
@@ -75,7 +75,7 @@ Corrupted form: molten cache spills from its chassis and burns the grid.
 | Signal | Value |
 | --- | --- |
 | Status | ACTIVE RAID TARGET |
-| Integrity | 12% |
+| Integrity | 11% |
 | Phase Window | Phase 3 |
 | Boss Image | `assets/bosses/gpu_devourer_p3.svg` |
 | Attack Vector | GitHub attack form |
@@ -96,34 +96,36 @@ Roll damage and claim loot:
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| - | No attackers yet | 0 | 0 |
+| 1 | @ratishoberoi | 8 | 1 |
 
 ## Last 10 Attacks
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
-| - | No attacks yet | - | - | - |
+| 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
 
 ## Hall of Relics
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 0 |
-| Active Collectors | 0 |
+| Total Relics Held | 1 |
+| Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
 
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
 | Common | 80% | 0 | 4 |
-| Rare | 15% | 0 | 4 |
+| Rare | 15% | 1 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
 | Mythic | 0.1% | 0 | 3 |
 
 ## Latest Drops
 
-No loot discovered yet.
+| Time | Collector | Relic | Rarity |
+| --- | --- | --- | --- |
+| 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare |
 
 ## Legendary Discoveries
 
@@ -137,13 +139,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| - | No collectors yet | 0 | 0 | 0 | 0 |
+| 1 | @ratishoberoi | 1 | 1 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
-| - | No loot yet | - | - | - |
+| 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare | 8 |
 
 ## 👑 Executioner Hall
 

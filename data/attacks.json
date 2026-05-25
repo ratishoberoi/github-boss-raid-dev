@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "timestamp": "2026-05-25T05:30:31.086Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Slash",
+    "damage": 8,
+    "applied_damage": 8,
+    "boss_name": "The GPU Devourer",
+    "phase_after_attack": "Phase 3",
+    "defeated": false,
+    "issue_number": 1,
+    "loot": {
+      "item": "Neural Fragment",
+      "rarity": "Rare"
+    }
+  }
+]
