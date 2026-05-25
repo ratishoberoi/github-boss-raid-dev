@@ -50,18 +50,61 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
 Every attack is processed by GitHub Actions. Damage is applied to the shared boss, loot rolls automatically, the README updates, and the attack issue closes with the result.
 
+## 🏆 TOP RAIDERS
+
+> ### 🥇 #1 Raider
+> **@ratishoberoi**
+>
+> **Total Damage:** 1370  
+> **Attacks:** 12
+
+> ### 🥈 #2 Raider
+> **Open Slot**
+>
+> **Total Damage:** 0  
+> **Attacks:** 0
+
+> ### 🥉 #3 Raider
+> **Open Slot**
+>
+> **Total Damage:** 0  
+> **Attacks:** 0
+
+### Top 10 Attackers
+
+| Rank | Attacker | Total Damage | Attacks |
+| ---: | --- | ---: | ---: |
+| 1 | @ratishoberoi | 1370 | 12 |
+
+### Current Record Holders
+
+**Most Damage:** @ratishoberoi (1370)  
+**Most Loot:** @ratishoberoi (12)  
+**Most Executions:** @ratishoberoi (2)
+
+## ⚔ RECENT COMBAT
+
+### Last 10 Attacks
+
+| Time | Attacker | Attack | Damage | Result |
+| --- | --- | --- | ---: | --- |
+| 2026-05-25T14:04:06.805Z | @ratishoberoi | Lucky Attack | 297 | Defeated boss |
+| 2026-05-25T14:03:37.524Z | @ratishoberoi | Lucky Attack | 118 | Phase 3 |
+| 2026-05-25T14:03:11.476Z | @ratishoberoi | Lucky Attack | 44 | Phase 3 |
+| 2026-05-25T14:02:47.985Z | @ratishoberoi | Lucky Attack | 142 | Phase 3 |
+| 2026-05-25T14:02:23.654Z | @ratishoberoi | Lucky Attack | 397 | Phase 3 |
+| 2026-05-25T14:01:55.675Z | @ratishoberoi | Lucky Attack | 94 | Phase 2 |
+| 2026-05-25T14:00:19.663Z | @ratishoberoi | Lucky Attack | 322 | Phase 1 |
+| 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
+| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
+| 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
+
 ## Live Pulse
 
 **Last Attack:** @ratishoberoi hit for 297  
 **Latest Loot:** @ratishoberoi found Corrupted CSV (Common)  
 **Top Raider:** @ratishoberoi with 1370 damage  
 **Boss Killer:** @ratishoberoi (Hydra Hunter)
-
-## Current Record Holders
-
-**Most Damage:** @ratishoberoi (1370)  
-**Most Loot:** @ratishoberoi (12)  
-**Most Executions:** @ratishoberoi (2)
 
 ## 👑 Latest Executioner
 
@@ -285,32 +328,6 @@ No mythic relics discovered yet.
     </td>
   </tr>
 </table>
-
-</details>
-
-<details>
-<summary>Recent Combat</summary>
-
-## Last 10 Attacks
-
-| Time | Attacker | Attack | Damage | Result |
-| --- | --- | --- | ---: | --- |
-| 2026-05-25T14:04:06.805Z | @ratishoberoi | Lucky Attack | 297 | Defeated boss |
-| 2026-05-25T14:03:37.524Z | @ratishoberoi | Lucky Attack | 118 | Phase 3 |
-| 2026-05-25T14:03:11.476Z | @ratishoberoi | Lucky Attack | 44 | Phase 3 |
-| 2026-05-25T14:02:47.985Z | @ratishoberoi | Lucky Attack | 142 | Phase 3 |
-| 2026-05-25T14:02:23.654Z | @ratishoberoi | Lucky Attack | 397 | Phase 3 |
-| 2026-05-25T14:01:55.675Z | @ratishoberoi | Lucky Attack | 94 | Phase 2 |
-| 2026-05-25T14:00:19.663Z | @ratishoberoi | Lucky Attack | 322 | Phase 1 |
-| 2026-05-25T07:25:41.744Z | @ratishoberoi | Lucky Attack | 441 | Defeated boss |
-| 2026-05-25T07:25:20.156Z | @ratishoberoi | Lucky Attack | 32 | Final Phase |
-| 2026-05-25T06:14:19.846Z | @ratishoberoi | Critical Strike | 54 | Final Phase |
-
-## Top 10 Attackers
-
-| Rank | Attacker | Total Damage | Attacks |
-| ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 1370 | 12 |
 
 </details>
 
