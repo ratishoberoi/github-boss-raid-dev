@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer raid encounter" width="960">
+  <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer raid encounter" width="960">
 </p>
 
 # ⚠ GLOBAL RAID ACTIVE
@@ -8,11 +8,11 @@
 
 ### Infinite Compute Maw
 
-**HP 112 / 1000 (11%)**  
-`███░░░░░░░░░░░░░░░░░░░░░`
+**HP 94 / 1000 (9%)**  
+`██░░░░░░░░░░░░░░░░░░░░░░`
 
-**Phase 3 of 4**  
-Corrupted form: molten cache spills from its chassis and burns the grid.
+**Final Phase of 4**  
+Final Nightmare form: a starved compute singularity with an endless reactor mouth.
 
 ## [⚔ ATTACK THIS BOSS](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
 
@@ -20,9 +20,9 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
 
 ## Live Raid Pulse
 
-**Last Attack:** @ratishoberoi hit for 8  
-**Latest Loot:** @ratishoberoi found Neural Fragment (Rare)  
-**Top Raider:** @ratishoberoi with 8 damage  
+**Last Attack:** @ratishoberoi hit for 18  
+**Latest Loot:** @ratishoberoi found Corrupted CSV (Common)  
+**Top Raider:** @ratishoberoi with 26 damage  
 **Boss Killer:** No boss has fallen yet.
 
 ## Phase Evolution
@@ -40,26 +40,26 @@ Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
       <sub>Phase 2</sub>
     </td>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer phase 3" width="210">
-      <br><strong>🔥 CURRENT</strong><br>
+      <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer phase 3" width="170">
+      <br><strong>✅ CLEARED</strong><br>
       <sub>Phase 3</sub>
     </td>
     <td align="center" width="25%">
-      <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
-      <br><strong>⬜ LOCKED</strong><br>
+      <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer phase 4" width="210">
+      <br><strong>🔥 CURRENT</strong><br>
       <sub>Phase 4</sub>
     </td>
   </tr>
 </table>
 
-**✅ Phase 1 → ✅ Phase 2 → 🔥 Phase 3 → ⬜ Phase 4**  
-Current transformation: Corrupted form: molten cache spills from its chassis and burns the grid.  
-Phases remaining: **1**
+**✅ Phase 1 → ✅ Phase 2 → ✅ Phase 3 → 🔥 Phase 4**  
+Current transformation: Final Nightmare form: a starved compute singularity with an endless reactor mouth.  
+Phases remaining: **0**
 
 ## Current Record Holders
 
-**Most Damage:** @ratishoberoi (8)  
-**Most Loot:** @ratishoberoi (1)  
+**Most Damage:** @ratishoberoi (26)  
+**Most Loot:** @ratishoberoi (2)  
 **Most Executions:** No executions yet
 
 ## 👑 Latest Executioner
@@ -74,10 +74,10 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 ## Loot Signal
 
-**Latest Drop:** @ratishoberoi found Neural Fragment (Rare)  
-**Vault:** 1 relics held by 1 collectors  
+**Latest Drop:** @ratishoberoi found Corrupted CSV (Common)  
+**Vault:** 2 relics held by 1 collectors  
 **Rare History:** 0 Legendary / 0 Mythic  
-**Top Collector:** @ratishoberoi (1 relics)
+**Top Collector:** @ratishoberoi (2 relics)
 
 <details>
 <summary>Recent Combat</summary>
@@ -86,13 +86,14 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Attacker | Attack | Damage | Result |
 | --- | --- | --- | ---: | --- |
+| 2026-05-25T06:10:41.242Z | @ratishoberoi | Slash | 18 | Final Phase |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
 
 ## Top 10 Attackers
 
 | Rank | Attacker | Total Damage | Attacks |
 | ---: | --- | ---: | ---: |
-| 1 | @ratishoberoi | 8 | 1 |
+| 1 | @ratishoberoi | 26 | 2 |
 
 </details>
 
@@ -103,14 +104,14 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Relic Signal | Value |
 | --- | ---: |
-| Total Relics Held | 1 |
+| Total Relics Held | 2 |
 | Active Collectors | 1 |
 | Legendary Discoveries | 0 |
 | Mythic Discoveries | 0 |
 
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
-| Common | 80% | 0 | 4 |
+| Common | 80% | 1 | 4 |
 | Rare | 15% | 1 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
@@ -120,6 +121,7 @@ A furnace-beast that eats compute clusters and exhales molten tensors.
 
 | Time | Collector | Relic | Rarity |
 | --- | --- | --- | --- |
+| 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare |
 
 ## Legendary Discoveries
@@ -134,12 +136,13 @@ No mythic relics discovered yet.
 
 | Rank | Collector | Total Relics | Unique | Legendary | Mythic |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | @ratishoberoi | 1 | 1 | 0 | 0 |
+| 1 | @ratishoberoi | 2 | 2 | 0 | 0 |
 
 ## Recent Loot
 
 | Time | Collector | Drop | Rarity | Damage |
 | --- | --- | --- | --- | ---: |
+| 2026-05-25T06:10:41.242Z | @ratishoberoi | Corrupted CSV | Common | 18 |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare | 8 |
 
 </details>
@@ -180,7 +183,7 @@ No bosses defeated yet.
 
 | Rarity | Drop Rate | Owned | Registry Items |
 | --- | ---: | ---: | ---: |
-| Common | 80% | 0 | 4 |
+| Common | 80% | 1 | 4 |
 | Rare | 15% | 1 | 4 |
 | Epic | 4% | 0 | 4 |
 | Legendary | 0.9% | 0 | 4 |
