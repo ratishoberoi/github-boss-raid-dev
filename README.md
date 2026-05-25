@@ -1,96 +1,92 @@
+<p align="center">
+  <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer raid encounter" width="960">
+</p>
+
 # ⚠ GLOBAL RAID ACTIVE
 
 ## THE GPU DEVOURER
 
-**HP: 11%**
+### Infinite Compute Maw
 
-[**⚔ ATTACK THIS BOSS**](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
+**HP 112 / 1000 (11%)**  
+`███░░░░░░░░░░░░░░░░░░░░░`
 
-Takes 10 seconds.  
-Opens a GitHub attack form.  
-Bot calculates damage.  
-Loot is rolled automatically.  
-Your result is posted and the issue auto-closes.
+**Phase 3 of 4**  
+Corrupted form: molten cache spills from its chassis and burns the grid.
 
-| Live Signal | Status |
-| --- | --- |
-| Last Attack | @ratishoberoi rolled 8 damage |
-| Latest Loot | @ratishoberoi found Neural Fragment (Rare) |
-| Top Raider | @ratishoberoi with 8 total damage |
-| Boss Killer | No boss has fallen yet. |
+## [⚔ ATTACK THIS BOSS](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
+
+Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
+
+## Live Raid Pulse
+
+**Last Attack:** @ratishoberoi hit for 8  
+**Latest Loot:** @ratishoberoi found Neural Fragment (Rare)  
+**Top Raider:** @ratishoberoi with 8 damage  
+**Boss Killer:** No boss has fallen yet.
+
+## Phase Evolution
+
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <img src="./assets/bosses/gpu_devourer_p1.svg" alt="The GPU Devourer phase 1" width="170">
+      <br><strong>✅ CLEARED</strong><br>
+      <sub>Phase 1</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/bosses/gpu_devourer_p2.svg" alt="The GPU Devourer phase 2" width="170">
+      <br><strong>✅ CLEARED</strong><br>
+      <sub>Phase 2</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer phase 3" width="210">
+      <br><strong>🔥 CURRENT</strong><br>
+      <sub>Phase 3</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="./assets/bosses/gpu_devourer_p4.svg" alt="The GPU Devourer phase 4" width="170" style="opacity:0.42; filter:grayscale(1);">
+      <br><strong>⬜ LOCKED</strong><br>
+      <sub>Phase 4</sub>
+    </td>
+  </tr>
+</table>
+
+**✅ Phase 1 → ✅ Phase 2 → 🔥 Phase 3 → ⬜ Phase 4**  
+Current transformation: Corrupted form: molten cache spills from its chassis and burns the grid.  
+Phases remaining: **1**
 
 ## Current Record Holders
 
-| Record | Holder |
-| --- | --- |
-| Most Damage | @ratishoberoi (8) |
-| Most Loot | @ratishoberoi (1) |
-| Most Executions | No executions yet |
-
-<p align="center">
-  <img src="./assets/bosses/gpu_devourer_p3.svg" alt="The GPU Devourer encounter phase art" width="720">
-</p>
-
-<p align="center">
-  <img src="./assets/boss-card.svg" alt="Current raid boss card" width="720">
-</p>
-
-## Current Boss
-
-| Boss | HP | HP Bar | Phase | Last Attacker |
-| --- | ---: | --- | --- | --- |
-| The GPU Devourer | 112 / 1000 (11%) | `███░░░░░░░░░░░░░░░░░░░░░` | Phase 3 | @ratishoberoi |
+**Most Damage:** @ratishoberoi (8)  
+**Most Loot:** @ratishoberoi (1)  
+**Most Executions:** No executions yet
 
 ## 👑 Latest Executioner
 
 No executioner yet. Land the final blow to claim the first crown.
 
-## Current Boss Lore
+## Why Attack Now
 
-**Infinite Compute Maw**  
 A furnace-beast that eats compute clusters and exhales molten tensors.
 
-| Signal | Value |
-| --- | --- |
-| Theme | Machine consuming infinite compute |
-| Threat Level | SEVERE |
-| Corruption Level | 89% |
-| Danger Meter | `█████████████████████░░░` |
+**Damage the boss. Roll loot. Push the next phase. Take the final blow.**
 
-## Boss Evolution Status
+## Loot Signal
 
-| Phase | Form | Status |
-| --- | --- | --- |
-| Phase 1 | Normal form: a plated machine with a restrained thermal core. | Cleared |
-| Phase 2 | Mutated form: cooling towers snap open into claws and intake fans become teeth. | Cleared |
-| Phase 3 | Corrupted form: molten cache spills from its chassis and burns the grid. | ACTIVE |
-| Phase 4 | Final Nightmare form: a starved compute singularity with an endless reactor mouth. | Dormant |
+**Latest Drop:** @ratishoberoi found Neural Fragment (Rare)  
+**Vault:** 1 relics held by 1 collectors  
+**Rare History:** 0 Legendary / 0 Mythic  
+**Top Collector:** @ratishoberoi (1 relics)
 
-## Phase Description
+<details>
+<summary>Recent Combat</summary>
 
-Corrupted form: molten cache spills from its chassis and burns the grid.
+## Last 10 Attacks
 
-## Raid Terminal
-
-| Signal | Value |
-| --- | --- |
-| Status | ACTIVE RAID TARGET |
-| Integrity | 11% |
-| Phase Window | Phase 3 |
-| Boss Image | `assets/bosses/gpu_devourer_p3.svg` |
-| Attack Vector | GitHub attack form |
-
-## Attack
-
-[Attack This Boss](https://github.com/ratishoberoi/github-boss-raid-dev/issues/new?template=attack.yml)
-
-Roll damage and claim loot:
-
-| Attack | Damage |
-| --- | ---: |
-| Slash | 5-20 |
-| Critical Strike | 0-100 |
-| Lucky Attack | 1-500 |
+| Time | Attacker | Attack | Damage | Result |
+| --- | --- | --- | ---: | --- |
+| 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
 
 ## Top 10 Attackers
 
@@ -98,11 +94,10 @@ Roll damage and claim loot:
 | ---: | --- | ---: | ---: |
 | 1 | @ratishoberoi | 8 | 1 |
 
-## Last 10 Attacks
+</details>
 
-| Time | Attacker | Attack | Damage | Result |
-| --- | --- | --- | ---: | --- |
-| 2026-05-25T05:30:31.086Z | @ratishoberoi | Slash | 8 | Phase 3 |
+<details>
+<summary>Loot Vault</summary>
 
 ## Hall of Relics
 
@@ -147,6 +142,11 @@ No mythic relics discovered yet.
 | --- | --- | --- | --- | ---: |
 | 2026-05-25T05:30:31.086Z | @ratishoberoi | Neural Fragment | Rare | 8 |
 
+</details>
+
+<details>
+<summary>Executioner Archives</summary>
+
 ## 👑 Executioner Hall
 
 | Boss | Executioner | Badge | Final Blow | Date |
@@ -162,5 +162,34 @@ No mythic relics discovered yet.
 ## Hall of Fame
 
 No bosses defeated yet.
+
+</details>
+
+<details>
+<summary>Raid Rules</summary>
+
+## Attack Damage
+
+| Attack | Damage |
+| --- | ---: |
+| Slash | 5-20 |
+| Critical Strike | 0-100 |
+| Lucky Attack | 1-500 |
+
+## Drop Rates
+
+| Rarity | Drop Rate | Owned | Registry Items |
+| --- | ---: | ---: | ---: |
+| Common | 80% | 0 | 4 |
+| Rare | 15% | 1 | 4 |
+| Epic | 4% | 0 | 4 |
+| Legendary | 0.9% | 0 | 4 |
+| Mythic | 0.1% | 0 | 3 |
+
+## Implementation
+
+This raid runs entirely inside GitHub using the profile README, Issues, Actions, JSON state, and generated SVGs.
+
+</details>
 
 <!-- This README is generated by scripts/render_readme.js. -->

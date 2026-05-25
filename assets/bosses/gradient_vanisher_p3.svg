@@ -19,43 +19,52 @@
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="heavyGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <style>
       @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
-      @keyframes dash { to { stroke-dashoffset: -160; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
+      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      @keyframes flow { to { stroke-dashoffset: -220; } }
       .pulse { animation: pulse 1.65s ease-in-out infinite; }
-      .dash { animation: dash 3s linear infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 8s linear infinite; }
-      .jitter { animation: jitter 1.5500000000000003s steps(2,end) infinite; }
+      .shake { animation: shake 1.36s steps(2,end) infinite; }
+      .drift { animation: drift 4.050000000000001s ease-in-out infinite; }
       .sweep { animation: sweep 4.8s linear infinite; }
+      .flow { animation: flow 3.7s linear infinite; }
     </style>
   </defs>
-  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#bg)"/>
   <rect width="960" height="540" fill="url(#core)"/>
   <rect width="960" height="540" fill="url(#scan)"/>
   <rect class="sweep" x="0" y="0" width="228" height="540" fill="#b8f7ff" fill-opacity=".045"/>
-  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="#b8f7ff" stroke-opacity=".09"/>
-  <rect x="28" y="28" width="904" height="484" rx="16" stroke="#b8f7ff" stroke-opacity=".78" stroke-width="2"/>
-  <rect x="44" y="44" width="872" height="452" rx="8" stroke="#7a5cff" stroke-opacity=".42"/>
-  <text x="70" y="86" fill="#b8f7ff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE 3</text>
-  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">The Gradient Vanisher</text>
-  <text x="70" y="158" fill="#ff2bd6" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">Fading Backprop Phantom</text>
-  <text x="70" y="498" fill="#ff2bd6" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION 75% // Corrupted Form</text>
-  <g filter="url(#glow)">
+  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="#b8f7ff" stroke-opacity=".08"/>
+  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="#7a5cff" stroke-opacity=".72" stroke-width="4"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#7a5cff" stroke-opacity=".18" stroke-width="6" stroke-dasharray="26 18" fill="none"/>
+  <g filter="url(#heavyGlow)">
     <g>
-    <path d="M420 128C350 190 356 356 438 426C510 358 520 208 420 128Z" fill="#b8f7ff" fill-opacity="0.48" stroke="#ff2bd6" stroke-opacity="0.48" stroke-width="3"/>
-    <path d="M448 128C350 190 356 356 466 426C510 358 520 208 448 128Z" fill="#7a5cff" fill-opacity="0.41" stroke="#ff2bd6" stroke-opacity="0.41" stroke-width="3"/>
-    <path d="M476 128C350 190 356 356 494 426C510 358 520 208 476 128Z" fill="#b8f7ff" fill-opacity="0.33999999999999997" stroke="#ff2bd6" stroke-opacity="0.33999999999999997" stroke-width="3"/>
-    <path d="M504 128C350 190 356 356 522 426C510 358 520 208 504 128Z" fill="#7a5cff" fill-opacity="0.26999999999999996" stroke="#ff2bd6" stroke-opacity="0.26999999999999996" stroke-width="3"/>
-    <path d="M532 128C350 190 356 356 550 426C510 358 520 208 532 128Z" fill="#b8f7ff" fill-opacity="0.19999999999999996" stroke="#ff2bd6" stroke-opacity="0.19999999999999996" stroke-width="3"/>
-    <path class="pulse" d="M438 118C338 206 360 390 486 446C594 368 590 190 438 118Z" fill="#07101b" fill-opacity=".76" stroke="#b8f7ff" stroke-width="5"/>
-    <circle cx="444" cy="234" r="10" fill="#ff2bd6"/>
-    <circle cx="506" cy="240" r="10" fill="#ff2bd6" fill-opacity=".45"/>
-    <path class="dash" d="M278 172L676 384M690 154L306 402" stroke="#7a5cff" stroke-width="7" stroke-dasharray="12 18"/>
+    <path class="drift" d="M348 56C292 150 280 374 366 516C516 448 598 318 568 184C546 102 488 72 348 56Z" fill="#b8f7ff" fill-opacity="0.44" stroke="#ff2bd6" stroke-opacity="0.44" stroke-width="3"/>
+    <path class="drift" d="M384 56C292 150 280 374 402 516C516 448 598 318 568 184C546 102 488 72 384 56Z" fill="#7a5cff" fill-opacity="0.395" stroke="#ff2bd6" stroke-opacity="0.395" stroke-width="3"/>
+    <path class="drift" d="M420 56C292 150 280 374 438 516C516 448 598 318 568 184C546 102 488 72 420 56Z" fill="#b8f7ff" fill-opacity="0.35" stroke="#ff2bd6" stroke-opacity="0.35" stroke-width="3"/>
+    <path class="drift" d="M456 56C292 150 280 374 474 516C516 448 598 318 568 184C546 102 488 72 456 56Z" fill="#7a5cff" fill-opacity="0.305" stroke="#ff2bd6" stroke-opacity="0.305" stroke-width="3"/>
+    <path class="drift" d="M492 56C292 150 280 374 510 516C516 448 598 318 568 184C546 102 488 72 492 56Z" fill="#b8f7ff" fill-opacity="0.26" stroke="#ff2bd6" stroke-opacity="0.26" stroke-width="3"/>
+    <path class="drift" d="M528 56C292 150 280 374 546 516C516 448 598 318 568 184C546 102 488 72 528 56Z" fill="#7a5cff" fill-opacity="0.21500000000000002" stroke="#ff2bd6" stroke-opacity="0.21500000000000002" stroke-width="3"/>
+    <path class="drift" d="M564 56C292 150 280 374 582 516C516 448 598 318 568 184C546 102 488 72 564 56Z" fill="#b8f7ff" fill-opacity="0.16999999999999998" stroke="#ff2bd6" stroke-opacity="0.16999999999999998" stroke-width="3"/>
+    <path class="pulse" d="M454 48C306 154 294 384 454 526C548 450 638 320 606 180C580 94 526 62 454 48Z" fill="#060914" fill-opacity=".82" stroke="#b8f7ff" stroke-width="11"/>
+    <path d="M350 218C428 138 552 144 628 236C546 202 430 204 350 218Z" fill="#7a5cff" fill-opacity=".22" stroke="#7a5cff" stroke-width="7"/>
+    <path class="pulse" d="M424 250L466 224L452 282ZM538 254L586 228L558 288Z" fill="#ff2bd6"/>
+    <path d="M380 386C460 440 552 424 622 360" stroke="#b8f7ff" stroke-width="9" fill="none"/>
+    <path d="M392 164L504 206L434 278L556 330L452 394L540 476" stroke="#020409" stroke-width="52" stroke-linecap="round" fill="none"/>
+    <path class="flow" d="M170 120L812 462M848 94L128 474M314 36L642 520" stroke="#7a5cff" stroke-width="9" stroke-dasharray="12 20"/>
+    
   </g>
   </g>
-  <path d="M70 460H890" stroke="#7a5cff" stroke-opacity=".75" stroke-width="4" stroke-dasharray="25 12"/>
-  <text x="890" y="86" text-anchor="end" fill="#7a5cff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT SEVERE</text>
+  <g filter="url(#glow)">
+    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="#b8f7ff" stroke-width="2"/>
+    <text x="58" y="67" fill="#ff2bd6" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE 3</text>
+  </g>
 </svg>

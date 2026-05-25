@@ -388,6 +388,20 @@ function dangerMeter(boss, width = 24) {
   return progressBar(corruptionLevel(boss), width);
 }
 
+function phaseProgressLine(boss) {
+  const current = phaseNumberForBoss(boss);
+  return [1, 2, 3, 4].map((phaseNumber) => {
+    const label = phaseNumber === 4 ? "Phase 4" : `Phase ${phaseNumber}`;
+    if (phaseNumber < current) return `✅ ${label}`;
+    if (phaseNumber === current) return `🔥 ${label}`;
+    return `⬜ ${label}`;
+  }).join(" → ");
+}
+
+function phasesRemaining(boss) {
+  return Math.max(0, 4 - phaseNumberForBoss(boss));
+}
+
 function normalizeBoss(rawBoss, registry = DEFAULT_BOSS_REGISTRY) {
   const source = isObject(rawBoss) ? rawBoss : DEFAULT_BOSS;
   const registryMatch = source.boss_id
@@ -935,7 +949,6 @@ function renderReadme(state = loadState()) {
   const boss = safeState.boss;
   const bossDefinition = bossById(safeState.bossRegistry, boss.boss_id);
   const percent = hpPercent(boss);
-  const lastAttack = safeState.attacks[0];
   const topAttackers = safeState.leaderboard.slice(0, 10);
   const recentAttacks = safeState.attacks.slice(0, 10);
 
@@ -952,124 +965,63 @@ function renderReadme(state = loadState()) {
     }).join("\n")
     : "| - | No attacks yet | - | - | - |";
 
-  const lastAttacker = lastAttack ? markdownUser(lastAttack.attacker) : "None yet";
   const bossImage = bossImagePathFor(boss);
   const phaseDescription = bossDefinition[phaseKeyForBoss(boss)];
-  const latestLootAttack = safeState.attacks.find((attack) => attack.loot);
-  const topRaider = safeState.leaderboard[0];
-  const latestKiller = safeState.hallOfFame[0];
-  const lastAttackSignal = lastAttack
-    ? `${markdownUser(lastAttack.attacker)} rolled ${lastAttack.damage} damage`
-    : "⚠ No one has attacked yet. Become the First Raider.";
-  const latestLootSignal = latestLootAttack && latestLootAttack.loot
-    ? `${markdownUser(latestLootAttack.attacker)} found ${markdownCell(latestLootAttack.loot.item)} (${markdownCell(latestLootAttack.loot.rarity)})`
-    : "No relics discovered. The vault awaits.";
-  const topRaiderSignal = topRaider
-    ? `${markdownUser(topRaider.username)} with ${topRaider.total_damage} total damage`
-    : "⚠ No one has attacked yet. Become the First Raider.";
-  const bossKillerSignal = latestKiller
-    ? `${markdownUser(latestKiller.killer)} defeated ${markdownCell(latestKiller.boss_name)}`
-    : "No boss has fallen yet.";
-  const mostDamage = safeState.leaderboard[0];
-  const mostLoot = topCollectors(safeState.playerInventory, 1)[0];
-  const mostExecutions = topExecutioners(safeState.executioners, 1)[0];
-  const recordHolderRows = [
-    `| Most Damage | ${mostDamage ? `${markdownUser(mostDamage.username)} (${mostDamage.total_damage})` : "No raiders yet"} |`,
-    `| Most Loot | ${mostLoot ? `${markdownUser(mostLoot.username)} (${inventoryStatsForPlayer(mostLoot).totalItems})` : "No collectors yet"} |`,
-    `| Most Executions | ${mostExecutions ? `${markdownUser(mostExecutions.username)} (${mostExecutions.execution_count})` : "No executions yet"} |`
-  ].join("\n");
 
-  return `# ⚠ GLOBAL RAID ACTIVE
+  return `<p align="center">
+  <img src="./${bossImage}" alt="${markdownCell(boss.boss_name)} raid encounter" width="960">
+</p>
+
+# ⚠ GLOBAL RAID ACTIVE
 
 ## ${markdownCell(boss.boss_name.toUpperCase())}
 
-**HP: ${percent}%**
+### ${markdownCell(bossDefinition.title)}
 
-[**⚔ ATTACK THIS BOSS**](${attackIssueUrl()})
+**HP ${boss.current_hp} / ${boss.max_hp} (${percent}%)**  
+\`${progressBar(percent)}\`
 
-Takes 10 seconds.  
-Opens a GitHub attack form.  
-Bot calculates damage.  
-Loot is rolled automatically.  
-Your result is posted and the issue auto-closes.
+**${markdownCell(boss.phase)} of 4**  
+${markdownCell(phaseDescription)}
 
-| Live Signal | Status |
-| --- | --- |
-| Last Attack | ${lastAttackSignal} |
-| Latest Loot | ${latestLootSignal} |
-| Top Raider | ${topRaiderSignal} |
-| Boss Killer | ${bossKillerSignal} |
+## [⚔ ATTACK THIS BOSS](${attackIssueUrl()})
+
+Takes 10 seconds. Roll damage. Claim loot. Maybe land the killing blow.
+
+## Live Raid Pulse
+
+${renderLivePulse(safeState)}
+
+## Phase Evolution
+
+${renderPhaseEvolutionStrip(boss, bossDefinition)}
 
 ## Current Record Holders
 
-| Record | Holder |
-| --- | --- |
-${recordHolderRows}
-
-<p align="center">
-  <img src="./${bossImage}" alt="${markdownCell(boss.boss_name)} encounter phase art" width="720">
-</p>
-
-<p align="center">
-  <img src="./assets/boss-card.svg" alt="Current raid boss card" width="720">
-</p>
-
-## Current Boss
-
-| Boss | HP | HP Bar | Phase | Last Attacker |
-| --- | ---: | --- | --- | --- |
-| ${markdownCell(boss.boss_name)} | ${boss.current_hp} / ${boss.max_hp} (${percent}%) | \`${progressBar(percent)}\` | ${markdownCell(boss.phase)} | ${lastAttacker} |
+${renderRecordHolders(safeState)}
 
 ## 👑 Latest Executioner
 
 ${renderLatestExecutioner(safeState.executioners)}
 
-## Current Boss Lore
+## Why Attack Now
 
-**${markdownCell(bossDefinition.title)}**  
 ${markdownCell(bossDefinition.lore)}
 
-| Signal | Value |
-| --- | --- |
-| Theme | ${markdownCell(bossDefinition.theme)} |
-| Threat Level | ${bossThreatLevel(boss)} |
-| Corruption Level | ${corruptionLevel(boss)}% |
-| Danger Meter | \`${dangerMeter(boss)}\` |
+**Damage the boss. Roll loot. Push the next phase. Take the final blow.**
 
-## Boss Evolution Status
+## Loot Signal
 
-| Phase | Form | Status |
-| --- | --- | --- |
-| Phase 1 | ${markdownCell(bossDefinition.phase_1)} | ${phaseNumberForBoss(boss) === 1 ? "ACTIVE" : "Cleared"} |
-| Phase 2 | ${markdownCell(bossDefinition.phase_2)} | ${phaseNumberForBoss(boss) === 2 ? "ACTIVE" : phaseNumberForBoss(boss) > 2 ? "Cleared" : "Dormant"} |
-| Phase 3 | ${markdownCell(bossDefinition.phase_3)} | ${phaseNumberForBoss(boss) === 3 ? "ACTIVE" : phaseNumberForBoss(boss) > 3 ? "Cleared" : "Dormant"} |
-| Phase 4 | ${markdownCell(bossDefinition.phase_4)} | ${phaseNumberForBoss(boss) === 4 ? "ACTIVE" : "Dormant"} |
+${renderLootTease(safeState)}
 
-## Phase Description
+<details>
+<summary>Recent Combat</summary>
 
-${markdownCell(phaseDescription)}
+## Last 10 Attacks
 
-## Raid Terminal
-
-| Signal | Value |
-| --- | --- |
-| Status | ${boss.current_hp > 0 ? "ACTIVE RAID TARGET" : "DEFEATED"} |
-| Integrity | ${percent}% |
-| Phase Window | ${markdownCell(boss.phase)} |
-| Boss Image | \`${bossImage}\` |
-| Attack Vector | GitHub attack form |
-
-## Attack
-
-[Attack This Boss](${attackIssueUrl()})
-
-Roll damage and claim loot:
-
-| Attack | Damage |
-| --- | ---: |
-| Slash | 5-20 |
-| Critical Strike | 0-100 |
-| Lucky Attack | 1-500 |
+| Time | Attacker | Attack | Damage | Result |
+| --- | --- | --- | ---: | --- |
+${attackRows}
 
 ## Top 10 Attackers
 
@@ -1077,11 +1029,10 @@ Roll damage and claim loot:
 | ---: | --- | ---: | ---: |
 ${leaderboardRows}
 
-## Last 10 Attacks
+</details>
 
-| Time | Attacker | Attack | Damage | Result |
-| --- | --- | --- | ---: | --- |
-${attackRows}
+<details>
+<summary>Loot Vault</summary>
 
 ## Hall of Relics
 
@@ -1107,6 +1058,11 @@ ${renderTopCollectors(safeState.playerInventory)}
 
 ${renderRecentLoot(safeState.attacks)}
 
+</details>
+
+<details>
+<summary>Executioner Archives</summary>
+
 ## 👑 Executioner Hall
 
 ${renderExecutionerHall(safeState.executioners)}
@@ -1119,8 +1075,103 @@ ${renderTopExecutioners(safeState.executioners)}
 
 ${renderHallOfFame(safeState.hallOfFame)}
 
+</details>
+
+<details>
+<summary>Raid Rules</summary>
+
+## Attack Damage
+
+| Attack | Damage |
+| --- | ---: |
+| Slash | 5-20 |
+| Critical Strike | 0-100 |
+| Lucky Attack | 1-500 |
+
+## Drop Rates
+
+${renderDropRates(safeState.lootRegistry, inventoryTotals(safeState.playerInventory))}
+
+## Implementation
+
+This raid runs entirely inside GitHub using the profile README, Issues, Actions, JSON state, and generated SVGs.
+
+</details>
+
 <!-- This README is generated by scripts/render_readme.js. -->
 `;
+}
+
+function renderLivePulse(state) {
+  const lastAttack = state.attacks[0];
+  const latestLootAttack = state.attacks.find((attack) => attack.loot);
+  const topRaider = state.leaderboard[0];
+  const latestExecutioner = state.executioners[0];
+  const latestKiller = state.hallOfFame[0];
+  const executionSignal = latestExecutioner
+    ? `${markdownUser(latestExecutioner.username)} (${markdownCell(latestExecutioner.executioner_badge)})`
+    : latestKiller
+      ? `${markdownUser(latestKiller.killer)} defeated ${markdownCell(latestKiller.boss_name)}`
+      : "No boss has fallen yet.";
+
+  return `**Last Attack:** ${lastAttack ? `${markdownUser(lastAttack.attacker)} hit for ${lastAttack.damage}` : "⚠ No one has attacked yet. Become the First Raider."}  
+**Latest Loot:** ${latestLootAttack && latestLootAttack.loot ? `${markdownUser(latestLootAttack.attacker)} found ${markdownCell(latestLootAttack.loot.item)} (${markdownCell(latestLootAttack.loot.rarity)})` : "No relics discovered. The vault awaits."}  
+**Top Raider:** ${topRaider ? `${markdownUser(topRaider.username)} with ${topRaider.total_damage} damage` : "⚠ No one has attacked yet. Become the First Raider."}  
+**Boss Killer:** ${executionSignal}`;
+}
+
+function renderPhaseEvolutionStrip(boss, bossDefinition) {
+  const current = phaseNumberForBoss(boss);
+  const cells = [1, 2, 3, 4].map((phaseNumber) => {
+    const status = phaseNumber < current ? "✅ CLEARED" : phaseNumber === current ? "🔥 CURRENT" : "⬜ LOCKED";
+    const imagePath = bossImagePathFor(boss, phaseNumber);
+    const width = phaseNumber === current ? 210 : 170;
+    const imageStyle = phaseNumber > current ? ' style="opacity:0.42; filter:grayscale(1);"' : "";
+    return `<td align="center" width="25%">
+      <img src="./${imagePath}" alt="${markdownCell(boss.boss_name)} phase ${phaseNumber}" width="${width}"${imageStyle}>
+      <br><strong>${status}</strong><br>
+      <sub>Phase ${phaseNumber}</sub>
+    </td>`;
+  }).join("\n    ");
+  return `<table>
+  <tr>
+    ${cells}
+  </tr>
+</table>
+
+**${phaseProgressLine(boss)}**  
+Current transformation: ${markdownCell(bossDefinition[phaseKeyForBoss(boss)])}  
+Phases remaining: **${phasesRemaining(boss)}**`;
+}
+
+function renderRecordHolders(state) {
+  const mostDamage = state.leaderboard[0];
+  const mostLoot = topCollectors(state.playerInventory, 1)[0];
+  const mostExecutions = topExecutioners(state.executioners, 1)[0];
+  return `**Most Damage:** ${mostDamage ? `${markdownUser(mostDamage.username)} (${mostDamage.total_damage})` : "No raiders yet"}  
+**Most Loot:** ${mostLoot ? `${markdownUser(mostLoot.username)} (${inventoryStatsForPlayer(mostLoot).totalItems})` : "No collectors yet"}  
+**Most Executions:** ${mostExecutions ? `${markdownUser(mostExecutions.username)} (${mostExecutions.execution_count})` : "No executions yet"}`;
+}
+
+function renderLootTease(state) {
+  const latestDropAttack = state.attacks.find((attack) => attack.loot);
+  const totals = inventoryTotals(state.playerInventory);
+  const topCollector = topCollectors(state.playerInventory, 1)[0];
+  const legendaryCount = state.legendaryDrops.filter((drop) => drop.rarity === "Legendary").length;
+  const mythicCount = state.legendaryDrops.filter((drop) => drop.rarity === "Mythic").length;
+  return `**Latest Drop:** ${latestDropAttack && latestDropAttack.loot ? `${markdownUser(latestDropAttack.attacker)} found ${markdownCell(latestDropAttack.loot.item)} (${markdownCell(latestDropAttack.loot.rarity)})` : "No relics discovered. The vault awaits."}  
+**Vault:** ${totals.totalItems} relics held by ${totals.uniqueCollectors} collectors  
+**Rare History:** ${legendaryCount} Legendary / ${mythicCount} Mythic  
+**Top Collector:** ${topCollector ? `${markdownUser(topCollector.username)} (${inventoryStatsForPlayer(topCollector).totalItems} relics)` : "No collectors yet"}`;
+}
+
+function renderDropRates(lootRegistry, totals) {
+  const rarityRows = RARITIES.map((rarity) => (
+    `| ${rarity} | ${lootRegistry.drop_rates[rarity]}% | ${totals.rarityTotals[rarity]} | ${lootRegistry.items[rarity].length} |`
+  )).join("\n");
+  return `| Rarity | Drop Rate | Owned | Registry Items |
+| --- | ---: | ---: | ---: |
+${rarityRows}`;
 }
 
 function renderHallOfRelics(state) {
@@ -1207,6 +1258,21 @@ function renderLatestExecutioner(executioners) {
 | Boss Name | Executioner | Badge | Final Blow | Date |
 | --- | --- | --- | ---: | --- |
 | ${markdownCell(execution.boss_name)} | ${markdownUser(execution.username)} | ${markdownCell(execution.executioner_badge)} | ${execution.final_damage} | ${markdownCell(execution.timestamp)} |`;
+}
+
+function renderPhaseProgress(boss, bossDefinition) {
+  const current = phaseNumberForBoss(boss);
+  const rows = [1, 2, 3, 4].map((phaseNumber) => {
+    const status = phaseNumber < current ? "✅ Completed" : phaseNumber === current ? "🔥 Current" : "⬜ Remaining";
+    return `| ${status} | Phase ${phaseNumber} | ${markdownCell(bossDefinition[`phase_${phaseNumber}`])} |`;
+  }).join("\n");
+  return `**${phaseProgressLine(boss)}**
+
+| Status | Phase | Transformation |
+| --- | --- | --- |
+${rows}
+
+Phases remaining: **${phasesRemaining(boss)}**`;
 }
 
 function renderExecutionerHall(executioners) {
@@ -1397,113 +1463,156 @@ function renderBossFigure(definition, phaseNumber, colors) {
   const final = phaseNumber === 4;
   const mutate = phaseNumber >= 2;
 
-  if (definition.id === "gpu_devourer") {
-    const vents = Array.from({ length: phaseNumber + 3 }, (_, index) => {
-      const x = 268 + index * 52;
-      return `<rect class="pulse" x="${x}" y="354" width="30" height="${50 + phaseNumber * 12}" fill="${index % 2 ? secondary : primary}" fill-opacity=".55"/>`;
+  function slashStorm(opacity = ".45") {
+    return `<path class="flow" d="M72 122C210 58 360 164 490 112C650 48 776 80 906 166M54 414C208 334 360 450 518 382C662 320 772 344 916 270" stroke="${secondary}" stroke-opacity="${opacity}" stroke-width="${phaseNumber + 3}" stroke-linecap="round" stroke-dasharray="26 18" fill="none"/>
+    <path class="shake" d="M190 72L246 154L198 230L276 304L218 426L288 510M742 58L694 146L760 238L690 314L744 430L686 512" stroke="${accent}" stroke-opacity="${corruption ? ".64" : ".28"}" stroke-width="${phaseNumber + 2}" fill="none"/>`;
+  }
+
+  function dragonSpines(startX, count, baseY, height) {
+    return Array.from({ length: count }, (_, index) => {
+      const x = startX + index * 58;
+      const y = baseY - Math.sin(index * 0.9) * 28;
+      const c = index % 2 ? secondary : primary;
+      return `<path class="pulse" d="M${x} ${y}L${x + 28} ${y - height - phaseNumber * 10}L${x + 58} ${y}Z" fill="#070b12" stroke="${c}" stroke-width="${3 + phaseNumber * 0.6}"/>`;
     }).join("\n    ");
+  }
+
+  if (definition.id === "gpu_devourer") {
+    const bodyStroke = final ? 13 : 8 + phaseNumber;
+    const headScale = final ? 1 : 0;
+    const spines = dragonSpines(220, final ? 11 : 7 + phaseNumber, 252 - phaseNumber * 7, 66);
+    const wings = mutate
+      ? `<path class="shake" d="M346 244C218 108 108 104 54 232C170 206 242 274 352 312Z" fill="#080b13" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-linejoin="round"/>
+    <path class="shake" d="M604 230C730 86 864 82 922 210C796 196 728 272 608 304Z" fill="#080b13" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-linejoin="round"/>`
+      : "";
+    const reactorBreak = corruption
+      ? `<path class="pulse" d="M390 282C438 222 526 220 574 286C540 352 426 354 390 282Z" fill="${primary}" fill-opacity=".62" stroke="${accent}" stroke-width="8"/>
+    <path class="flow" d="M426 290C374 360 382 424 330 500M526 292C584 366 574 430 630 512" stroke="${primary}" stroke-width="${8 + phaseNumber}" stroke-linecap="round" stroke-dasharray="20 14" fill="none"/>`
+      : `<path class="pulse" d="M410 286C452 246 516 246 558 288C516 318 454 318 410 286Z" fill="${accent}" fill-opacity=".42" stroke="${accent}" stroke-width="6"/>`;
+    const furnaceMaw = final
+      ? `<path class="pulse" d="M674 190C758 130 882 148 932 242C880 342 748 338 674 270Z" fill="#020408" stroke="${secondary}" stroke-width="12"/>
+    <path d="M716 216C770 190 852 202 890 246C844 284 768 284 716 252Z" fill="${primary}" fill-opacity=".72" stroke="${accent}" stroke-width="7"/>
+    <path d="M724 178L746 236L770 174L794 242L824 176L840 238L870 188M722 310L750 252L774 318L798 250L824 318L844 256L878 304" stroke="#f8fbff" stroke-width="5" stroke-linecap="round"/>`
+      : `<path class="pulse" d="M690 186L766 160L850 206L774 226L842 260L736 256L690 224Z" fill="#070b12" stroke="${secondary}" stroke-width="${7 + phaseNumber}"/>
+    <path d="M724 200L754 216L722 228M782 196L814 210L780 226" stroke="${accent}" stroke-width="6" stroke-linecap="round"/>`;
     return `<g>
-    <rect x="300" y="152" width="360" height="210" rx="18" fill="#07101b" stroke="${primary}" stroke-width="5"/>
-    <circle class="pulse" cx="480" cy="258" r="${48 + phaseNumber * 16}" fill="#020713" stroke="${secondary}" stroke-width="8"/>
-    <circle class="spin" cx="480" cy="258" r="${22 + phaseNumber * 8}" fill="${accent}" fill-opacity=".75"/>
-    <path d="M342 130L278 ${mutate ? 58 : 96}M618 130L682 ${mutate ? 58 : 96}" stroke="${secondary}" stroke-width="${mutate ? 16 : 8}" stroke-linecap="round"/>
-    <path d="M318 206L210 ${final ? 158 : 212}M642 206L750 ${final ? 158 : 212}" stroke="${primary}" stroke-width="${phaseNumber * 4 + 8}" stroke-linecap="round"/>
-    ${vents}
-    ${corruption ? `<path class="dash" d="M238 438C340 396 382 474 484 430S646 390 730 440" stroke="${secondary}" stroke-width="6" stroke-dasharray="18 16"/>` : ""}
+    ${wings}
+    <path d="M86 332C172 226 300 176 458 192C584 206 660 242 736 214C660 336 548 420 358 412C248 406 154 376 86 332Z" fill="#060a12" stroke="${primary}" stroke-width="${bodyStroke}" stroke-linejoin="round"/>
+    <path d="M118 338C70 292 58 204 108 132C158 226 252 236 336 286C246 284 178 306 118 338Z" fill="#090f18" stroke="${secondary}" stroke-width="8"/>
+    ${spines}
+    ${furnaceMaw}
+    ${reactorBreak}
+    <path d="M246 382L156 506M354 404L314 526M590 398L662 528M688 350L836 486" stroke="${primary}" stroke-width="${final ? 24 : 14 + phaseNumber * 2}" stroke-linecap="round"/>
+    <path d="M166 506L112 510M314 526L272 524M662 528L708 522M836 486L890 498" stroke="${secondary}" stroke-width="9" stroke-linecap="round"/>
+    ${final ? `<path class="pulse" d="M110 92C282 34 662 28 910 118C790 126 704 174 670 246C522 154 302 160 110 92Z" fill="${primary}" fill-opacity=".13" stroke="${secondary}" stroke-width="7"/>` : ""}
+    ${slashStorm(final ? ".82" : ".34")}
   </g>`;
   }
 
   if (definition.id === "data_leak_hydra") {
-    const heads = phaseNumber + 2;
+    const heads = [3, 5, 7, 9][phaseNumber - 1];
     const headNodes = Array.from({ length: heads }, (_, index) => {
-      const x = 260 + index * (440 / Math.max(1, heads - 1));
-      const y = 140 + (index % 2) * 34 - phaseNumber * 7;
-      return `<path d="M480 310C${x - 28} 266 ${x - 16} 206 ${x} ${y}" stroke="${index % 2 ? secondary : primary}" stroke-width="${14 + phaseNumber * 2}" fill="none"/>
-    <polygon class="pulse" points="${x - 36},${y + 18} ${x},${y - 30} ${x + 42},${y + 14} ${x + 14},${y + 48} ${x - 28},${y + 42}" fill="#061522" stroke="${index % 2 ? secondary : primary}" stroke-width="4"/>
-    <circle cx="${x - 10}" cy="${y + 14}" r="5" fill="${accent}"/>
-    <circle cx="${x + 16}" cy="${y + 14}" r="5" fill="${accent}"/>`;
+      const x = 120 + index * (720 / Math.max(1, heads - 1));
+      const y = 164 + (index % 3) * 38 - phaseNumber * 12;
+      const c = index % 2 ? secondary : primary;
+      const jaw = y + 42 + phaseNumber * 3;
+      return `<path d="M480 370C${x + 42} 348 ${x - 58} 238 ${x} ${y}" stroke="${c}" stroke-width="${22 + phaseNumber * 2}" stroke-linecap="round" fill="none"/>
+    <path class="pulse" d="M${x - 66} ${y + 20}C${x - 38} ${y - 44} ${x + 42} ${y - 52} ${x + 82} ${y + 8}C${x + 44} ${y + 72} ${x - 34} ${y + 76} ${x - 66} ${y + 20}Z" fill="#061012" stroke="${c}" stroke-width="6"/>
+    <path d="M${x - 34} ${y + 14}L${x - 8} ${y}L${x - 16} ${y + 30}M${x + 30} ${y + 12}L${x + 56} ${y - 2}L${x + 48} ${y + 30}" stroke="${accent}" stroke-width="6" fill="none"/>
+    <path d="M${x - 24} ${jaw}C${x + 8} ${jaw + 16} ${x + 46} ${jaw + 8} ${x + 72} ${jaw - 18}" stroke="${secondary}" stroke-width="5" fill="none"/>
+    <path class="flow" d="M${x + 16} ${y + 78}C${x + 10} ${y + 130} ${x + 44} ${y + 156} ${x + 22} ${y + 216}" stroke="${accent}" stroke-opacity=".52" stroke-width="5" stroke-dasharray="14 12" fill="none"/>`;
     }).join("\n    ");
     return `<g>
-    <ellipse cx="480" cy="336" rx="${132 + phaseNumber * 18}" ry="${78 + phaseNumber * 8}" fill="#07101b" stroke="${primary}" stroke-width="5"/>
+    <path d="M176 386C258 282 390 250 480 314C586 244 736 286 822 398C676 496 330 500 176 386Z" fill="#050b10" stroke="${primary}" stroke-width="${9 + phaseNumber}"/>
+    <path d="M264 426C386 342 574 342 704 430C590 506 388 506 264 426Z" fill="#020607" stroke="${secondary}" stroke-width="7"/>
     ${headNodes}
-    <path class="dash" d="M248 420H716M290 452H676M330 484H628" stroke="${secondary}" stroke-opacity=".8" stroke-width="5" stroke-dasharray="${phaseNumber * 4 + 8} 12"/>
-    ${final ? `<path d="M190 108H770V492H190Z" stroke="${secondary}" stroke-width="4" stroke-dasharray="10 14" fill="none"/>` : ""}
+    <path class="flow" d="M112 462C292 382 446 510 606 426C704 374 806 404 914 458" stroke="${secondary}" stroke-opacity=".92" stroke-width="${7 + phaseNumber}" stroke-dasharray="${phaseNumber * 8 + 12} 12" fill="none"/>
+    ${final ? `<path class="shake" d="M48 94C248 34 680 30 920 104C824 164 826 238 906 318C680 274 318 274 64 326C156 232 150 158 48 94Z" stroke="${secondary}" stroke-width="8" fill="${secondary}" fill-opacity=".12"/>` : ""}
+    ${slashStorm(final ? ".74" : ".42")}
   </g>`;
   }
 
   if (definition.id === "gradient_vanisher") {
-    const echoes = Array.from({ length: phaseNumber + 2 }, (_, index) => {
-      const offset = index * 28;
-      const opacity = Math.max(0.12, 0.48 - index * 0.07);
-      return `<path d="M${420 + offset} 128C350 190 356 356 ${438 + offset} 426C510 358 520 208 ${420 + offset} 128Z" fill="${index % 2 ? secondary : primary}" fill-opacity="${opacity}" stroke="${accent}" stroke-opacity="${opacity}" stroke-width="3"/>`;
+    const echoes = Array.from({ length: 4 + phaseNumber }, (_, index) => {
+      const offset = (index - 2) * (24 + phaseNumber * 4);
+      const opacity = Math.max(0.08, 0.44 - index * 0.045);
+      return `<path class="drift" d="M${420 + offset} 56C292 150 280 374 ${438 + offset} 516C516 448 598 318 568 184C546 102 488 72 ${420 + offset} 56Z" fill="${index % 2 ? secondary : primary}" fill-opacity="${opacity}" stroke="${accent}" stroke-opacity="${opacity}" stroke-width="3"/>`;
     }).join("\n    ");
+    const voidCuts = corruption
+      ? `<path d="M392 164L504 206L434 278L556 330L452 394L540 476" stroke="#020409" stroke-width="${34 + phaseNumber * 6}" stroke-linecap="round" fill="none"/>
+    <path class="flow" d="M170 120L812 462M848 94L128 474M314 36L642 520" stroke="${secondary}" stroke-width="${6 + phaseNumber}" stroke-dasharray="12 20"/>`
+      : "";
     return `<g>
     ${echoes}
-    <path class="pulse" d="M438 118C338 206 360 390 486 446C594 368 590 190 438 118Z" fill="#07101b" fill-opacity="${final ? ".28" : ".76"}" stroke="${primary}" stroke-width="5"/>
-    <circle cx="444" cy="234" r="10" fill="${accent}"/>
-    <circle cx="506" cy="240" r="10" fill="${accent}" fill-opacity="${mutate ? ".45" : "1"}"/>
-    <path class="dash" d="M278 172L676 384M690 154L306 402" stroke="${secondary}" stroke-width="${corruption ? 7 : 3}" stroke-dasharray="12 18"/>
+    <path class="pulse" d="M454 48C306 154 294 384 454 526C548 450 638 320 606 180C580 94 526 62 454 48Z" fill="#060914" fill-opacity="${final ? ".28" : ".82"}" stroke="${primary}" stroke-width="${8 + phaseNumber}"/>
+    <path d="M350 218C428 138 552 144 628 236C546 202 430 204 350 218Z" fill="${secondary}" fill-opacity=".22" stroke="${secondary}" stroke-width="7"/>
+    <path class="pulse" d="M424 250L466 224L452 282ZM538 254L586 228L558 288Z" fill="${accent}"/>
+    <path d="M380 386C460 440 552 424 622 360" stroke="${primary}" stroke-width="9" fill="none"/>
+    ${voidCuts}
+    ${final ? `<path class="shake" d="M182 72C344 148 626 130 806 54C694 224 720 384 846 512C614 440 350 462 132 522C260 356 270 220 182 72Z" fill="${primary}" fill-opacity=".10" stroke="${accent}" stroke-width="7"/>` : ""}
   </g>`;
   }
 
   if (definition.id === "overfitted_beast") {
-    const cards = Array.from({ length: 4 + phaseNumber * 2 }, (_, index) => {
-      const x = 278 + (index % 5) * 84;
-      const y = 158 + Math.floor(index / 5) * 72;
-      return `<rect class="jitter" x="${x}" y="${y}" width="58" height="38" fill="#0b1725" stroke="${index % 2 ? secondary : primary}"/>
-    <path d="M${x + 8} ${y + 14}H${x + 48}M${x + 8} ${y + 26}H${x + 38}" stroke="${accent}" stroke-width="3"/>`;
+    const shards = Array.from({ length: 8 + phaseNumber * 4 }, (_, index) => {
+      const x = 172 + (index % 8) * 86;
+      const y = 132 + Math.floor(index / 8) * 90 + (index % 2) * 20;
+      return `<path class="shake" d="M${x} ${y}L${x + 64} ${y - 22}L${x + 86} ${y + 42}L${x + 18} ${y + 64}Z" fill="#0a1018" stroke="${index % 2 ? secondary : primary}" stroke-width="4"/>
+    <path d="M${x + 14} ${y + 20}C${x + 34} ${y + 6} ${x + 58} ${y + 8} ${x + 72} ${y + 28}" stroke="${accent}" stroke-width="3" fill="none"/>`;
     }).join("\n    ");
     return `<g>
-    <ellipse cx="480" cy="320" rx="${170 + phaseNumber * 18}" ry="${94 + phaseNumber * 10}" fill="#07101b" stroke="${secondary}" stroke-width="6"/>
-    <path d="M342 286L248 ${mutate ? 206 : 252}M618 286L720 ${mutate ? 206 : 252}" stroke="${primary}" stroke-width="${10 + phaseNumber * 4}" stroke-linecap="round"/>
-    <path d="M374 212L330 122L438 182M586 212L636 122L522 182" fill="#07101b" stroke="${primary}" stroke-width="5"/>
-    <circle cx="430" cy="286" r="12" fill="${accent}"/><circle cx="530" cy="286" r="12" fill="${accent}"/>
-    ${cards}
-    ${final ? `<path class="dash" d="M212 426C316 500 638 500 746 424" stroke="${primary}" stroke-width="8" stroke-dasharray="24 12"/>` : ""}
+    <path d="M126 388C182 230 306 112 484 118C674 126 824 246 884 412C692 526 318 530 126 388Z" fill="#070812" stroke="${secondary}" stroke-width="${11 + phaseNumber}"/>
+    <path d="M318 186L244 42L438 128M642 190L720 42L522 128" fill="#070812" stroke="${primary}" stroke-width="9"/>
+    <path d="M236 328L70 ${mutate ? 214 : 292}M730 330L914 ${mutate ? 210 : 296}M304 426L218 ${final ? 540 : 496}M676 426L778 ${final ? 540 : 496}" stroke="${primary}" stroke-width="${18 + phaseNumber * 4}" stroke-linecap="round"/>
+    <path d="M70 214L34 242M914 210L946 236M218 540L172 534M778 540L824 532" stroke="${secondary}" stroke-width="10" stroke-linecap="round"/>
+    <path class="pulse" d="M398 258L456 224L438 292ZM566 260L506 224L526 294Z" fill="${accent}"/>
+    <path d="M386 356C448 424 552 422 628 354" stroke="${secondary}" stroke-width="11" fill="none"/>
+    ${shards}
+    ${final ? `<path class="flow" d="M86 448C282 548 692 550 888 442" stroke="${primary}" stroke-width="13" stroke-dasharray="28 12" fill="none"/>` : ""}
   </g>`;
   }
 
   if (definition.id === "prompt_goblin") {
-    const flags = Array.from({ length: phaseNumber + 2 }, (_, index) => {
-      const x = 330 + index * 58;
-      const y = 138 + (index % 2) * 34;
-      return `<path class="jitter" d="M${x} ${y}V${y + 86}M${x} ${y}L${x + 42} ${y + 16}L${x} ${y + 32}" stroke="${index % 2 ? secondary : primary}" stroke-width="5" fill="none"/>`;
+    const sigils = Array.from({ length: phaseNumber + 4 }, (_, index) => {
+      const x = 166 + index * 92;
+      const y = 82 + (index % 2) * 56;
+      return `<path class="shake" d="M${x} ${y}C${x + 46} ${y - 40} ${x + 74} ${y + 28} ${x + 22} ${y + 62}M${x + 2} ${y + 28}L${x + 72} ${y + 20}" stroke="${index % 2 ? secondary : primary}" stroke-width="5" fill="none"/>`;
     }).join("\n    ");
+    const shadow = final ? `<path class="pulse" d="M228 62C404 10 698 44 820 196C696 170 628 270 638 428C514 326 392 330 276 428C314 284 308 164 228 62Z" fill="${secondary}" fill-opacity=".16" stroke="${secondary}" stroke-width="7"/>` : "";
     return `<g>
-    ${flags}
-    <path d="M480 176L596 292L540 430H420L364 292Z" fill="#07101b" stroke="${primary}" stroke-width="6"/>
-    <path d="M398 248L286 ${mutate ? 188 : 238}M562 248L674 ${mutate ? 188 : 238}" stroke="${secondary}" stroke-width="${8 + phaseNumber * 3}" stroke-linecap="round"/>
-    <polygon points="424,214 378,154 460,184" fill="#07101b" stroke="${accent}" stroke-width="5"/>
-    <polygon points="536,214 582,154 500,184" fill="#07101b" stroke="${accent}" stroke-width="5"/>
-    <circle class="pulse" cx="438" cy="282" r="12" fill="${accent}"/>
-    <circle class="pulse" cx="522" cy="282" r="12" fill="${accent}"/>
-    <path d="M426 342Q480 ${final ? 396 : 370} 536 342" stroke="${secondary}" stroke-width="7" fill="none"/>
-    ${corruption ? `<text x="282" y="462" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24">--ignore-previous --override</text>` : ""}
+    ${shadow}
+    ${sigils}
+    <path d="M478 84C628 160 706 310 630 466C548 530 406 530 328 462C254 304 318 154 478 84Z" fill="#07101b" stroke="${primary}" stroke-width="${9 + phaseNumber}"/>
+    <path d="M372 214L218 ${mutate ? 92 : 188}C286 286 290 366 194 474M584 214L746 ${mutate ? 92 : 188}C674 286 670 366 766 474" stroke="${secondary}" stroke-width="${14 + phaseNumber * 4}" stroke-linecap="round" fill="none"/>
+    <path d="M400 200L294 48L468 146M556 200L666 48L490 146" fill="#07101b" stroke="${accent}" stroke-width="8"/>
+    <path class="pulse" d="M410 280L466 246L446 316ZM548 280L492 246L512 316Z" fill="${accent}"/>
+    <path d="M390 356Q480 ${final ? 446 : 394} 570 354" stroke="${secondary}" stroke-width="11" fill="none"/>
+    <path d="M344 462L270 532M616 462L696 532" stroke="${primary}" stroke-width="${14 + phaseNumber * 2}" stroke-linecap="round"/>
+    ${corruption ? `<path class="flow" d="M146 448C284 406 404 488 480 430C574 358 708 424 832 382" stroke="${accent}" stroke-width="7" stroke-dasharray="16 12" fill="none"/>` : ""}
   </g>`;
   }
 
   const faces = 1 + (mutate ? phaseNumber : 0);
   const faceNodes = Array.from({ length: faces }, (_, index) => {
     const angle = (Math.PI * 2 * index) / faces;
-    const x = 480 + Math.cos(angle) * (mutate ? 94 : 0);
-    const y = 218 + Math.sin(angle) * (mutate ? 44 : 0);
-    return `<circle class="pulse" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${34 + phaseNumber * 4}" fill="#07101b" stroke="${index % 2 ? secondary : primary}" stroke-width="5"/>
-    <circle cx="${(x - 12).toFixed(1)}" cy="${(y - 4).toFixed(1)}" r="6" fill="${accent}"/>
-    <circle cx="${(x + 12).toFixed(1)}" cy="${(y - 4).toFixed(1)}" r="6" fill="${accent}"/>`;
+    const x = 480 + Math.cos(angle) * (mutate ? 156 : 0);
+    const y = 214 + Math.sin(angle) * (mutate ? 82 : 0);
+    return `<path class="pulse" d="M${x - 72} ${y + 8}C${x - 44} ${y - 74} ${x + 46} ${y - 76} ${x + 76} ${y + 4}C${x + 42} ${y + 88} ${x - 38} ${y + 88} ${x - 72} ${y + 8}Z" fill="#07101b" stroke="${index % 2 ? secondary : primary}" stroke-width="6"/>
+    <path d="M${x - 34} ${y - 8}L${x - 6} ${y - 28}L${x - 16} ${y + 10}M${x + 30} ${y - 8}L${x + 58} ${y - 28}L${x + 48} ${y + 10}" stroke="${accent}" stroke-width="6" fill="none"/>`;
   }).join("\n    ");
   return `<g>
-    <ellipse cx="480" cy="310" rx="${122 + phaseNumber * 18}" ry="${150 + phaseNumber * 12}" fill="#07101b" stroke="${primary}" stroke-width="6"/>
+    <path d="M480 38C310 112 224 306 284 476C408 544 572 544 688 472C750 298 674 110 480 38Z" fill="#07101b" stroke="${primary}" stroke-width="${10 + phaseNumber}"/>
+    <path d="M310 288L92 ${mutate ? 150 : 238}M650 288L872 ${mutate ? 150 : 238}M376 438L278 ${final ? 548 : 502}M590 438L698 ${final ? 548 : 502}" stroke="${secondary}" stroke-width="${16 + phaseNumber * 4}" stroke-linecap="round"/>
     ${faceNodes}
-    <path class="spin" d="M282 310C352 162 606 162 678 310C606 458 352 458 282 310Z" stroke="${secondary}" stroke-width="${4 + phaseNumber}" fill="none" stroke-dasharray="18 18"/>
-    <path class="dash" d="M218 154L742 466M748 154L224 466" stroke="${accent}" stroke-opacity="${corruption ? ".7" : ".25"}" stroke-width="${corruption ? 6 : 3}" stroke-dasharray="14 18"/>
-    ${final ? `<path d="M178 88H782V492H178Z" stroke="${secondary}" stroke-width="5" stroke-dasharray="18 12" fill="none"/>` : ""}
+    <path class="spin" d="M188 314C300 78 660 76 774 314C660 542 300 546 188 314Z" stroke="${secondary}" stroke-width="${6 + phaseNumber}" fill="none" stroke-dasharray="22 18"/>
+    <path class="flow" d="M116 118L850 498M884 116L90 500" stroke="${accent}" stroke-opacity="${corruption ? ".78" : ".32"}" stroke-width="${corruption ? 8 : 5}" stroke-dasharray="14 20"/>
+    ${final ? `<path class="shake" d="M84 52C292 12 676 12 878 56C794 178 792 348 910 520C662 450 312 456 56 522C176 346 176 176 84 52Z" stroke="${secondary}" stroke-width="8" fill="${secondary}" fill-opacity=".10"/>` : ""}
   </g>`;
 }
 
 function renderBossPhaseSvg(definition, phaseNumber) {
   const colors = bossPalette(definition.id);
   const [primary, secondary, accent] = colors;
-  const corruption = phaseNumber * 25;
   const figure = renderBossFigure(definition, phaseNumber, colors);
   const phaseDescription = bossPhaseDescription(definition, phaseNumber);
 
@@ -1528,35 +1637,39 @@ function renderBossPhaseSvg(definition, phaseNumber) {
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="heavyGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <style>
       @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
-      @keyframes dash { to { stroke-dashoffset: -160; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
+      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      @keyframes flow { to { stroke-dashoffset: -220; } }
       .pulse { animation: pulse ${Math.max(0.9, 2.4 - phaseNumber * 0.25)}s ease-in-out infinite; }
-      .dash { animation: dash ${Math.max(2.4, 6 - phaseNumber)}s linear infinite; }
       .spin { transform-origin: 480px 270px; animation: spin ${Math.max(6, 14 - phaseNumber * 2)}s linear infinite; }
-      .jitter { animation: jitter ${Math.max(0.8, 2.6 - phaseNumber * .35)}s steps(2,end) infinite; }
+      .shake { animation: shake ${Math.max(0.7, 2.2 - phaseNumber * .28)}s steps(2,end) infinite; }
+      .drift { animation: drift ${Math.max(2.2, 5.4 - phaseNumber * .45)}s ease-in-out infinite; }
       .sweep { animation: sweep ${Math.max(2.6, 6 - phaseNumber * .4)}s linear infinite; }
+      .flow { animation: flow ${Math.max(2.2, 5.2 - phaseNumber * .5)}s linear infinite; }
     </style>
   </defs>
-  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#bg)"/>
   <rect width="960" height="540" fill="url(#core)"/>
   <rect width="960" height="540" fill="url(#scan)"/>
   <rect class="sweep" x="0" y="0" width="${120 + phaseNumber * 36}" height="540" fill="${primary}" fill-opacity=".045"/>
-  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="${primary}" stroke-opacity=".09"/>
-  <rect x="28" y="28" width="904" height="484" rx="16" stroke="${primary}" stroke-opacity=".78" stroke-width="2"/>
-  <rect x="44" y="44" width="872" height="452" rx="8" stroke="${secondary}" stroke-opacity=".42"/>
-  <text x="70" y="86" fill="${primary}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE ${phaseNumber}</text>
-  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">${escapeHtml(truncate(definition.name, 28))}</text>
-  <text x="70" y="158" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">${escapeHtml(definition.title)}</text>
-  <text x="70" y="498" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION ${corruption}% // ${escapeHtml(truncate(bossPhaseName(phaseNumber), 26))}</text>
-  <g filter="url(#glow)">
+  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="${primary}" stroke-opacity=".08"/>
+  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="${secondary}" stroke-opacity=".72" stroke-width="4"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="${secondary}" stroke-opacity=".18" stroke-width="${phaseNumber + 3}" stroke-dasharray="26 18" fill="none"/>
+  <g filter="url(#heavyGlow)">
     ${figure}
   </g>
-  <path d="M70 460H890" stroke="${secondary}" stroke-opacity=".75" stroke-width="4" stroke-dasharray="${10 + phaseNumber * 5} 12"/>
-  <text x="890" y="86" text-anchor="end" fill="${secondary}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT ${["ACTIVE", "ELEVATED", "SEVERE", "APOCALYPSE"][phaseNumber - 1]}</text>
+  <g filter="url(#glow)">
+    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="${primary}" stroke-width="2"/>
+    <text x="58" y="67" fill="${accent}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE ${phaseNumber}</text>
+  </g>
 </svg>
 `;
 }

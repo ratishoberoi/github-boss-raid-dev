@@ -19,46 +19,52 @@
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="heavyGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <style>
       @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
-      @keyframes dash { to { stroke-dashoffset: -160; } }
       @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes jitter { 0%,100% { transform: translate(0,0); } 20% { transform: translate(2px,-1px); } 40% { transform: translate(-2px,2px); } 60% { transform: translate(1px,2px); } 80% { transform: translate(-1px,-2px); } }
+      @keyframes shake { 0%,100% { transform: translate(0,0); } 20% { transform: translate(3px,-2px); } 40% { transform: translate(-3px,2px); } 60% { transform: translate(2px,3px); } 80% { transform: translate(-2px,-3px); } }
+      @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(16px); } }
       @keyframes sweep { 0% { transform: translateX(-960px); } 100% { transform: translateX(960px); } }
+      @keyframes flow { to { stroke-dashoffset: -220; } }
       .pulse { animation: pulse 1.9s ease-in-out infinite; }
-      .dash { animation: dash 4s linear infinite; }
       .spin { transform-origin: 480px 270px; animation: spin 10s linear infinite; }
-      .jitter { animation: jitter 1.9000000000000001s steps(2,end) infinite; }
+      .shake { animation: shake 1.6400000000000001s steps(2,end) infinite; }
+      .drift { animation: drift 4.5s ease-in-out infinite; }
       .sweep { animation: sweep 5.2s linear infinite; }
+      .flow { animation: flow 4.2s linear infinite; }
     </style>
   </defs>
-  <rect width="960" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#bg)"/>
   <rect width="960" height="540" fill="url(#core)"/>
   <rect width="960" height="540" fill="url(#scan)"/>
   <rect class="sweep" x="0" y="0" width="192" height="540" fill="#9dff28" fill-opacity=".045"/>
-  <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540" stroke="#9dff28" stroke-opacity=".09"/>
-  <rect x="28" y="28" width="904" height="484" rx="16" stroke="#9dff28" stroke-opacity=".78" stroke-width="2"/>
-  <rect x="44" y="44" width="872" height="452" rx="8" stroke="#ff2bd6" stroke-opacity=".42"/>
-  <text x="70" y="86" fill="#9dff28" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" letter-spacing="3">RAID ENCOUNTER // PHASE 2</text>
-  <text x="70" y="128" fill="#f7fbff" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="36" font-weight="900">The Prompt Goblin</text>
-  <text x="70" y="158" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">Chaotic Trickster AI</text>
-  <text x="70" y="498" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">CORRUPTION 50% // Mutated Form</text>
-  <g filter="url(#glow)">
+  <path d="M0 108H960M0 432H960M110 0V540M850 0V540" stroke="#9dff28" stroke-opacity=".08"/>
+  <path d="M22 24H202M758 24H938M22 516H202M758 516H938" stroke="#ff2bd6" stroke-opacity=".72" stroke-width="4"/>
+  <path class="spin" d="M84 270C204 32 756 32 876 270C756 508 204 508 84 270Z" stroke="#ff2bd6" stroke-opacity=".18" stroke-width="5" stroke-dasharray="26 18" fill="none"/>
+  <g filter="url(#heavyGlow)">
     <g>
-    <path class="jitter" d="M330 138V224M330 138L372 154L330 170" stroke="#9dff28" stroke-width="5" fill="none"/>
-    <path class="jitter" d="M388 172V258M388 172L430 188L388 204" stroke="#ff2bd6" stroke-width="5" fill="none"/>
-    <path class="jitter" d="M446 138V224M446 138L488 154L446 170" stroke="#9dff28" stroke-width="5" fill="none"/>
-    <path class="jitter" d="M504 172V258M504 172L546 188L504 204" stroke="#ff2bd6" stroke-width="5" fill="none"/>
-    <path d="M480 176L596 292L540 430H420L364 292Z" fill="#07101b" stroke="#9dff28" stroke-width="6"/>
-    <path d="M398 248L286 188M562 248L674 188" stroke="#ff2bd6" stroke-width="14" stroke-linecap="round"/>
-    <polygon points="424,214 378,154 460,184" fill="#07101b" stroke="#ffe95e" stroke-width="5"/>
-    <polygon points="536,214 582,154 500,184" fill="#07101b" stroke="#ffe95e" stroke-width="5"/>
-    <circle class="pulse" cx="438" cy="282" r="12" fill="#ffe95e"/>
-    <circle class="pulse" cx="522" cy="282" r="12" fill="#ffe95e"/>
-    <path d="M426 342Q480 370 536 342" stroke="#ff2bd6" stroke-width="7" fill="none"/>
+    
+    <path class="shake" d="M166 82C212 42 240 110 188 144M168 110L238 102" stroke="#9dff28" stroke-width="5" fill="none"/>
+    <path class="shake" d="M258 138C304 98 332 166 280 200M260 166L330 158" stroke="#ff2bd6" stroke-width="5" fill="none"/>
+    <path class="shake" d="M350 82C396 42 424 110 372 144M352 110L422 102" stroke="#9dff28" stroke-width="5" fill="none"/>
+    <path class="shake" d="M442 138C488 98 516 166 464 200M444 166L514 158" stroke="#ff2bd6" stroke-width="5" fill="none"/>
+    <path class="shake" d="M534 82C580 42 608 110 556 144M536 110L606 102" stroke="#9dff28" stroke-width="5" fill="none"/>
+    <path class="shake" d="M626 138C672 98 700 166 648 200M628 166L698 158" stroke="#ff2bd6" stroke-width="5" fill="none"/>
+    <path d="M478 84C628 160 706 310 630 466C548 530 406 530 328 462C254 304 318 154 478 84Z" fill="#07101b" stroke="#9dff28" stroke-width="11"/>
+    <path d="M372 214L218 92C286 286 290 366 194 474M584 214L746 92C674 286 670 366 766 474" stroke="#ff2bd6" stroke-width="22" stroke-linecap="round" fill="none"/>
+    <path d="M400 200L294 48L468 146M556 200L666 48L490 146" fill="#07101b" stroke="#ffe95e" stroke-width="8"/>
+    <path class="pulse" d="M410 280L466 246L446 316ZM548 280L492 246L512 316Z" fill="#ffe95e"/>
+    <path d="M390 356Q480 394 570 354" stroke="#ff2bd6" stroke-width="11" fill="none"/>
+    <path d="M344 462L270 532M616 462L696 532" stroke="#9dff28" stroke-width="18" stroke-linecap="round"/>
     
   </g>
   </g>
-  <path d="M70 460H890" stroke="#ff2bd6" stroke-opacity=".75" stroke-width="4" stroke-dasharray="20 12"/>
-  <text x="890" y="86" text-anchor="end" fill="#ff2bd6" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">THREAT ELEVATED</text>
+  <g filter="url(#glow)">
+    <path d="M36 42H174L208 76H36Z" fill="#020713" fill-opacity=".82" stroke="#9dff28" stroke-width="2"/>
+    <text x="58" y="67" fill="#ffe95e" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="22" font-weight="900">PHASE 2</text>
+  </g>
 </svg>
