@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T14:33:33.169Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Slash",
+    "damage": 8,
+    "applied_damage": 8,
+    "boss_name": "The Gradient Vanisher",
+    "phase_after_attack": "Phase 1",
+    "defeated": false,
+    "issue_number": 13,
+    "loot": {
+      "item": "Broken Dataset",
+      "rarity": "Common"
+    }
+  },
+  {
     "timestamp": "2026-05-25T14:04:06.805Z",
     "attacker": "ratishoberoi",
     "attack_type": "Lucky Attack",
