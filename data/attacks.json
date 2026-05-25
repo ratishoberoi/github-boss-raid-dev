@@ -1,5 +1,20 @@
 [
   {
+    "timestamp": "2026-05-25T14:03:37.524Z",
+    "attacker": "ratishoberoi",
+    "attack_type": "Lucky Attack",
+    "damage": 118,
+    "applied_damage": 118,
+    "boss_name": "The Data Leak Hydra",
+    "phase_after_attack": "Phase 3",
+    "defeated": false,
+    "issue_number": 11,
+    "loot": {
+      "item": "Corrupted CSV",
+      "rarity": "Common"
+    }
+  },
+  {
     "timestamp": "2026-05-25T14:03:11.476Z",
     "attacker": "ratishoberoi",
     "attack_type": "Lucky Attack",
